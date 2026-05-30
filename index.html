@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Bakerwoord: soluciones digitales, desarrollo web, automatización y estrategias para empresas modernas."
+    />
+    <title>Bakerwoord | Soluciones digitales para empresas modernas</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg class="icon-library" aria-hidden="true">
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M5 12h13m-5-5 5 5-5 5" />
+      </symbol>
+      <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+        <path d="M7 17 17 7M8 7h9v9" />
+      </symbol>
+      <symbol id="icon-bars" viewBox="0 0 24 24">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </symbol>
+      <symbol id="icon-x" viewBox="0 0 24 24">
+        <path d="m6 6 12 12M18 6 6 18" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6" />
+      </symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol id="icon-monitor" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="13" rx="2" />
+        <path d="M8 21h8m-4-4v4" />
+      </symbol>
+      <symbol id="icon-social" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="5" cy="6" r="2" />
+        <circle cx="19" cy="6" r="2" />
+        <path d="M7 7.5 9.5 10M17 7.5 14.5 10M9 14l-3 3m9-3 3 3" />
+      </symbol>
+      <symbol id="icon-trending" viewBox="0 0 24 24">
+        <path d="m4 16 6-6 4 4 6-7" />
+        <path d="M15 7h5v5" />
+      </symbol>
+      <symbol id="icon-pen" viewBox="0 0 24 24">
+        <path d="m14 6 4 4M5 19l4.5-1 9-9a2.8 2.8 0 0 0-4-4l-9 9L5 19Z" />
+        <path d="m12 7 4 4" />
+      </symbol>
+      <symbol id="icon-bolt" viewBox="0 0 24 24">
+        <path d="m13 2-9 13h7l-1 7 10-14h-7l0-6Z" />
+      </symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24">
+        <path d="M16 19a4 4 0 0 0-8 0m4-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+        <path d="M19 8a2 2 0 1 1 0 4m3 6a3 3 0 0 0-3-3M5 8a2 2 0 1 0 0 4m-3 6a3 3 0 0 1 3-3" />
+      </symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24">
+        <path d="M4 19V5m0 14h16" />
+        <path d="M8 16v-5m4 5V7m4 9v-3" />
+      </symbol>
+      <symbol id="icon-server" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="6" rx="2" />
+        <rect x="4" y="14" width="16" height="6" rx="2" />
+        <path d="M8 7h.01M8 17h.01" />
+      </symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="6" />
+        <path d="m16 16 4 4" />
+      </symbol>
+      <symbol id="icon-message" viewBox="0 0 24 24">
+        <path d="M20 14a4 4 0 0 1-4 4H8l-4 3v-7a4 4 0 0 1-1-2.7V7a4 4 0 0 1 4-4h9a4 4 0 0 1 4 4v7Z" />
+      </symbol>
+      <symbol id="icon-file" viewBox="0 0 24 24">
+        <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z" />
+        <path d="M14 3v6h6M8 13h8M8 17h6" />
+      </symbol>
+      <symbol id="icon-code" viewBox="0 0 24 24">
+        <path d="m9 18-6-6 6-6m6 0 6 6-6 6" />
+      </symbol>
+      <symbol id="icon-eye" viewBox="0 0 24 24">
+        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" />
+        <circle cx="12" cy="12" r="2" />
+      </symbol>
+      <symbol id="icon-headphones" viewBox="0 0 24 24">
+        <path d="M4 14a8 8 0 0 1 16 0" />
+        <path d="M6 19H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h1Zm12 0h1a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-1Z" />
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24">
+        <path d="M21 16.8v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.2 19.2 0 0 1-5.9-5.9 19.7 19.7 0 0 1-3.1-8.6A2 2 0 0 1 3.2 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L7.2 10a16 16 0 0 0 5.9 5.9l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 1.9Z" />
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
+      </symbol>
+      <symbol id="icon-pin" viewBox="0 0 24 24">
+        <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+        <circle cx="12" cy="10" r="2" />
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <path d="M17.5 6.5h.01" />
+      </symbol>
+      <symbol id="icon-linkedin" viewBox="0 0 24 24">
+        <path d="M6 9v11M6 5v.01M10 20v-6a4 4 0 0 1 8 0v6M10 9v11" />
+      </symbol>
+      <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+        <path d="M20 11.5a8 8 0 0 1-11.9 7l-4.1 1 1.1-4A8 8 0 1 1 20 11.5Z" />
+        <path d="M9 8.5c.3 2 1.7 3.5 3.8 4.2l1-1c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.3.4.6-.1 1.1-.8 1.7-1.9 1.8-3.8-.2-6.9-3.2-7.2-6.8 0-1 .7-1.7 1.7-1.8.3 0 .5.1.6.4l.7 1.5c.1.3.1.5-.1.7L9 8.5Z" />
+      </symbol>
+    </svg>
+
+    <header class="site-header" id="top">
+      <div class="container nav-shell">
+        <a class="brand" href="#inicio" aria-label="Bakerwoord, ir al inicio">
+          <span class="brand-mark">B</span>
+          <span class="brand-name">Bakerwoord<span>.</span></span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">
+          <svg class="icon icon-menu"><use href="#icon-bars"></use></svg>
+          <svg class="icon icon-close"><use href="#icon-x"></use></svg>
+        </button>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#planes">Planes</a>
+          <a href="#proceso">Proceso</a>
+          <a href="#portafolio">Portafolio</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <a class="btn btn-primary nav-cta" href="#solicitud">
+          Solicitar cotización
+          <svg class="icon"><use href="#icon-arrow-up-right"></use></svg>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section" id="inicio">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> Soluciones digitales para empresas</p>
+            <h1>Impulsa tu negocio con soluciones digitales <em>profesionales</em></h1>
+            <p class="hero-text">
+              Bakerwoord crea experiencias digitales diseñadas para mejorar tu presencia online,
+              automatizar procesos y aumentar las oportunidades comerciales de tu empresa.
+            </p>
+            <div class="button-group">
+              <a class="btn btn-primary btn-lg" href="#servicios">
+                Ver servicios
+                <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </a>
+              <a class="btn btn-outline btn-lg" href="#solicitud">Solicitar propuesta</a>
+            </div>
+            <div class="hero-trust">
+              <div>
+                <strong>+30</strong>
+                <span>Proyectos digitales</span>
+              </div>
+              <div>
+                <strong>100%</strong>
+                <span>Enfoque personalizado</span>
+              </div>
+              <div>
+                <strong>360°</strong>
+                <span>Visión estratégica</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Panel visual de métricas comerciales">
+            <div class="hero-orbit orbit-one"></div>
+            <div class="hero-orbit orbit-two"></div>
+            <div class="dashboard-card">
+              <div class="dash-topbar">
+                <div class="dash-brand">
+                  <span class="dash-logo">B</span>
+                  <div>
+                    <strong>Panel comercial</strong>
+                    <small>Resumen del mes</small>
+                  </div>
+                </div>
+                <span class="dash-avatar">AC</span>
+              </div>
+              <div class="dash-main">
+                <div class="dash-sidebar">
+                  <span class="active"></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="dash-content">
+                  <div class="dash-title">
+                    <div>
+                      <small>Rendimiento general</small>
+                      <strong>Solicitudes recibidas</strong>
+                    </div>
+                    <span>Últimos 30 días</span>
+                  </div>
+                  <div class="metric-grid">
+                    <div class="metric-card">
+                      <small>Solicitudes</small>
+                      <strong>128</strong>
+                      <span>+18.4%</span>
+                    </div>
+                    <div class="metric-card">
+                      <small>Conversión</small>
+                      <strong>32%</strong>
+                      <span>+6.8%</span>
+                    </div>
+                  </div>
+                  <div class="chart-card">
+                    <div class="chart-heading">
+                      <small>Crecimiento comercial</small>
+                      <span><i></i> Solicitudes</span>
+                    </div>
+                    <div class="chart">
+                      <span style="--height: 34%"></span>
+                      <span style="--height: 48%"></span>
+                      <span style="--height: 42%"></span>
+                      <span style="--height: 66%"></span>
+                      <span style="--height: 61%"></span>
+                      <span style="--height: 79%"></span>
+                      <span style="--height: 92%"></span>
+                    </div>
+                  </div>
+                  <div class="dash-row">
+                    <span class="mini-avatar">MG</span>
+                    <div><strong>Nuevo prospecto</strong><small>Diseño web empresarial</small></div>
+                    <b>USD 750</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="floating-card floating-card-top">
+              <span class="floating-icon"><svg class="icon"><use href="#icon-trending"></use></svg></span>
+              <div><strong>+24%</strong><small>Crecimiento mensual</small></div>
+            </div>
+            <div class="floating-card floating-card-bottom">
+              <span class="floating-icon"><svg class="icon"><use href="#icon-users"></use></svg></span>
+              <div><strong>42</strong><small>Nuevos prospectos</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip">
+        <div class="container trust-strip-inner">
+          <span>Servicios especializados en</span>
+          <div class="trust-item"><i></i> Diseño web</div>
+          <div class="trust-item"><i></i> Automatización</div>
+          <div class="trust-item"><i></i> Marketing digital</div>
+          <div class="trust-item"><i></i> Gestión comercial</div>
+        </div>
+      </section>
+
+      <section class="section services" id="servicios">
+        <div class="container">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow"><span></span> Nuestros servicios</p>
+              <h2>Soluciones que hacen avanzar <em>tu negocio</em></h2>
+            </div>
+            <p>
+              Combinamos estrategia, diseño y tecnología para crear sistemas digitales que
+              fortalecen tu empresa y simplifican el trabajo diario.
+            </p>
+          </div>
+
+          <div class="service-grid">
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-monitor"></use></svg></div>
+              <h3>Desarrollo de páginas web</h3>
+              <p>Sitios modernos, rápidos y adaptables que presentan tu marca con claridad.</p>
+              <button class="text-link service-more" type="button" data-service="Desarrollo de páginas web">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-social"></use></svg></div>
+              <h3>Gestión de redes sociales</h3>
+              <p>Contenido estratégico que conecta tu propuesta con la audiencia correcta.</p>
+              <button class="text-link service-more" type="button" data-service="Gestión de redes sociales">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-trending"></use></svg></div>
+              <h3>Publicidad digital pagada</h3>
+              <p>Campañas enfocadas en alcance, generación de prospectos y conversión.</p>
+              <button class="text-link service-more" type="button" data-service="Publicidad digital pagada">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-pen"></use></svg></div>
+              <h3>Diseño de marca y contenido</h3>
+              <p>Identidades visuales consistentes para comunicar confianza y profesionalismo.</p>
+              <button class="text-link service-more" type="button" data-service="Diseño de marca y contenido visual">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-bolt"></use></svg></div>
+              <h3>Automatización de procesos</h3>
+              <p>Flujos inteligentes para optimizar tareas y acelerar la atención al cliente.</p>
+              <button class="text-link service-more" type="button" data-service="Automatización de procesos">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-users"></use></svg></div>
+              <h3>CRM y gestión de clientes</h3>
+              <p>Control comercial organizado para dar seguimiento a cada oportunidad.</p>
+              <button class="text-link service-more" type="button" data-service="CRM y gestión de clientes">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-chart"></use></svg></div>
+              <h3>Analítica y reportes</h3>
+              <p>Indicadores claros para entender resultados y tomar mejores decisiones.</p>
+              <button class="text-link service-more" type="button" data-service="Analítica y reportes">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+            <article class="service-card">
+              <div class="service-icon"><svg class="icon"><use href="#icon-server"></use></svg></div>
+              <h3>Hosting, dominio y soporte</h3>
+              <p>Acompañamiento técnico para mantener tu ecosistema digital disponible.</p>
+              <button class="text-link service-more" type="button" data-service="Hosting, dominio y soporte técnico">
+                Ver más <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section plans" id="planes">
+        <div class="container">
+          <div class="section-heading centered-heading">
+            <p class="eyebrow centered"><span></span> Planes comerciales <span></span></p>
+            <h2>Una solución para cada etapa de <em>crecimiento</em></h2>
+            <p>Selecciona la alternativa que mejor se ajusta a tus objetivos actuales.</p>
+          </div>
+
+          <div class="plan-grid">
+            <article class="plan-card" data-plan-card="Plan Básico">
+              <div class="plan-head">
+                <p class="plan-name">Plan Básico</p>
+                <p class="plan-description">Presencia digital esencial para iniciar con solidez.</p>
+                <p class="price"><span>USD</span> 250</p>
+              </div>
+              <ul class="check-list">
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Página informativa de hasta 4 secciones</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Formulario de contacto</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Diseño responsive</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Integración con WhatsApp</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Entrega estimada: 1 semana</li>
+              </ul>
+              <button class="btn btn-outline plan-select" type="button" data-plan="Plan Básico">Seleccionar plan</button>
+            </article>
+
+            <article class="plan-card" data-plan-card="Plan Profesional">
+              <div class="plan-head">
+                <p class="plan-name">Plan Profesional</p>
+                <p class="plan-description">Una experiencia completa para captar más oportunidades.</p>
+                <p class="price"><span>USD</span> 500</p>
+              </div>
+              <ul class="check-list">
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Página web completa hasta 6 secciones</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Catálogo de servicios</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Formulario de solicitud</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Integración con redes sociales</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Optimización básica SEO</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Entrega estimada: 2 semanas</li>
+              </ul>
+              <button class="btn btn-outline plan-select" type="button" data-plan="Plan Profesional">Seleccionar plan</button>
+            </article>
+
+            <article class="plan-card recommended selected" data-plan-card="Plan Empresarial">
+              <p class="recommended-label">Recomendado</p>
+              <div class="plan-head">
+                <p class="plan-name">Plan Empresarial</p>
+                <p class="plan-description">Sistema comercial para centralizar servicios y solicitudes.</p>
+                <p class="price"><span>USD</span> 750</p>
+              </div>
+              <ul class="check-list">
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Sistema web de venta de servicios</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Módulo de planes y cotización</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Panel administrativo visual</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Integración con WhatsApp y correo</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Diseño responsive</li>
+                <li><svg class="icon"><use href="#icon-check"></use></svg>Entrega estimada: 3 a 4 semanas</li>
+              </ul>
+              <button class="btn btn-primary plan-select" type="button" data-plan="Plan Empresarial">
+                Plan seleccionado
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="proposal-wrap">
+        <div class="container">
+          <article class="proposal-card">
+            <div class="proposal-intro">
+              <p class="eyebrow light"><span></span> Resumen de propuesta</p>
+              <h2>Una solución lista para presentar y hacer crecer.</h2>
+              <p>
+                El sistema integra la oferta comercial de Bakerwoord en una experiencia clara,
+                moderna y enfocada en convertir visitas en solicitudes.
+              </p>
+            </div>
+            <div class="proposal-main">
+              <div class="proposal-stats">
+                <div><span>Presupuesto total</span><strong>USD 750</strong></div>
+                <div><span>Tiempo estimado</span><strong>3 a 4 semanas</strong></div>
+                <div><span>Modalidad</span><strong>Prototipo funcional</strong></div>
+              </div>
+              <div class="proposal-includes">
+                <p>Incluye</p>
+                <ul>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Diseño de interfaz</li>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Página de servicios</li>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Planes comerciales</li>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Formulario de solicitud</li>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Panel administrativo simulado</li>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Integración visual con WhatsApp</li>
+                  <li><svg class="icon"><use href="#icon-check"></use></svg>Soporte inicial</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section request-section" id="solicitud">
+        <div class="container request-grid">
+          <div class="request-copy">
+            <p class="eyebrow"><span></span> Inicia tu proyecto</p>
+            <h2>Cuéntanos qué necesita <em>tu empresa</em></h2>
+            <p>
+              Completa los datos y recibe una propuesta ajustada a tus objetivos. Esta maqueta
+              simula el registro para mostrar la experiencia final del sistema.
+            </p>
+            <div class="request-points">
+              <div>
+                <span><svg class="icon"><use href="#icon-message"></use></svg></span>
+                <div><strong>Atención personalizada</strong><small>Analizamos cada solicitud de forma individual.</small></div>
+              </div>
+              <div>
+                <span><svg class="icon"><use href="#icon-file"></use></svg></span>
+                <div><strong>Propuesta clara</strong><small>Recibe un alcance alineado con tu necesidad.</small></div>
+              </div>
+              <div>
+                <span><svg class="icon"><use href="#icon-headphones"></use></svg></span>
+                <div><strong>Acompañamiento cercano</strong><small>Te guiamos durante todo el proceso.</small></div>
+              </div>
+            </div>
+          </div>
+
+          <form class="request-form form-card" id="request-form">
+            <div class="form-heading">
+              <div>
+                <p>Solicitud de propuesta</p>
+                <span>Todos los campos marcados son necesarios.</span>
+              </div>
+              <strong>01</strong>
+            </div>
+            <div class="form-grid">
+              <label>
+                <span>Servicio *</span>
+                <select id="service-select" name="service" required>
+                  <option value="">Seleccionar servicio</option>
+                  <option>Desarrollo de páginas web</option>
+                  <option>Gestión de redes sociales</option>
+                  <option>Publicidad digital pagada</option>
+                  <option>Diseño de marca y contenido visual</option>
+                  <option>Automatización de procesos</option>
+                  <option>CRM y gestión de clientes</option>
+                  <option>Analítica y reportes</option>
+                  <option>Hosting, dominio y soporte técnico</option>
+                </select>
+              </label>
+              <label>
+                <span>Plan *</span>
+                <select id="plan-select" name="plan" required>
+                  <option>Plan Empresarial</option>
+                  <option>Plan Profesional</option>
+                  <option>Plan Básico</option>
+                </select>
+              </label>
+              <label>
+                <span>Nombre *</span>
+                <input type="text" name="name" placeholder="Tu nombre completo" required />
+              </label>
+              <label>
+                <span>Correo *</span>
+                <input type="email" name="email" placeholder="nombre@empresa.com" required />
+              </label>
+              <label class="full-field">
+                <span>Teléfono *</span>
+                <input type="tel" name="phone" placeholder="+593 99 000 0000" required />
+              </label>
+              <label class="full-field">
+                <span>Cuéntanos brevemente qué necesitas *</span>
+                <textarea name="message" rows="4" placeholder="Describe tu idea o necesidad principal..." required></textarea>
+              </label>
+            </div>
+            <button class="btn btn-primary btn-full" type="submit">
+              Enviar solicitud
+              <svg class="icon"><use href="#icon-arrow"></use></svg>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="section process" id="proceso">
+        <div class="container">
+          <div class="section-heading centered-heading">
+            <p class="eyebrow centered"><span></span> Nuestro proceso <span></span></p>
+            <h2>De la idea a una solución <em>lista para crecer</em></h2>
+            <p>Un flujo de trabajo simple, ordenado y transparente en cada etapa.</p>
+          </div>
+          <div class="process-grid">
+            <article class="process-step">
+              <span class="step-number">01</span>
+              <div class="step-icon"><svg class="icon"><use href="#icon-message"></use></svg></div>
+              <h3>Reunión inicial</h3>
+              <p>Conocemos tu negocio, metas y prioridades.</p>
+            </article>
+            <article class="process-step">
+              <span class="step-number">02</span>
+              <div class="step-icon"><svg class="icon"><use href="#icon-search"></use></svg></div>
+              <h3>Requerimientos</h3>
+              <p>Definimos alcance, funcionalidades y enfoque.</p>
+            </article>
+            <article class="process-step">
+              <span class="step-number">03</span>
+              <div class="step-icon"><svg class="icon"><use href="#icon-file"></use></svg></div>
+              <h3>Propuesta</h3>
+              <p>Presentamos la solución y su plan de trabajo.</p>
+            </article>
+            <article class="process-step">
+              <span class="step-number">04</span>
+              <div class="step-icon"><svg class="icon"><use href="#icon-code"></use></svg></div>
+              <h3>Desarrollo</h3>
+              <p>Construimos la experiencia digital acordada.</p>
+            </article>
+            <article class="process-step">
+              <span class="step-number">05</span>
+              <div class="step-icon"><svg class="icon"><use href="#icon-eye"></use></svg></div>
+              <h3>Revisión</h3>
+              <p>Validamos cada detalle junto con tu equipo.</p>
+            </article>
+            <article class="process-step">
+              <span class="step-number">06</span>
+              <div class="step-icon"><svg class="icon"><use href="#icon-headphones"></use></svg></div>
+              <h3>Entrega y soporte</h3>
+              <p>Activamos la solución y te acompañamos.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section portfolio" id="portafolio">
+        <div class="container">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow"><span></span> Portafolio simulado</p>
+              <h2>Proyectos pensados para generar <em>resultados</em></h2>
+            </div>
+            <p>
+              Cada solución nace de una necesidad concreta y combina una experiencia clara con
+              herramientas útiles para el negocio.
+            </p>
+          </div>
+          <div class="portfolio-grid">
+            <article class="portfolio-card">
+              <div class="project-visual project-corporate">
+                <div class="project-browser">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="project-corporate-inner">
+                  <i></i>
+                  <strong>AVANT</strong>
+                  <span></span>
+                  <small></small>
+                  <small></small>
+                </div>
+              </div>
+              <div class="project-info">
+                <div class="project-tags"><span>Web</span><span>Corporativo</span></div>
+                <h3>Sitio web corporativo</h3>
+                <p>Experiencia institucional para presentar servicios y captar oportunidades.</p>
+                <button class="text-link project-more" type="button" data-project="Sitio web corporativo">
+                  Ver proyecto <svg class="icon"><use href="#icon-arrow"></use></svg>
+                </button>
+              </div>
+            </article>
+            <article class="portfolio-card">
+              <div class="project-visual project-landing">
+                <div class="project-browser">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="project-landing-inner">
+                  <div><i></i><strong>Impulsa tu marca</strong><small></small><small></small><b></b></div>
+                  <span></span>
+                </div>
+              </div>
+              <div class="project-info">
+                <div class="project-tags"><span>Marketing</span><span>Conversión</span></div>
+                <h3>Landing page comercial</h3>
+                <p>Página enfocada en campañas para generar contactos calificados.</p>
+                <button class="text-link project-more" type="button" data-project="Landing page comercial">
+                  Ver proyecto <svg class="icon"><use href="#icon-arrow"></use></svg>
+                </button>
+              </div>
+            </article>
+            <article class="portfolio-card">
+              <div class="project-visual project-catalog">
+                <div class="project-browser">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="project-catalog-inner">
+                  <small></small>
+                  <strong>Servicios</strong>
+                  <div><i></i><i></i><i></i></div>
+                </div>
+              </div>
+              <div class="project-info">
+                <div class="project-tags"><span>Web</span><span>Catálogo</span></div>
+                <h3>Catálogo digital de servicios</h3>
+                <p>Oferta organizada para facilitar la exploración y la toma de decisión.</p>
+                <button class="text-link project-more" type="button" data-project="Catálogo digital de servicios">
+                  Ver proyecto <svg class="icon"><use href="#icon-arrow"></use></svg>
+                </button>
+              </div>
+            </article>
+            <article class="portfolio-card">
+              <div class="project-visual project-crm">
+                <div class="project-browser">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="project-crm-inner">
+                  <aside><i></i><i></i><i></i><i></i></aside>
+                  <div>
+                    <span></span>
+                    <section><i></i><i></i><i></i></section>
+                    <small></small>
+                    <small></small>
+                    <small></small>
+                  </div>
+                </div>
+              </div>
+              <div class="project-info">
+                <div class="project-tags"><span>Automatización</span><span>CRM</span></div>
+                <h3>Sistema de atención al cliente</h3>
+                <p>Panel de seguimiento para organizar prospectos y solicitudes comerciales.</p>
+                <button class="text-link project-more" type="button" data-project="Sistema de atención al cliente">
+                  Ver proyecto <svg class="icon"><use href="#icon-arrow"></use></svg>
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section benefits">
+        <div class="container benefits-grid">
+          <div class="benefits-copy">
+            <p class="eyebrow"><span></span> Beneficios reales</p>
+            <h2>Más que una web: una herramienta para <em>tu empresa</em></h2>
+            <p>
+              Una presencia digital bien diseñada te ayuda a trabajar con mayor orden, responder
+              mejor y comunicar el valor de tus servicios con confianza.
+            </p>
+            <a class="btn btn-primary" href="#solicitud">
+              Solicitar una propuesta
+              <svg class="icon"><use href="#icon-arrow"></use></svg>
+            </a>
+          </div>
+          <div class="benefit-list">
+            <article>
+              <span>01</span>
+              <div><h3>Mayor presencia digital</h3><p>Una imagen moderna disponible para tus clientes en todo momento.</p></div>
+            </article>
+            <article>
+              <span>02</span>
+              <div><h3>Captación de clientes</h3><p>Puntos de contacto claros para convertir interés en oportunidades.</p></div>
+            </article>
+            <article>
+              <span>03</span>
+              <div><h3>Organización de servicios</h3><p>Una oferta ordenada que facilita la decisión de cada prospecto.</p></div>
+            </article>
+            <article>
+              <span>04</span>
+              <div><h3>Solicitudes automatizadas</h3><p>Más agilidad para recibir datos y dar seguimiento comercial.</p></div>
+            </article>
+            <article>
+              <span>05</span>
+              <div><h3>Comunicación profesional</h3><p>Una experiencia consistente que fortalece la confianza en tu marca.</p></div>
+            </article>
+            <article>
+              <span>06</span>
+              <div><h3>Control de oportunidades</h3><p>Información útil para conocer la actividad comercial de tu negocio.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section admin-section">
+        <div class="container">
+          <div class="section-heading split-heading">
+            <div>
+              <p class="eyebrow"><span></span> Administración simulada</p>
+              <h2>Control comercial en una sola <em>vista</em></h2>
+            </div>
+            <p>
+              Un panel visual permite revisar solicitudes, conocer prioridades y mantener un
+              seguimiento ordenado de cada oportunidad.
+            </p>
+          </div>
+
+          <div class="admin-dashboard">
+            <div class="admin-header">
+              <div>
+                <span class="admin-badge">Vista demostrativa</span>
+                <h3>Panel de solicitudes</h3>
+              </div>
+              <button class="btn btn-dark" type="button" id="refresh-dashboard">
+                Actualizar datos
+                <svg class="icon"><use href="#icon-arrow"></use></svg>
+              </button>
+            </div>
+            <div class="admin-stats">
+              <article>
+                <span class="stat-icon"><svg class="icon"><use href="#icon-file"></use></svg></span>
+                <div><small>Total de solicitudes</small><strong>128</strong><b>+18 este mes</b></div>
+              </article>
+              <article>
+                <span class="stat-icon"><svg class="icon"><use href="#icon-trending"></use></svg></span>
+                <div><small>Servicio más solicitado</small><strong>Diseño web</strong><b>42 solicitudes</b></div>
+              </article>
+              <article>
+                <span class="stat-icon"><svg class="icon"><use href="#icon-users"></use></svg></span>
+                <div><small>Clientes potenciales</small><strong>64</strong><b>+12 esta semana</b></div>
+              </article>
+              <article>
+                <span class="stat-icon"><svg class="icon"><use href="#icon-check"></use></svg></span>
+                <div><small>Cotizaciones aprobadas</small><strong>32</strong><b>25% de conversión</b></div>
+              </article>
+            </div>
+            <div class="admin-table-wrap">
+              <div class="table-heading">
+                <div><h4>Solicitudes recientes</h4><p>Seguimiento de prospectos registrados</p></div>
+                <div class="status-filter" role="group" aria-label="Filtrar solicitudes por estado">
+                  <button class="active" type="button" data-filter="Todos">Todos</button>
+                  <button type="button" data-filter="Pendiente">Pendientes</button>
+                  <button type="button" data-filter="Aprobado">Aprobados</button>
+                </div>
+              </div>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Cliente</th>
+                      <th>Servicio solicitado</th>
+                      <th>Plan</th>
+                      <th>Estado</th>
+                      <th>Fecha</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-status="Pendiente">
+                      <td><span class="client-avatar">CM</span><strong>Carolina Méndez</strong></td>
+                      <td>Desarrollo de página web</td>
+                      <td>Empresarial</td>
+                      <td><span class="status status-pending">Pendiente</span></td>
+                      <td>28 May, 2026</td>
+                    </tr>
+                    <tr data-status="En revisión">
+                      <td><span class="client-avatar">JR</span><strong>Javier Rojas</strong></td>
+                      <td>Automatización de procesos</td>
+                      <td>Profesional</td>
+                      <td><span class="status status-review">En revisión</span></td>
+                      <td>27 May, 2026</td>
+                    </tr>
+                    <tr data-status="Cotizado">
+                      <td><span class="client-avatar">EV</span><strong>Elena Vallejo</strong></td>
+                      <td>CRM y gestión de clientes</td>
+                      <td>Empresarial</td>
+                      <td><span class="status status-quoted">Cotizado</span></td>
+                      <td>26 May, 2026</td>
+                    </tr>
+                    <tr data-status="Aprobado">
+                      <td><span class="client-avatar">DM</span><strong>Diego Moreno</strong></td>
+                      <td>Catálogo digital de servicios</td>
+                      <td>Profesional</td>
+                      <td><span class="status status-approved">Aprobado</span></td>
+                      <td>25 May, 2026</td>
+                    </tr>
+                    <tr data-status="Aprobado">
+                      <td><span class="client-avatar">SA</span><strong>Sofía Andrade</strong></td>
+                      <td>Diseño de marca y contenido</td>
+                      <td>Básico</td>
+                      <td><span class="status status-approved">Aprobado</span></td>
+                      <td>23 May, 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contacto">
+        <div class="container contact-grid">
+          <div class="contact-copy">
+            <p class="eyebrow light"><span></span> Conversemos</p>
+            <h2>Tu próximo proyecto puede comenzar <em>hoy</em></h2>
+            <p>
+              Escríbenos para revisar tus objetivos y encontrar la solución digital ideal para tu
+              empresa.
+            </p>
+            <div class="contact-details">
+              <a href="mailto:contacto@bakerwoord.com">
+                <span><svg class="icon"><use href="#icon-mail"></use></svg></span>
+                <div><small>Correo electrónico</small><strong>contacto@bakerwoord.com</strong></div>
+              </a>
+              <a href="tel:+593990000000">
+                <span><svg class="icon"><use href="#icon-phone"></use></svg></span>
+                <div><small>Teléfono</small><strong>+593 99 000 0000</strong></div>
+              </a>
+              <div>
+                <span><svg class="icon"><use href="#icon-pin"></use></svg></span>
+                <div><small>Ubicación</small><strong>Quito, Ecuador</strong></div>
+              </div>
+            </div>
+            <a
+              class="btn btn-whatsapp"
+              href="https://wa.me/593990000000?text=Hola%20Bakerwoord,%20deseo%20información%20sobre%20sus%20servicios."
+              target="_blank"
+              rel="noopener"
+            >
+              <svg class="icon"><use href="#icon-whatsapp"></use></svg>
+              Escribir por WhatsApp
+            </a>
+          </div>
+
+          <form class="contact-form" id="contact-form">
+            <p>Contacto rápido</p>
+            <h3>Déjanos un mensaje</h3>
+            <label>
+              <span>Nombre *</span>
+              <input type="text" name="name" placeholder="Tu nombre" required />
+            </label>
+            <label>
+              <span>Correo *</span>
+              <input type="email" name="email" placeholder="nombre@empresa.com" required />
+            </label>
+            <label>
+              <span>Mensaje *</span>
+              <textarea name="message" rows="4" placeholder="¿Cómo podemos ayudarte?" required></textarea>
+            </label>
+            <button class="btn btn-primary btn-full" type="submit">
+              Enviar mensaje
+              <svg class="icon"><use href="#icon-arrow"></use></svg>
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div class="footer-brand">
+          <a class="brand brand-light" href="#inicio">
+            <span class="brand-mark">B</span>
+            <span class="brand-name">Bakerwoord<span>.</span></span>
+          </a>
+          <p>Soluciones digitales para empresas modernas.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg class="icon"><use href="#icon-instagram"></use></svg>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+              <svg class="icon"><use href="#icon-linkedin"></use></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Explorar</h3>
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#planes">Planes</a>
+          <a href="#portafolio">Portafolio</a>
+        </div>
+        <div class="footer-column">
+          <h3>Servicios</h3>
+          <a href="#servicios">Desarrollo web</a>
+          <a href="#servicios">Automatización</a>
+          <a href="#servicios">CRM comercial</a>
+          <a href="#servicios">Marketing digital</a>
+        </div>
+        <div class="footer-column footer-contact">
+          <h3>Contacto</h3>
+          <a href="mailto:contacto@bakerwoord.com">contacto@bakerwoord.com</a>
+          <a href="tel:+593990000000">+593 99 000 0000</a>
+          <span>Quito, Ecuador</span>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© <span id="current-year"></span> Bakerwoord. Todos los derechos reservados.</p>
+        <p>Diseñado para presentar, conectar y crecer.</p>
+      </div>
+    </footer>
+
+    <a
+      class="whatsapp-float"
+      href="https://wa.me/593990000000?text=Hola%20Bakerwoord,%20deseo%20información%20sobre%20sus%20servicios."
+      target="_blank"
+      rel="noopener"
+      aria-label="Contactar por WhatsApp"
+    >
+      <svg class="icon"><use href="#icon-whatsapp"></use></svg>
+    </a>
+
+    <button class="back-to-top" type="button" aria-label="Volver al inicio">
+      <svg class="icon"><use href="#icon-chevron"></use></svg>
+    </button>
+
+    <div class="modal" id="detail-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <button class="modal-close" type="button" aria-label="Cerrar ventana" data-modal-close>
+          <svg class="icon"><use href="#icon-x"></use></svg>
+        </button>
+        <p class="eyebrow"><span></span> Bakerwoord</p>
+        <h2 id="modal-title">Detalle</h2>
+        <p id="modal-copy"></p>
+        <button class="btn btn-primary" type="button" id="modal-action">
+          Solicitar información
+          <svg class="icon"><use href="#icon-arrow"></use></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <span><svg class="icon"><use href="#icon-check"></use></svg></span>
+      <div>
+        <strong id="toast-title">Listo</strong>
+        <p id="toast-message">Acción completada correctamente.</p>
+      </div>
+      <button type="button" aria-label="Cerrar notificación">
+        <svg class="icon"><use href="#icon-x"></use></svg>
+      </button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

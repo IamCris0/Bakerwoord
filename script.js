@@ -23,7 +23,7 @@ let selectedService = "";
 
 const serviceDetails = {
   "Herramientas SaaS":
-    "Integramos Schedule, Notion, Slack, Google Workspace y analítica para que el equipo tenga procesos, responsables y seguimiento en un solo ecosistema.",
+    "Integramos Schedule o Supercreator, Notion, Slack, Google Workspace y analítica para que el equipo tenga procesos, responsables y seguimiento en un solo ecosistema.",
   "Publicidad pagada":
     "Preparamos la operación de pauta en Reddit Ads, Twitter/X Ads, TikTok, Instagram, X y otros canales según la audiencia y el objetivo comercial.",
   "Almacenamiento y nube":

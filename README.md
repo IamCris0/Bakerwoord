@@ -18,7 +18,7 @@ python -m http.server 8000
 ## Contenido de la demo
 
 - Identidad comercial de INFINIA MEDIA S.A.S.
-- Servicios basados en herramientas SaaS, publicidad pagada, nube, VPN, software creativo, CRM, locación e infraestructura.
+- Servicios basados en herramientas SaaS como Schedule/Supercreator, publicidad pagada, nube, VPN, software creativo, CRM, locación e infraestructura.
 - Paquete recomendado: Plan Integral INFINIA por USD 750.
 - Formularios de solicitud y contacto con confirmación simulada.
 - Casos de uso ficticios para explicar la operación al cliente.

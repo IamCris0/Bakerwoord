@@ -1,6 +1,6 @@
-# Bakerwoord - Sistema Web de Venta de Servicios
+# INFINIA MEDIA S.A.S - Propuesta Web y CRM Demo
 
-Maqueta web local para presentar una propuesta comercial de servicios digitales de Bakerwoord.
+Maqueta web local para presentar una propuesta profesional de operación digital, publicidad pagada, herramientas SaaS, CRM, seguridad e infraestructura.
 
 ## Abrir localmente
 
@@ -17,10 +17,11 @@ python -m http.server 8000
 
 ## Contenido de la demo
 
-- Servicios digitales y planes comerciales.
-- Selección visual de planes.
+- Identidad comercial de INFINIA MEDIA S.A.S.
+- Servicios basados en herramientas SaaS, publicidad pagada, nube, VPN, software creativo, CRM, locación e infraestructura.
+- Paquete recomendado: Plan Integral INFINIA por USD 750.
 - Formularios de solicitud y contacto con confirmación simulada.
-- Portafolio ficticio.
-- Resumen de propuesta de USD 750.
-- Panel administrativo simulado con filtros.
+- Casos de uso ficticios para explicar la operación al cliente.
+- Acceso reservado al CRM demo mediante botón.
+- Panel CRM simulado con métricas, filtros y tabla de actividades.
 - Diseño responsive y menú adaptable.

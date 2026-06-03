@@ -16,37 +16,41 @@ const detailModal = document.querySelector("#detail-modal");
 const modalTitle = document.querySelector("#modal-title");
 const modalCopy = document.querySelector("#modal-copy");
 const modalAction = document.querySelector("#modal-action");
+const crmPanel = document.querySelector("#crm-panel");
+const toggleCrm = document.querySelector("#toggle-crm");
 let toastTimeout;
 let selectedService = "";
 
 const serviceDetails = {
-  "Desarrollo de páginas web":
-    "Diseñamos sitios corporativos claros, responsivos y orientados a convertir visitas en nuevas oportunidades comerciales.",
-  "Gestión de redes sociales":
-    "Planificamos contenido y presencia digital para comunicar el valor de tu marca de forma consistente en cada canal.",
-  "Publicidad digital pagada":
-    "Creamos campañas segmentadas para ampliar el alcance, atraer prospectos y medir resultados con mayor precisión.",
-  "Diseño de marca y contenido visual":
-    "Construimos una identidad visual profesional con piezas coherentes para fortalecer la percepción de tu empresa.",
-  "Automatización de procesos":
-    "Conectamos tareas y formularios para reducir trabajo manual y acelerar la atención de cada solicitud.",
-  "CRM y gestión de clientes":
-    "Organizamos el seguimiento comercial con una vista centralizada de clientes, etapas y oportunidades.",
-  "Analítica y reportes":
-    "Transformamos datos en indicadores simples para evaluar rendimiento y tomar decisiones informadas.",
-  "Hosting, dominio y soporte técnico":
-    "Mantenemos tu presencia digital disponible y acompañada por soporte técnico cuando lo necesites.",
+  "Herramientas SaaS":
+    "Integramos Schedule, Notion, Slack, Google Workspace y analítica para que el equipo tenga procesos, responsables y seguimiento en un solo ecosistema.",
+  "Publicidad pagada":
+    "Preparamos la operación de pauta en Reddit Ads, Twitter/X Ads, TikTok, Instagram, X y otros canales según la audiencia y el objetivo comercial.",
+  "Almacenamiento y nube":
+    "Organizamos Google Drive o Dropbox Business con carpetas, permisos y estructura de respaldos para activos, piezas, reportes y entregables.",
+  "VPN y seguridad":
+    "Configuramos VPN corporativa, gestión de contraseñas y protección de cuentas para reducir riesgos en accesos, campañas y herramientas críticas.",
+  "Software de edición":
+    "Centralizamos el uso de Adobe Creative Cloud y herramientas como Premiere, Lightroom y CapCut Pro para producción visual profesional.",
+  "Misceláneos operativos":
+    "Incluimos dominio, hosting web de la agencia e imprevistos menores que suelen aparecer durante la puesta en marcha de la operación.",
+  "Locación de contenido":
+    "Consideramos un espacio físico exclusivo para generar contenido, mantener consistencia visual y acelerar la producción de piezas.",
+  "Software y herramientas CRM":
+    "Integramos CRM de gestión, automatización de publicaciones, licencias de edición y VPNs corporativas para administrar clientes y contenido.",
+  "Infraestructura tecnológica":
+    "Planificamos el uso de aro de luz, cámaras o smartphone de alta gama, micrófono y estación de edición para producir con calidad constante.",
 };
 
 const projectDetails = {
-  "Sitio web corporativo":
-    "Propuesta institucional ficticia enfocada en jerarquía visual, servicios destacados y canales de contacto directos.",
-  "Landing page comercial":
-    "Ejemplo de una experiencia de campaña breve, persuasiva y preparada para registrar nuevos prospectos.",
-  "Catálogo digital de servicios":
-    "Maqueta de un catálogo que facilita explorar alternativas y comprender el alcance de cada solución.",
-  "Sistema de atención al cliente":
-    "Vista simulada de un CRM ligero para revisar solicitudes, priorizar contactos y ordenar la gestión comercial.",
+  "Ecosistema SaaS y productividad":
+    "Caso simulado que muestra cómo se ordenarían herramientas como Notion, Slack, Google Workspace y analítica para sostener la operación diaria.",
+  "Campañas de publicidad pagada":
+    "Escenario de pauta multicanal con seguimiento de estados, responsables, presupuesto y tareas asociadas a cada campaña.",
+  "Producción de contenido en locación":
+    "Vista de trabajo para coordinar espacio, software creativo, equipo técnico y entregables de contenido.",
+  "CRM de gestión y automatización":
+    "Panel reservado para revisar prospectos, tareas, estados de campaña y automatizaciones sin exponer la administración al público.",
 };
 
 function scrollToSection(selector) {
@@ -90,7 +94,7 @@ planSelect.addEventListener("change", () => selectPlan(planSelect.value, false))
 function openModal(title, copy, service = "") {
   selectedService = service;
   modalTitle.textContent = title;
-  modalCopy.textContent = copy;
+  modalCopy.textContent = copy || "Detalle disponible dentro de la propuesta integral.";
   detailModal.classList.add("open");
   detailModal.setAttribute("aria-hidden", "false");
   body.classList.add("no-scroll");
@@ -152,16 +156,30 @@ requestForm.addEventListener("submit", (event) => {
   event.preventDefault();
   showToast(
     "Solicitud registrada correctamente",
-    "Un asesor de Bakerwoord se comunicará contigo."
+    "Un asesor de INFINIA MEDIA S.A.S se comunicará contigo."
   );
   requestForm.reset();
-  selectPlan("Plan Empresarial", false);
+  selectPlan("Plan Integral INFINIA", false);
 });
 
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
   showToast("Mensaje registrado", "Gracias por escribirnos. Te contactaremos muy pronto.");
   contactForm.reset();
+});
+
+toggleCrm.addEventListener("click", () => {
+  const shouldShow = crmPanel.hidden;
+  crmPanel.hidden = !shouldShow;
+  toggleCrm.setAttribute("aria-expanded", String(shouldShow));
+  toggleCrm.innerHTML = shouldShow
+    ? 'Ocultar demo del CRM <svg class="icon"><use href="#icon-chevron"></use></svg>'
+    : 'Ver demo del CRM <svg class="icon"><use href="#icon-arrow"></use></svg>';
+
+  if (shouldShow) {
+    showToast("CRM demo habilitado", "La vista interna ya está disponible para revisión.");
+    crmPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 });
 
 document.querySelector("#refresh-dashboard").addEventListener("click", (event) => {
@@ -172,7 +190,7 @@ document.querySelector("#refresh-dashboard").addEventListener("click", (event) =
   window.setTimeout(() => {
     button.innerHTML = 'Actualizar datos <svg class="icon"><use href="#icon-arrow"></use></svg>';
     button.disabled = false;
-    showToast("Panel actualizado", "Los datos simulados están al día.");
+    showToast("Panel actualizado", "Los datos simulados del CRM están al día.");
   }, 700);
 });
 
@@ -181,7 +199,7 @@ document.querySelectorAll(".status-filter button").forEach((button) => {
     const filter = button.dataset.filter;
     document.querySelectorAll(".status-filter button").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
-    document.querySelectorAll("tbody tr").forEach((row) => {
+    document.querySelectorAll("#crm-panel tbody tr").forEach((row) => {
       row.hidden = filter !== "Todos" && row.dataset.status !== filter;
     });
   });
@@ -194,9 +212,12 @@ const observedSections = [...document.querySelectorAll("main section[id]")];
 function updateScrollState() {
   backToTop.classList.toggle("show", window.scrollY > 700);
 
-  const currentSection = observedSections
-    .filter((section) => section.offsetTop <= window.scrollY + 160)
-    .at(-1);
+  let currentSection;
+  observedSections.forEach((section) => {
+    if (section.offsetTop <= window.scrollY + 160) {
+      currentSection = section;
+    }
+  });
 
   navLinks.forEach((link) => {
     link.classList.toggle("active", link.getAttribute("href") === `#${currentSection?.id}`);

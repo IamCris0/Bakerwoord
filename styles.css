@@ -268,21 +268,23 @@ h2 em {
 
 .brand-mark {
   display: inline-grid;
-  width: 34px;
+  width: 40px;
   height: 34px;
   place-items: center;
   border-radius: 10px 2px 10px 2px;
   color: #fff;
   background: var(--navy);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: -0.08em;
 }
 
 .brand-name {
   color: var(--navy);
-  font-size: 1.1rem;
+  font-size: 1.02rem;
   font-weight: 800;
-  letter-spacing: -0.065em;
+  letter-spacing: -0.04em;
 }
 
 .brand-name span {
@@ -813,7 +815,7 @@ h2 em {
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
@@ -1743,6 +1745,89 @@ textarea:focus {
   background: #fff;
 }
 
+.crm-access-card {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 0.9fr auto;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid rgba(198, 157, 88, 0.28);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(198, 157, 88, 0.14), transparent 30%),
+    linear-gradient(135deg, #ffffff 0%, #f8faf9 100%);
+  box-shadow: var(--shadow-soft);
+}
+
+.crm-access-copy h3 {
+  margin-top: 11px;
+  color: var(--navy);
+  font-size: 1.35rem;
+  letter-spacing: -0.06em;
+  line-height: 1.25;
+}
+
+.crm-access-copy p {
+  max-width: 520px;
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.crm-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.crm-window {
+  display: grid;
+  min-width: 150px;
+  gap: 9px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.crm-window span {
+  width: 28px;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--gold);
+}
+
+.crm-window strong {
+  color: var(--navy);
+  font-size: 0.74rem;
+}
+
+.crm-window i {
+  display: block;
+  width: var(--width);
+  height: 6px;
+  border-radius: 99px;
+  background: #dce5e3;
+}
+
+.crm-window.muted {
+  opacity: 0.78;
+}
+
+.crm-access-actions {
+  display: grid;
+  gap: 9px;
+  min-width: 190px;
+}
+
+.crm-panel {
+  margin-top: 16px;
+}
+
+.crm-panel[hidden] {
+  display: none;
+}
+
 .admin-dashboard {
   padding: 21px;
   border: 1px solid var(--line);
@@ -2452,7 +2537,8 @@ td strong {
   .proposal-card,
   .request-grid,
   .benefits-grid,
-  .contact-grid {
+  .contact-grid,
+  .crm-access-card {
     grid-template-columns: 1fr;
   }
 
@@ -2468,6 +2554,11 @@ td strong {
 
   .admin-stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .crm-access-actions {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
@@ -2664,6 +2755,18 @@ td strong {
 
   .admin-dashboard {
     padding: 13px;
+  }
+
+  .crm-access-card {
+    padding: 18px;
+  }
+
+  .crm-preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .crm-access-actions {
+    display: grid;
   }
 
   .admin-header,

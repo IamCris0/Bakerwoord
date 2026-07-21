@@ -45,11 +45,16 @@ Alternativa sin Node.js: `python -m http.server 8080` desde la carpeta del proye
 
 ## Qué se rediseñó y por qué
 
-- **Identidad visual nueva**: paleta oro (`#B8872E`) + vino (`#6E1F2B`) + crema
-  (`#FBF6EC`) sobre tinta cálida casi negra, tipografía Playfair Display
-  (encabezados, con cursiva para el nombre de marca) + Inter (texto/UI).
-  Reemplaza el esquema anterior (turquesa/negro sin una paleta unificada) por
-  algo consistente en las 6 páginas.
+- **Identidad visual nueva — versión clara**: el sitio es predominantemente
+  blanco/crema (`#FBF6EC`, `#F3ECDD`), con el oro corporativo (`#B8872E`) como
+  único acento fuerte y el vino (`#6E1F2B`) reservado a detalles pequeños
+  (etiquetas, enlaces). No queda ningún bloque negro/oscuro en la barra
+  superior, el menú, la franja de cifras, el banner de subpáginas, la cita ni
+  el pie de página — todos son claros con texto oscuro, siguiendo el pedido
+  de "web clara, no oscura, que resalten los productos". Tipografía Playfair
+  Display (encabezados, cursiva para el nombre de marca) + Inter (texto/UI).
+  Paleta ajustada tras revisar como referencia guillermovazquezjoyeria.com
+  (fondo claro, producto protagonista, acento cálido único).
 - **Navegación reorganizada**: se unificó "Nuestra Historia" y "Misión y
   Visión" (antes duplicadas en `mision-vision.html` e `historia.html`) en una
   sola página `quienes-somos.html` con anclas, evitando contenido repetido.

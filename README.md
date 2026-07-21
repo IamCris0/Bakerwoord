@@ -1,33 +1,32 @@
-# Crazyshop — Demo de página de inicio
+# Joyería El Palacio del Amor — Sitio de demostración
 
-Recreación en HTML/CSS/JS de la página de inicio de Crazyshop (header con anuncio,
-buscador, menú de categorías, carrusel principal, tarjetas de oferta y franja de
-beneficios), lista para presentar localmente o compartir por red.
+Rediseño completo del sitio de **Joyería El Palacio del Amor** (Lago Agrio y El
+Coca, Ecuador), en HTML/CSS/JS puro, sin frameworks ni build tools. Reemplaza
+el diseño anterior por una identidad propia en oro, vino y crema, inspirada en
+tu historia real de 37 años, y queda lista para presentar localmente o
+compartir por red mientras se conectan los datos reales.
 
 ## Estructura de carpetas
 
 ```
-crazyshop/
-├── index.html          Página de inicio
-├── css/
-│   └── styles.css      Estilos (tokens de diseño, componentes, responsive)
-├── js/
-│   └── main.js         Carrusel, menú móvil, mega menú de categorías, badges
-├── assets/img/         (reservado para imágenes propias, si quieres reemplazar las de stock)
-├── server.js           Servidor local sin dependencias (Node.js)
+palacio-del-amor/
+├── index.html              Inicio
+├── quienes-somos.html      Historia, Misión/Visión, Política, Preguntas Frecuentes
+├── productos.html          Catálogo con filtros por categoría
+├── servicio-tecnico.html   Grabado láser, reparación, proceso de trabajo
+├── contacto.html           Formulario, sucursales, WhatsApp, mapa
+├── noticias.html           Noticias y premios (contenido de ejemplo)
+├── css/styles.css          Sistema de diseño (colores, tipografía, componentes)
+├── js/main.js              Menús, carrusel, filtros, acordeón, formulario
+├── server.js               Servidor local sin dependencias (Node.js)
 ├── package.json
 └── README.md
 ```
 
 ## Cómo verlo localmente
 
-**Opción rápida (doble clic):** abre `index.html` directamente en el navegador.
-Funciona, pero para compartirlo por red necesitas un servidor (opción de abajo).
-
-**Con servidor local (recomendado para compartir):**
-
 ```bash
-cd crazyshop
+cd palacio-del-amor
 node server.js
 ```
 
@@ -39,41 +38,57 @@ En tu red: http://192.168.1.23:8080
 ```
 
 - Abre la URL **Local** en tu propia PC.
-- Comparte la URL **"En tu red"** con alguien conectado al mismo Wi-Fi/red local
-  (oficina, casa) — podrá abrirla directamente en su navegador.
-- Para usar otro puerto: `node server.js 3000`
+- Comparte la URL **"En tu red"** con alguien en el mismo Wi-Fi (oficina, casa).
+- Para otro puerto: `node server.js 3000`. También puedes usar `npm start`.
 
-También puedes usar `npm start` (equivalente a `node server.js`).
+Alternativa sin Node.js: `python -m http.server 8080` desde la carpeta del proyecto.
 
-### Alternativa con Python
+## Qué se rediseñó y por qué
 
-Si prefieres no usar Node.js:
+- **Identidad visual nueva**: paleta oro (`#B8872E`) + vino (`#6E1F2B`) + crema
+  (`#FBF6EC`) sobre tinta cálida casi negra, tipografía Playfair Display
+  (encabezados, con cursiva para el nombre de marca) + Inter (texto/UI).
+  Reemplaza el esquema anterior (turquesa/negro sin una paleta unificada) por
+  algo consistente en las 6 páginas.
+- **Navegación reorganizada**: se unificó "Nuestra Historia" y "Misión y
+  Visión" (antes duplicadas en `mision-vision.html` e `historia.html`) en una
+  sola página `quienes-somos.html` con anclas, evitando contenido repetido.
+- **Pie de página consistente**: antes las categorías del footer cambiaban de
+  una página a otra; ahora es el mismo bloque en las 6 páginas.
+- **Contenido real conservado**: historia, fundación (14 feb. 1989), misión,
+  visión, política de 4 pilares y horarios de atención se tomaron de tu sitio
+  actual y se re-redactaron para el nuevo diseño.
+- **Sin funcionalidades inventadas**: no se agregó carrito de compras ni pagos
+  en línea porque el sitio actual funciona como catálogo + contacto directo,
+  no como tienda con checkout.
 
-```bash
-cd crazyshop
-python -m http.server 8080
-```
+## ⚠️ Datos que debes reemplazar antes de publicar
 
-## Compartir fuera de tu red local (opcional)
+Este sitio usa **imágenes de stock** y **datos de contacto marcados como
+plantilla** a propósito, para no inventar información real de tu negocio.
+Busca y reemplaza en los 6 archivos `.html`:
 
-La opción "En tu red" solo funciona si la otra persona está en la misma red
-Wi-Fi/LAN. Para que alguien fuera de tu red acceda:
-
-1. Revisa que el Firewall de Windows permita conexiones entrantes al puerto usado
-   (Windows puede pedir confirmación la primera vez que ejecutes `node server.js`; acepta "Permitir acceso").
-2. Configura redirección de puertos (port forwarding) en tu router hacia la IP de
-   tu PC y el puerto del servidor, o usa un túnel temporal (por ejemplo `ngrok`,
-   `cloudflared`) si prefieres no tocar la configuración del router.
+| Dato | Marcador usado | Dónde |
+|---|---|---|
+| Teléfono / WhatsApp | `+593 6 XXX-XXXX` | Header, footer, página de Contacto |
+| Botón "Abrir WhatsApp" | `href="#"` | `contacto.html` — cámbialo por tu enlace `https://wa.me/593XXXXXXXXX` |
+| Correo | `info@elpalaciodelamorjoyeria.com` | Footer y Contacto — confirma que sea el correo que realmente monitoreas |
+| Direcciones exactas | `[agrega tu dirección exacta]` | `contacto.html`, tarjetas de sucursales |
+| Mapa | Placeholder con instrucciones | `contacto.html` — pega el iframe de Google Maps de cada sucursal |
+| Fotos de productos | Fotos de stock (Unsplash) | `index.html`, `productos.html` — reemplaza por fotos reales de tus joyas |
+| Redes sociales | `href="#"` | Todas las páginas — agrega tus enlaces reales de Facebook/Instagram/YouTube |
+| Noticias | Artículos "[Título de ejemplo]" | `noticias.html` — reemplaza por tus noticias/premios reales |
+| Preguntas frecuentes | Redactadas de forma genérica | `quienes-somos.html` — confirma que las políticas (garantía, pagos, grabado) sean exactamente las tuyas |
+| Formulario de contacto | No envía correos todavía | `contacto.html` / `js/main.js` — conéctalo a un servicio de formularios (Formspree, EmailJS, etc.) o a tu backend |
 
 ## Notas de diseño
 
-- Tipografía: Poppins (encabezados) + Inter (texto), vía Google Fonts.
-- Paleta: naranja marca `#F2542D`, tinta `#17181C`, fondo `#F7F6F3`, más los tres
-  acentos de las tarjetas de oferta (menta, ladrillo, dorado).
-- Interacciones: header que se compacta al hacer scroll, mega menú de categorías,
-  carrusel con autoplay/swipe/flechas/puntos, menú móvil con hamburguesa, y
-  contadores animados en los íconos de comparar/favoritos/carrito.
-- Las fotografías del héroe y las tarjetas de oferta son imágenes de stock
-  (Unsplash) usadas solo como referencia visual; reemplázalas en `index.html`
-  (atributo `style="--img:url(...)"`) por tus propias imágenes en `assets/img/`
-  cuando tengas fotografía real de producto.
+- **Motivo de marca**: un divisor dorado con un pequeño "diamante" (rombo) se
+  repite como separador entre secciones — un guiño discreto a la joyería,
+  reutilizado en vez de líneas genéricas.
+- **Franja de cifras** (1989 · 37 años · 2 sucursales · Oro 18k) en el
+  Inicio: son datos reales tomados de tu historia, no decoración.
+- **Categorías** con menú desplegable (Quiénes Somos) y mega-menú (Productos),
+  con versión colapsable en móvil.
+- **Accesibilidad**: foco visible en todos los controles, `prefers-reduced-motion`
+  respetado en carrusel y animaciones, formularios con `<label>` asociados.

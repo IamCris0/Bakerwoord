@@ -1,5 +1,5 @@
 /**
- * Zero-dependency static file server for the Crazyshop demo.
+ * Zero-dependency static file server for the Palacio del Amor site.
  * Usage:  node server.js [port]      (default port: 8080)
  */
 const http = require('http');
@@ -46,7 +46,7 @@ const server = http.createServer((req, res) => {
     fs.readFile(filePath, (err2, data) => {
       if (err2) {
         res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-        return res.end('<h1>404</h1><p>Archivo no encontrado.</p>');
+        return res.end('<h1>404</h1><p>Página no encontrada.</p><p><a href="/">Volver al inicio</a></p>');
       }
       const ext = path.extname(filePath).toLowerCase();
       res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
@@ -67,7 +67,7 @@ function getLanIPs() {
 }
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log('\n  Crazyshop demo corriendo\n');
+  console.log('\n  Joyería El Palacio del Amor — sitio de demostración\n');
   console.log(`  Local:    http://localhost:${PORT}`);
   getLanIPs().forEach((ip) => console.log(`  En tu red: http://${ip}:${PORT}`));
   console.log('\n  Comparte la URL "En tu red" con quien esté en el mismo Wi-Fi/red.');

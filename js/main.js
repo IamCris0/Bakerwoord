@@ -138,6 +138,108 @@
     });
   });
 
+  /* ---------- Catalog: hub page (productos.html) ---------- */
+  const CAT = window.CATALOG;
+  const hubRoot = document.getElementById('hubRoot');
+  if (hubRoot && CAT) {
+    const filters = document.getElementById('hubFilters');
+    CAT.groups.forEach((group, gi) => {
+      const cats = Object.entries(CAT.categories).filter(([, c]) => c.group === group.id);
+      if (!cats.length) return;
+
+      const chip = document.createElement('a');
+      chip.className = 'filter-chip' + (gi === 0 ? '' : '');
+      chip.href = '#grupo-' + group.id;
+      chip.textContent = group.title;
+      filters.appendChild(chip);
+
+      const section = document.createElement('div');
+      section.className = 'hub-group';
+      section.id = 'grupo-' + group.id;
+      const totalFotos = cats.reduce((sum, [, c]) => sum + (c.count || (c.files || []).length), 0);
+      section.innerHTML = `
+        <div class="divider divider--left"><span class="divider__gem"></span><span class="divider__line divider__line--r"></span></div>
+        <div class="hub-group__head"><h2>${group.title}</h2><span>${cats.length} categorías · ${totalFotos} fotos</span></div>`;
+      const grid = document.createElement('div');
+      grid.className = 'product-grid';
+      cats.forEach(([slug, c]) => {
+        const card = document.createElement('a');
+        card.className = 'product-card';
+        card.href = 'categoria.html?cat=' + slug;
+        card.innerHTML = `
+          <div class="product-card__img" style="background-image:url('${c.dir}/1.jpg')"></div>
+          <div class="product-card__body">
+            <span class="product-card__cat">${group.title}</span>
+            <h3>${c.title}</h3>
+            <p>${c.desc}</p>
+            <span class="product-card__cta">Ver ${c.count || (c.files || []).length} modelos <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span>
+          </div>`;
+        grid.appendChild(card);
+      });
+      section.appendChild(grid);
+      hubRoot.appendChild(section);
+    });
+  }
+
+  /* ---------- Catalog: category page (categoria.html) ---------- */
+  const catGrid = document.getElementById('catGrid');
+  if (catGrid && CAT) {
+    const slug = new URLSearchParams(window.location.search).get('cat');
+    const cat = slug && CAT.categories[slug];
+    const titleEl = document.getElementById('catTitle');
+    if (!cat) {
+      titleEl.textContent = 'Categoría no encontrada';
+      document.getElementById('catDesc').innerHTML =
+        'La categoría solicitada no existe. <a href="productos.html" style="color:var(--color-wine);font-weight:700">Ver el catálogo completo →</a>';
+    } else {
+      document.title = cat.title + ' — El Palacio del Amor';
+      titleEl.textContent = cat.title;
+      document.getElementById('catCrumb').textContent = cat.title;
+      document.getElementById('catDesc').textContent = cat.desc + ' Toca una foto para verla en grande; precios y disponibilidad por WhatsApp o en nuestras sucursales.';
+
+      const waText = encodeURIComponent('Hola, vi la sección "' + cat.title + '" en su página web y quiero más información.');
+      document.getElementById('catWhatsBtn').href = CAT.whatsapp + '&text=' + waText;
+
+      const files = cat.files || Array.from({ length: cat.count }, (_, i) => (i + 1) + '.jpg');
+      files.forEach((file) => {
+        const src = cat.dir + '/' + file;
+        const card = document.createElement('a');
+        card.className = 'photo-card';
+        card.href = src;
+        card.target = '_blank';
+        card.rel = 'noopener';
+        card.innerHTML = `
+          <img src="${src}" alt="${cat.title}" loading="lazy">
+          <span class="photo-card__foot">Ver foto <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span>`;
+        card.querySelector('img').addEventListener('error', () => card.remove());
+        catGrid.appendChild(card);
+      });
+
+      /* Sidebar: other categories in the same group */
+      const sideList = document.getElementById('catSideList');
+      const group = CAT.groups.find(g => g.id === cat.group);
+      if (group) {
+        document.getElementById('catSideTitle').textContent = group.title;
+        Object.entries(CAT.categories)
+          .filter(([, c]) => c.group === cat.group)
+          .forEach(([s, c]) => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="categoria.html?cat=${s}"${s === slug ? ' style="color:var(--color-gold-dark)"' : ''}>${c.title} <svg class="icon icon--xs"><use href="#icon-chevron-right"/></svg></a>`;
+            sideList.appendChild(li);
+          });
+      } else {
+        document.getElementById('catSideTitle').textContent = 'Explora el catálogo';
+        CAT.groups.forEach((g) => {
+          const first = Object.entries(CAT.categories).find(([, c]) => c.group === g.id);
+          if (!first) return;
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="productos.html#grupo-${g.id}">${g.title} <svg class="icon icon--xs"><use href="#icon-chevron-right"/></svg></a>`;
+          sideList.appendChild(li);
+        });
+      }
+    }
+  }
+
   /* ---------- Contact form (client-side demo, no backend) ---------- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {

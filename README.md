@@ -1,99 +1,97 @@
-# Joyería El Palacio del Amor — Sitio de demostración
+# Joyería El Palacio del Amor — Sitio web
 
 Rediseño completo del sitio de **Joyería El Palacio del Amor** (Lago Agrio y El
-Coca, Ecuador), en HTML/CSS/JS puro, sin frameworks ni build tools. Reemplaza
-el diseño anterior por una identidad propia en oro, vino y crema, inspirada en
-tu historia real de 37 años, y queda lista para presentar localmente o
-compartir por red mientras se conectan los datos reales.
+Coca, Ecuador) en HTML/CSS/JS puro, sin frameworks ni build tools. Web clara
+con el dorado corporativo como acento, **fotos e información 100% reales del
+negocio** (tomadas de `assets/` y de la página anterior), y un catálogo de
+53 categorías navegable por URL.
 
 ## Estructura de carpetas
 
 ```
 palacio-del-amor/
-├── index.html              Inicio
-├── quienes-somos.html      Historia, Misión/Visión, Política, Preguntas Frecuentes
-├── productos.html          Catálogo con filtros por categoría
-├── servicio-tecnico.html   Grabado láser, reparación, proceso de trabajo
-├── contacto.html           Formulario, sucursales, WhatsApp, mapa
-├── noticias.html           Noticias y premios (contenido de ejemplo)
-├── css/styles.css          Sistema de diseño (colores, tipografía, componentes)
-├── js/main.js              Menús, carrusel, filtros, acordeón, formulario
+├── index.html              Inicio (slider, categorías, destacados — fotos reales)
+├── productos.html          Hub del catálogo: 8 grupos, 52 categorías (se genera de js/catalog.js)
+├── categoria.html          Plantilla dinámica: categoria.html?cat=<slug> muestra las fotos reales
+├── quienes-somos.html      Historia (con galería de fotos reales), Misión/Visión, Política, FAQ
+├── servicio-tecnico.html   Grabado láser, reparación, proceso (con banner real del taller)
+├── contacto.html           Formulario + 3 sucursales reales + WhatsApp real
+├── noticias.html           Eventos reales (Plan Acumulativo, premios) + registro de marca SENADI
+├── css/styles.css          Sistema de diseño (paleta clara oro/crema, componentes, responsive)
+├── js/catalog.js           ★ Datos del catálogo: 53 categorías → carpetas de assets con conteos
+├── js/main.js              Menús, carrusel, catálogo dinámico, acordeón, formulario
+├── assets/                 Fotos reales del cliente organizadas por categoría
+├── pagina-antigua/         Sitio anterior (solo referencia, no se sirve enlazado)
 ├── server.js               Servidor local sin dependencias (Node.js)
 ├── package.json
 └── README.md
 ```
 
-## Cómo verlo localmente
+## Cómo verlo y compartirlo
 
 ```bash
 cd palacio-del-amor
-node server.js
+node server.js          # o: npm start   |  otro puerto: node server.js 3000
 ```
 
-Verás algo como:
+- **Local**: http://localhost:8080
+- **En tu red**: el servidor imprime la URL con tu IP (ej. `http://192.168.1.23:8080`)
+  para compartir con cualquiera en el mismo Wi-Fi.
 
+## Cómo funciona el catálogo (lo importante para mantenerlo)
+
+Todo el catálogo vive en **`js/catalog.js`**. Cada categoría es una entrada:
+
+```js
+'anillos-matrimonio': { title:'Anillos de Matrimonio', group:'joyas',
+                        dir:'assets/joyas/matrimonio', count:24, desc:'...' },
 ```
-Local:     http://localhost:8080
-En tu red: http://192.168.1.23:8080
-```
 
-- Abre la URL **Local** en tu propia PC.
-- Comparte la URL **"En tu red"** con alguien en el mismo Wi-Fi (oficina, casa).
-- Para otro puerto: `node server.js 3000`. También puedes usar `npm start`.
+- `dir` es la carpeta real dentro de `assets/` y `count` la foto numerada más
+  alta (`1.jpg` … `count.jpg`). Si falta un número, la foto se descarta sola.
+- **Para agregar fotos**: copia `N+1.jpg` a la carpeta y sube `count`.
+- **Para una categoría nueva**: crea la carpeta en `assets/`, agrega la entrada
+  en `catalog.js`, y aparece automáticamente en `productos.html`; opcionalmente
+  agrégala al mega menú (en el `<nav>` de cada página).
+- Cada categoría tiene URL propia y compartible: `categoria.html?cat=anillos-matrimonio`.
+- `ofertas` es especial: lista archivos con nombre propio (carpeta `assets/ofertas`).
+- El botón de "Ofertas Especiales" del menú apunta a `categoria.html?cat=ofertas`.
 
-Alternativa sin Node.js: `python -m http.server 8080` desde la carpeta del proyecto.
+## Datos reales incluidos (verificados contra la página antigua)
 
-## Qué se rediseñó y por qué
+- **Matriz Lago Agrio**: Calle 12 de Febrero 1913, entre Av. Quito y Jorge
+  Añazco, junto al Banco Pichincha — (06) 2 830 669 · móvil 0993 681 748.
+- **Sucursal 2 Lago Agrio**: C.C. 17 de Octubre, locales 24-25-26 —
+  (06) 2 831 915 · móvil/WhatsApp 098 269 3332.
+- **Sucursal 3 El Coca**: Calle Amazonas 03-15, entre Cuenca y Rocafuerte —
+  (06) 2 300 039 / 041 · móviles 0993 681 747 / 0988 556 074.
+- **WhatsApp del sitio** (botón flotante, topbar y CTAs): 098 269 3332.
+- **Correos**: info@ / sucursa@ (El Coca) / talentohumano@ elpalaciodelamorjoyeria.com.
+- **Redes**: instagram.com/joyeriaelpalaciodelamor · x.com/PalaciodelAmor ·
+  youtube.com/user/elpalaciodelamor (el enlace de Facebook quedó genérico,
+  igual que en la página anterior — reemplázalo por la URL exacta de la página).
+- **Horario**: L–V 08:00–18:00 · Sáb 09:00–14:00 · Dom cerrado.
+- **Logos**: `assets/logo-1.png` (header), `assets/logo-10.png` (footer),
+  `assets/favicon.png` (pestaña). Tarjetas de pago: `assets/bancos/`.
 
-- **Identidad visual nueva — versión clara**: el sitio es predominantemente
-  blanco/crema (`#FBF6EC`, `#F3ECDD`), con el oro corporativo (`#B8872E`) como
-  único acento fuerte y el vino (`#6E1F2B`) reservado a detalles pequeños
-  (etiquetas, enlaces). No queda ningún bloque negro/oscuro en la barra
-  superior, el menú, la franja de cifras, el banner de subpáginas, la cita ni
-  el pie de página — todos son claros con texto oscuro, siguiendo el pedido
-  de "web clara, no oscura, que resalten los productos". Tipografía Playfair
-  Display (encabezados, cursiva para el nombre de marca) + Inter (texto/UI).
-  Paleta ajustada tras revisar como referencia guillermovazquezjoyeria.com
-  (fondo claro, producto protagonista, acento cálido único).
-- **Navegación reorganizada**: se unificó "Nuestra Historia" y "Misión y
-  Visión" (antes duplicadas en `mision-vision.html` e `historia.html`) en una
-  sola página `quienes-somos.html` con anclas, evitando contenido repetido.
-- **Pie de página consistente**: antes las categorías del footer cambiaban de
-  una página a otra; ahora es el mismo bloque en las 6 páginas.
-- **Contenido real conservado**: historia, fundación (14 feb. 1989), misión,
-  visión, política de 4 pilares y horarios de atención se tomaron de tu sitio
-  actual y se re-redactaron para el nuevo diseño.
-- **Sin funcionalidades inventadas**: no se agregó carrito de compras ni pagos
-  en línea porque el sitio actual funciona como catálogo + contacto directo,
-  no como tienda con checkout.
+## Pendientes menores antes de publicar
 
-## ⚠️ Datos que debes reemplazar antes de publicar
+| Qué | Dónde |
+|---|---|
+| Iframe de Google Maps por sucursal | `contacto.html` (placeholder marcado) |
+| URL exacta de la página de Facebook | topbar y footer de todas las páginas |
+| Conectar el formulario a correo/servicio | `contacto.html` + `js/main.js` (hoy es demo) |
+| Fotos faltantes: `assets/joyas/plata/` y `assets/perfumes/damas/` tienen 1 hueco cada una | se ocultan solas; puedes reponerlas |
 
-Este sitio usa **imágenes de stock** y **datos de contacto marcados como
-plantilla** a propósito, para no inventar información real de tu negocio.
-Busca y reemplaza en los 6 archivos `.html`:
+## Mejoras respecto a la página anterior
 
-| Dato | Marcador usado | Dónde |
-|---|---|---|
-| Teléfono / WhatsApp | `+593 6 XXX-XXXX` | Header, footer, página de Contacto |
-| Botón "Abrir WhatsApp" | `href="#"` | `contacto.html` — cámbialo por tu enlace `https://wa.me/593XXXXXXXXX` |
-| Correo | `info@elpalaciodelamorjoyeria.com` | Footer y Contacto — confirma que sea el correo que realmente monitoreas |
-| Direcciones exactas | `[agrega tu dirección exacta]` | `contacto.html`, tarjetas de sucursales |
-| Mapa | Placeholder con instrucciones | `contacto.html` — pega el iframe de Google Maps de cada sucursal |
-| Fotos de productos | Fotos de stock (Unsplash) | `index.html`, `productos.html` — reemplaza por fotos reales de tus joyas |
-| Redes sociales | `href="#"` | Todas las páginas — agrega tus enlaces reales de Facebook/Instagram/YouTube |
-| Noticias | Artículos "[Título de ejemplo]" | `noticias.html` — reemplaza por tus noticias/premios reales |
-| Preguntas frecuentes | Redactadas de forma genérica | `quienes-somos.html` — confirma que las políticas (garantía, pagos, grabado) sean exactamente las tuyas |
-| Formulario de contacto | No envía correos todavía | `contacto.html` / `js/main.js` — conéctalo a un servicio de formularios (Formspree, EmailJS, etc.) o a tu backend |
-
-## Notas de diseño
-
-- **Motivo de marca**: un divisor dorado con un pequeño "diamante" (rombo) se
-  repite como separador entre secciones — un guiño discreto a la joyería,
-  reutilizado en vez de líneas genéricas.
-- **Franja de cifras** (1989 · 37 años · 2 sucursales · Oro 18k) en el
-  Inicio: son datos reales tomados de tu historia, no decoración.
-- **Categorías** con menú desplegable (Quiénes Somos) y mega-menú (Productos),
-  con versión colapsable en móvil.
-- **Accesibilidad**: foco visible en todos los controles, `prefers-reduced-motion`
-  respetado en carrusel y animaciones, formularios con `<label>` asociados.
+- Las ~55 páginas HTML duplicadas del sitio viejo (una por subcategoría, cada
+  una con su propio header/footer desactualizado) se reemplazan por **una sola
+  plantilla** (`categoria.html`) + un archivo de datos, manteniendo URLs
+  únicas por categoría.
+- Header, mega menú y footer **idénticos en todas las páginas** (antes variaban).
+- Mega menú del catálogo ya no se corta en el borde de la pantalla (bug del
+  panel desplazado a la izquierda, corregido).
+- Web clara con el producto como protagonista (pedido del cliente), diseño
+  responsive hasta móvil, sin errores de consola y sin enlaces rotos
+  (80 enlaces internos verificados).

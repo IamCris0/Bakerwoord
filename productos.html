@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Productos — Anillos, Relojería, Perfumes y más | El Palacio del Amor</title>
 <meta name="description" content="Catálogo de Joyería El Palacio del Amor: anillos en oro 18k, relojería Fossil/Casio/Bulova, perfumes, trofeos, placas e implementos deportivos.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 rx=%226%22 fill=%22%231C1712%22/><path d=%22M6 8h12l-3 9H9L6 8z%22 fill=%22%23E4C374%22/></svg>">
+<link rel="icon" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
@@ -56,11 +56,12 @@
   <div class="container topbar__inner">
     <p class="topbar__tagline"><strong>37 años</strong> creando joyas con historia — Lago Agrio &amp; El Coca, Ecuador</p>
     <div class="topbar__right">
-      <a href="contacto.html" class="topbar__whatsapp"><svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg> Escríbenos por WhatsApp</a>
+      <a href="https://api.whatsapp.com/send?phone=5930982693332" target="_blank" rel="noopener" class="topbar__whatsapp"><svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg> Escríbenos por WhatsApp</a>
       <div class="topbar__social">
-        <a href="#" aria-label="Facebook"><svg class="icon icon--sm"><use href="#icon-fb"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg class="icon icon--sm"><use href="#icon-ig"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg class="icon icon--sm"><use href="#icon-yt"/></svg></a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon icon--sm"><use href="#icon-fb"/></svg></a>
+        <a href="https://www.instagram.com/joyeriaelpalaciodelamor" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon icon--sm"><use href="#icon-ig"/></svg></a>
+        <a href="https://x.com/PalaciodelAmor" target="_blank" rel="noopener" aria-label="X"><svg class="icon icon--sm"><use href="#icon-x"/></svg></a>
+        <a href="https://www.youtube.com/user/elpalaciodelamor" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon icon--sm"><use href="#icon-yt"/></svg></a>
       </div>
     </div>
   </div>
@@ -70,20 +71,18 @@
 <header class="site-header" id="siteHeader">
   <div class="container header__inner">
     <a href="index.html" class="logo">
-      <svg class="logo__mark" viewBox="0 0 48 48" fill="none"><path d="M24 6c3 4 8 5 8 5s-2 4-2 8 4 6 4 6-5 2-8 6c-1 1-2 3-2 3s-1-2-2-3c-3-4-8-6-8-6s4-2 4-6-2-8-2-8 5-1 8-5z" fill="currentColor"/><circle cx="24" cy="20" r="3.4" fill="#1C1712"/></svg>
-      <span class="logo__text">
-        <span class="logo__eyebrow">JOYERÍA</span>
-        <span class="logo__name">El Palacio del Amor</span>
-      </span>
+      <img src="assets/logo-1.png" alt="Joyería El Palacio del Amor" class="logo__img">
     </a>
 
     <form class="search" role="search" action="#" onsubmit="return false;">
       <select class="search__select" aria-label="Categoría">
         <option>Todas las categorías</option>
-        <option>Anillos</option>
+        <option>Joyas en Oro 18k</option>
         <option>Relojería</option>
         <option>Perfumes</option>
-        <option>Trofeos &amp; Placas</option>
+        <option>Trofeos &amp; Medallas</option>
+        <option>Placas &amp; Grabados</option>
+        <option>Corporativos</option>
         <option>Implementos Deportivos</option>
       </select>
       <input type="search" class="search__input" placeholder="Buscar anillos, relojes, perfumes...">
@@ -93,7 +92,7 @@
     <div class="header__actions">
       <div class="header__call">
         <span class="header__call-icon"><svg class="icon"><use href="#icon-phone"/></svg></span>
-        <span class="header__call-text">Llámanos<strong>+593 6 XXX-XXXX</strong></span>
+        <span class="header__call-text">Llámanos<strong>(06) 2 830 669</strong></span>
       </div>
       <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
         <svg class="icon"><use href="#icon-menu"/></svg>
@@ -122,29 +121,41 @@
         <a href="productos.html" class="main-nav__link is-active">Productos <svg class="icon icon--xs"><use href="#icon-chevron-down"/></svg></a>
         <div class="mega">
           <div class="mega__col">
-            <h5>Joyas</h5>
-            <a href="#anillos">Anillos de matrimonio</a>
-            <a href="#anillos">Anillos de compromiso</a>
-            <a href="#anillos">Cadenas y pulseras</a>
-            <a href="#anillos">Aretes</a>
+            <h5>Joyas en Oro 18k</h5>
+            <a href="categoria.html?cat=anillos-matrimonio">Anillos de Matrimonio</a>
+            <a href="categoria.html?cat=anillos-compromiso">Anillos de Compromiso</a>
+            <a href="categoria.html?cat=anillos-grado">Anillos de Grado</a>
+            <a href="categoria.html?cat=anillos-15anos">Anillos de 15 Años</a>
+            <a href="categoria.html?cat=joyas-damas">Joyas para Damas</a>
+            <a href="categoria.html?cat=joyas-caballeros">Joyas para Caballeros</a>
+          </div>
+          <div class="mega__col">
+            <h5>Cadenas &amp; Aretes</h5>
+            <a href="categoria.html?cat=cadenas-damas">Cadenas Damas</a>
+            <a href="categoria.html?cat=cadenas-caballeros">Cadenas Caballeros</a>
+            <a href="categoria.html?cat=pulseras-damas">Pulseras Damas</a>
+            <a href="categoria.html?cat=aretes-oro">Aretes en Oro</a>
+            <a href="categoria.html?cat=aretes-bebes">Aretes de Bebé</a>
+            <a href="categoria.html?cat=joyas-plata">Joyas de Plata</a>
           </div>
           <div class="mega__col">
             <h5>Relojería</h5>
-            <a href="#relojeria">Reloj CASIO</a>
-            <a href="#relojeria">Reloj FOSSIL</a>
-            <a href="#relojeria">Reloj BULOVA</a>
-            <a href="#relojeria">Reloj ORIENT / CITIZEN</a>
+            <a href="categoria.html?cat=reloj-casio">Relojes CASIO</a>
+            <a href="categoria.html?cat=reloj-fossil">Relojes FOSSIL</a>
+            <a href="categoria.html?cat=reloj-bulova">Relojes BULOVA</a>
+            <a href="categoria.html?cat=reloj-citizen">Relojes CITIZEN</a>
+            <a href="categoria.html?cat=reloj-orient">Relojes ORIENT</a>
+            <a href="categoria.html?cat=reloj-qyq">Relojes Q&amp;Q</a>
           </div>
           <div class="mega__col">
-            <h5>Perfumes &amp; Regalos</h5>
-            <a href="#perfumes">Perfumes para damas</a>
-            <a href="#perfumes">Perfumes para caballeros</a>
-            <a href="#regalos">Lámparas y detalles</a>
-            <a href="#regalos">Corporativos y oficinas</a>
+            <h5>Perfumes &amp; Más</h5>
+            <a href="categoria.html?cat=perfumes-damas">Perfumes Damas</a>
+            <a href="categoria.html?cat=perfumes-caballeros">Perfumes Caballeros</a>
+            <a href="categoria.html?cat=trofeos">Trofeos</a>
+            <a href="categoria.html?cat=medallas">Medallas</a>
+            <a href="categoria.html?cat=placas-conmemorativas">Placas</a>
+            <a href="productos.html" class="mega__all">Ver todo el catálogo →</a>
           </div>
-          <a href="#trofeos" class="mega__feature" style="--img:url('https://images.unsplash.com/photo-1514820720301-4c4790309f46?auto=format&fit=crop&w=500&q=80')">
-            <span>Trofeos, placas &amp; implementos deportivos →</span>
-          </a>
         </div>
       </div>
 
@@ -152,7 +163,7 @@
       <div class="main-nav__item"><a href="contacto.html" class="main-nav__link">Contáctenos</a></div>
       <div class="main-nav__item"><a href="noticias.html" class="main-nav__link">Noticias y Premios</a></div>
     </nav>
-    <a href="#productGrid" class="promo-pill"><svg class="icon icon--sm"><use href="#icon-diamond"/></svg><span>Ofertas Especiales</span></a>
+    <a href="categoria.html?cat=ofertas" class="promo-pill"><svg class="icon icon--sm"><use href="#icon-diamond"/></svg><span>Ofertas Especiales</span></a>
   </div>
 </div>
 
@@ -161,92 +172,15 @@
 <section class="page-hero">
   <div class="container page-hero__inner">
     <div class="breadcrumb"><a href="index.html">Inicio</a><svg class="icon icon--xs"><use href="#icon-chevron-right"/></svg><span>Productos</span></div>
-    <span class="eyebrow">Catálogo</span>
+    <span class="eyebrow">Catálogo completo</span>
     <h1>Joyas, relojería y detalles para cada ocasión</h1>
   </div>
 </section>
 
 <section class="section container">
-  <div class="filters" id="productFilters">
-    <button class="filter-chip is-active" data-filter="todos">Todos</button>
-    <button class="filter-chip" data-filter="anillos">Anillos &amp; Joyas</button>
-    <button class="filter-chip" data-filter="relojeria">Relojería</button>
-    <button class="filter-chip" data-filter="perfumes">Perfumes</button>
-    <button class="filter-chip" data-filter="trofeos">Trofeos &amp; Placas</button>
-    <button class="filter-chip" data-filter="deportivos">Implementos Deportivos</button>
-    <button class="filter-chip" data-filter="regalos">Regalos &amp; Corporativos</button>
-  </div>
-
-  <div class="product-grid" id="productGrid">
-
-    <div class="product-card" data-category="anillos" id="anillos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=500&q=80')"><span class="product-card__badge">En oferta</span></div>
-      <div class="product-card__body"><span class="product-card__cat">Anillos</span><h3>Anillos de Matrimonio Oro 18k</h3><p>Personalizados con grabado a láser incluido.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="anillos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Joyas</span><h3>Pulsera Oro Rosa con Piedras</h3><p>Diseño delicado en oro 18k, ideal para regalo.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="anillos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1611955167811-4711904bb9f8?auto=format&fit=crop&w=500&q=80')"><span class="product-card__badge">En oferta</span></div>
-      <div class="product-card__body"><span class="product-card__cat">Joyas</span><h3>Cadena Oro 18k Damas</h3><p>Cadena 100% oro con dije, varios largos disponibles.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="anillos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Joyas</span><h3>Aretes Oro 18k</h3><p>Diseños delicados para uso diario o de gala.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-
-    <div class="product-card" data-category="relojeria" id="relojeria">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=500&q=80')"><span class="product-card__badge">Nuevo</span></div>
-      <div class="product-card__body"><span class="product-card__cat">Relojería</span><h3>Reloj Bulova Dorado</h3><p>Correa metálica, resistente al agua, garantía incluida.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="relojeria">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1508057198894-247b23fe5ade?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Relojería</span><h3>Reloj Casio Deportivo</h3><p>Resistente, ideal para uso diario.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="relojeria">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Relojería</span><h3>Reloj Fossil Cuero</h3><p>Correa de cuero genuino, estilo clásico.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-
-    <div class="product-card" data-category="perfumes" id="perfumes">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1571332696189-7523a6e69926?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Perfumes</span><h3>Fragancia Caballero</h3><p>Aroma amaderado de larga duración.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="perfumes">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Perfumes</span><h3>Fragancia Damas</h3><p>Notas florales, ideal para regalo.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-
-    <div class="product-card" data-category="trofeos" id="trofeos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1514820720301-4c4790309f46?auto=format&fit=crop&w=500&q=80')"><span class="product-card__badge">Popular</span></div>
-      <div class="product-card__body"><span class="product-card__cat">Trofeos</span><h3>Trofeos Fútbol Económicos</h3><p>Ideal para torneos y premiaciones — tercia de copas.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="trofeos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1514820720301-4c4790309f46?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Placas</span><h3>Placas Corporativas Grabadas</h3><p>Grabado láser personalizado para reconocimientos.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-
-    <div class="product-card" data-category="deportivos" id="deportivos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Deportes</span><h3>Balón Gama Sport</h3><p>Balones oficiales y personalizados para equipos.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-
-    <div class="product-card" data-category="regalos" id="regalos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1671150590216-f138600130ce?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Regalos</span><h3>Lámpara Base de Madera</h3><p>Detalle decorativo, ideal para regalo u oficina.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-    <div class="product-card" data-category="regalos">
-      <div class="product-card__img" style="background-image:url('https://images.unsplash.com/photo-1585336261022-680e295ce3fe?auto=format&fit=crop&w=500&q=80')"></div>
-      <div class="product-card__body"><span class="product-card__cat">Corporativos</span><h3>Bolígrafo Metálico Grabado</h3><p>Con elegante estuche, ideal para regalo empresarial.</p><span class="product-card__cta">Consultar precio <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span></div>
-    </div>
-
-  </div>
-
-  <div class="placeholder-note" style="margin-top:40px">
-    <svg class="icon icon--sm"><use href="#icon-info"/></svg>
-    <span>Catálogo de muestra con fotografías de referencia. Reemplaza las imágenes y precios por tus productos reales en <code>productos.html</code> — ver <code>README.md</code> para más detalles.</span>
-  </div>
+  <div class="filters" id="hubFilters"></div>
+  <div id="hubRoot"></div>
+  <noscript><p style="text-align:center">Activa JavaScript para ver el catálogo, o navega por el menú "Productos".</p></noscript>
 </section>
 </main>
 
@@ -255,20 +189,19 @@
   <div class="container footer__grid">
     <div class="footer__col footer__col--brand">
       <a href="index.html" class="logo logo--footer">
-        <svg class="logo__mark" viewBox="0 0 48 48" fill="none"><path d="M24 6c3 4 8 5 8 5s-2 4-2 8 4 6 4 6-5 2-8 6c-1 1-2 3-2 3s-1-2-2-3c-3-4-8-6-8-6s4-2 4-6-2-8-2-8 5-1 8-5z" fill="currentColor"/></svg>
-        <span class="logo__text"><span class="logo__eyebrow">JOYERÍA</span><span class="logo__name">El Palacio del Amor</span></span>
+        <img src="assets/logo-10.png" alt="Joyería El Palacio del Amor" class="logo__img">
       </a>
       <p>37 años compartiendo momentos inolvidables junto a ti. Cada pieza nace de manos expertas de maestros joyeros, creando símbolos de amor que perduran generaciones.</p>
       <div class="footer__social">
-        <a href="#" aria-label="Facebook"><svg class="icon icon--sm"><use href="#icon-fb"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg class="icon icon--sm"><use href="#icon-ig"/></svg></a>
-        <a href="#" aria-label="X"><svg class="icon icon--sm"><use href="#icon-x"/></svg></a>
-        <a href="#" aria-label="YouTube"><svg class="icon icon--sm"><use href="#icon-yt"/></svg></a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon icon--sm"><use href="#icon-fb"/></svg></a>
+        <a href="https://www.instagram.com/joyeriaelpalaciodelamor" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon icon--sm"><use href="#icon-ig"/></svg></a>
+        <a href="https://x.com/PalaciodelAmor" target="_blank" rel="noopener" aria-label="X"><svg class="icon icon--sm"><use href="#icon-x"/></svg></a>
+        <a href="https://www.youtube.com/user/elpalaciodelamor" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon icon--sm"><use href="#icon-yt"/></svg></a>
       </div>
     </div>
     <div class="footer__col">
       <h5>Productos</h5>
-      <ul><li><a href="productos.html#anillos">Anillos y Joyas</a></li><li><a href="productos.html#relojeria">Relojería</a></li><li><a href="productos.html#perfumes">Perfumes</a></li><li><a href="productos.html#trofeos">Trofeos &amp; Placas</a></li><li><a href="productos.html#deportivos">Implementos Deportivos</a></li></ul>
+      <ul><li><a href="categoria.html?cat=anillos-matrimonio">Anillos de Matrimonio</a></li><li><a href="categoria.html?cat=reloj-casio">Relojes CASIO</a></li><li><a href="categoria.html?cat=perfumes-damas">Perfumes</a></li><li><a href="categoria.html?cat=trofeos">Trofeos &amp; Medallas</a></li><li><a href="categoria.html?cat=balones-gama">Implementos Deportivos</a></li></ul>
     </div>
     <div class="footer__col">
       <h5>Empresa</h5>
@@ -277,7 +210,8 @@
     <div class="footer__col">
       <h5>Contacto</h5>
       <ul class="footer__contact">
-        <li><svg class="icon icon--sm"><use href="#icon-phone"/></svg>+593 6 XXX-XXXX</li>
+        <li><svg class="icon icon--sm"><use href="#icon-phone"/></svg>(06) 2 830 669 · 0993 681 748</li>
+        <li><svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg><a href="https://api.whatsapp.com/send?phone=5930982693332" target="_blank" rel="noopener">WhatsApp: 098 269 3332</a></li>
         <li><svg class="icon icon--sm"><use href="#icon-mail"/></svg>info@elpalaciodelamorjoyeria.com</li>
         <li><svg class="icon icon--sm"><use href="#icon-pin"/></svg>Lago Agrio y El Coca, Ecuador</li>
         <li><svg class="icon icon--sm"><use href="#icon-clock"/></svg>Lun–Vie 8:00–18:00 · Sáb 9:00–14:00</li>
@@ -288,13 +222,13 @@
   <div class="container payments">
     <p class="payments__label">Aceptamos todas las tarjetas de crédito y débito</p>
     <div class="payments__row">
-      <span class="payments__badge">Visa</span>
-      <span class="payments__badge">Mastercard</span>
-      <span class="payments__badge">American Express</span>
-      <span class="payments__badge">Diners Club</span>
-      <span class="payments__badge">Discover</span>
-      <span class="payments__badge">PayPal</span>
-      <span class="payments__badge">PacifiCard</span>
+      <img src="assets/bancos/visa.png" alt="Visa">
+      <img src="assets/bancos/martecard.png" alt="Mastercard">
+      <img src="assets/bancos/america-express.png" alt="American Express">
+      <img src="assets/bancos/dirnrsclub.png" alt="Diners Club">
+      <img src="assets/bancos/discover.png" alt="Discover">
+      <img src="assets/bancos/paypal.png" alt="PayPal">
+      <img src="assets/bancos/facifico.png" alt="PacifiCard">
     </div>
   </div>
 
@@ -304,8 +238,9 @@
   </div>
 </footer>
 
-<a href="contacto.html" class="wa-float"><svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg><span>¡Chat en línea!</span></a>
+<a href="https://api.whatsapp.com/send?phone=5930982693332" target="_blank" rel="noopener" class="wa-float"><svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg><span>¡Chat en línea!</span></a>
 
+<script src="js/catalog.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

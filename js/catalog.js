@@ -5,7 +5,7 @@
  * "ofertas" usa una lista explícita de archivos porque su carpeta no está numerada.
  */
 window.CATALOG = {
-  whatsapp: 'https://api.whatsapp.com/send?phone=5930982693332',
+  whatsapp: 'https://api.whatsapp.com/send?phone=593982693332',
 
   groups: [
     { id: 'joyas',        title: 'Joyas en Oro 18k' },

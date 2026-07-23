@@ -197,6 +197,23 @@
       document.getElementById('catCrumb').textContent = cat.title;
       document.getElementById('catDesc').textContent = cat.desc + ' Toca una foto para verla en grande; precios y disponibilidad por WhatsApp o en nuestras sucursales.';
 
+      /* SEO: canonical + Open Graph / Twitter reflect the specific category */
+      const pageUrl = 'https://www.elpalaciodelamorjoyeria.com/categoria.html?cat=' + slug;
+      const pageImg = 'https://www.elpalaciodelamorjoyeria.com/' + cat.dir + '/1.jpg';
+      const setMeta = (selector, attr, value) => {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute(attr, value);
+      };
+      setMeta('link[rel="canonical"]', 'href', pageUrl);
+      setMeta('meta[name="description"]', 'content', cat.desc);
+      setMeta('meta[property="og:title"]', 'content', document.title);
+      setMeta('meta[property="og:description"]', 'content', cat.desc);
+      setMeta('meta[property="og:url"]', 'content', pageUrl);
+      setMeta('meta[property="og:image"]', 'content', pageImg);
+      setMeta('meta[name="twitter:title"]', 'content', document.title);
+      setMeta('meta[name="twitter:description"]', 'content', cat.desc);
+      setMeta('meta[name="twitter:image"]', 'content', pageImg);
+
       const waText = encodeURIComponent('Hola, vi la sección "' + cat.title + '" en su página web y quiero más información.');
       document.getElementById('catWhatsBtn').href = CAT.whatsapp + '&text=' + waText;
 
@@ -240,11 +257,20 @@
     }
   }
 
-  /* ---------- Contact form (client-side demo, no backend) ---------- */
+  /* ---------- Contact form: builds a WhatsApp message from the fields (no backend) ---------- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      const nombre = contactForm.nombre.value.trim();
+      const telefono = contactForm.telefono.value.trim();
+      const correo = contactForm.correo.value.trim();
+      const sucursal = contactForm.sucursal.value;
+      const mensaje = contactForm.mensaje.value.trim();
+      const texto = `Hola, soy ${nombre}. Quisiera hacer una consulta:\n\n${mensaje}\n\nTeléfono: ${telefono}\nCorreo: ${correo}\nSucursal de preferencia: ${sucursal}`;
+      const waUrl = `${CAT.whatsapp}&text=${encodeURIComponent(texto)}`;
+      window.open(waUrl, '_blank', 'noopener');
+
       const successBox = document.getElementById('formSuccess');
       if (successBox) {
         successBox.classList.add('is-visible');

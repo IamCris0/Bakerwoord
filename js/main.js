@@ -14,6 +14,88 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* ---------- Header search (sugerencias en vivo + envío real) ---------- */
+  const searchForm = document.getElementById('searchForm');
+  if (searchForm && window.CATALOG) {
+    const CATALOG = window.CATALOG;
+    const searchInput = document.getElementById('searchInput');
+    const groupSelect = document.getElementById('searchGroup');
+    const results = document.createElement('div');
+    results.className = 'search__results';
+    searchForm.appendChild(results);
+
+    const ACCENTS = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ü': 'u', 'ñ': 'n' };
+    const normalize = (s) => s.toLowerCase().replace(/[áéíóúüñ]/g, (ch) => ACCENTS[ch]);
+
+    function matchCategories(query, groupId) {
+      const q = normalize(query.trim());
+      if (!q) return [];
+      return Object.entries(CATALOG.categories)
+        .filter(([, c]) => (!groupId || c.group === groupId) && normalize(c.title).includes(q))
+        .slice(0, 6)
+        .map(([slug, c]) => ({ slug, ...c }));
+    }
+
+    let activeIndex = -1;
+
+    function renderResults() {
+      const query = searchInput.value;
+      activeIndex = -1;
+      if (!query.trim()) { results.classList.remove('is-open'); results.innerHTML = ''; return; }
+      const matches = matchCategories(query, groupSelect.value);
+      const moreLink = '<a href="productos.html" class="search__more">Ver catálogo completo →</a>';
+      results.innerHTML = matches.length
+        ? matches.map((c) => `
+          <a href="categoria.html?cat=${c.slug}" class="search__result">
+            <img src="${c.dir}/1.jpg" alt="" loading="lazy">
+            <div><strong>${c.title}</strong><span>${(CATALOG.groups.find(g => g.id === c.group) || {}).title || ''}</span></div>
+          </a>`).join('') + moreLink
+        : `<div class="search__empty">Sin resultados para "${query.replace(/[<>]/g, '')}".</div>` + moreLink;
+      results.classList.add('is-open');
+    }
+
+    let debounceTimer;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(renderResults, 120);
+    });
+    searchInput.addEventListener('focus', () => { if (searchInput.value.trim()) renderResults(); });
+    groupSelect.addEventListener('change', () => { if (searchInput.value.trim()) renderResults(); });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.search')) results.classList.remove('is-open');
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { results.classList.remove('is-open'); return; }
+      const items = Array.from(results.querySelectorAll('.search__result'));
+      if (!items.length) return;
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(activeIndex + 1, items.length - 1);
+        items.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
+        items[activeIndex].scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, 0);
+        items.forEach((el, i) => el.classList.toggle('is-active', i === activeIndex));
+        items[activeIndex].scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter' && activeIndex >= 0) {
+        e.preventDefault();
+        window.location.href = items[activeIndex].href;
+      }
+    });
+
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const groupId = groupSelect.value;
+      const matches = matchCategories(searchInput.value, groupId);
+      if (matches.length) window.location.href = 'categoria.html?cat=' + matches[0].slug;
+      else if (groupId) window.location.href = 'productos.html#grupo-' + groupId;
+      else window.location.href = 'productos.html';
+    });
+  }
+
   /* ---------- Mobile hamburger ---------- */
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mainNav = document.getElementById('mainNav');
@@ -26,23 +108,28 @@
 
   /* ---------- Dropdown / mega menu (click-to-toggle for touch + keyboard) ---------- */
   const navItems = document.querySelectorAll('.main-nav__item[data-has-panel]');
+  const setNavExpanded = (item, isOpen) => {
+    item.classList.toggle('is-open', isOpen);
+    const trigger = item.querySelector(':scope > .main-nav__link');
+    if (trigger) trigger.setAttribute('aria-expanded', String(isOpen));
+  };
   navItems.forEach((item) => {
     const trigger = item.querySelector(':scope > .main-nav__link');
     if (!trigger) return;
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
       const isOpen = item.classList.contains('is-open');
-      navItems.forEach(i => i.classList.remove('is-open'));
-      item.classList.toggle('is-open', !isOpen);
+      navItems.forEach(i => setNavExpanded(i, false));
+      setNavExpanded(item, !isOpen);
     });
   });
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.main-nav__item[data-has-panel]')) {
-      navItems.forEach(i => i.classList.remove('is-open'));
+      navItems.forEach(i => setNavExpanded(i, false));
     }
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') navItems.forEach(i => i.classList.remove('is-open'));
+    if (e.key === 'Escape') navItems.forEach(i => setNavExpanded(i, false));
   });
 
   /* ---------- Hero carousel ---------- */
@@ -94,30 +181,6 @@
     }, { passive: true });
 
     restartAutoplay();
-  }
-
-  /* ---------- Product filter chips ---------- */
-  const filterBar = document.getElementById('productFilters');
-  if (filterBar) {
-    const chips = Array.from(filterBar.querySelectorAll('.filter-chip'));
-    const cards = Array.from(document.querySelectorAll('.product-card'));
-    function applyFilter(cat, chip) {
-      chips.forEach(c => c.classList.remove('is-active'));
-      chip.classList.add('is-active');
-      cards.forEach(card => {
-        const show = cat === 'todos' || card.dataset.category === cat;
-        card.style.display = show ? '' : 'none';
-      });
-    }
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => applyFilter(chip.dataset.filter, chip));
-    });
-    const hash = window.location.hash.replace('#', '');
-    const hashChip = hash && filterBar.querySelector(`[data-filter="${hash}"]`);
-    if (hashChip) {
-      applyFilter(hash, hashChip);
-      setTimeout(() => document.getElementById('productGrid')?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' }), 100);
-    }
   }
 
   /* ---------- FAQ accordion ---------- */
@@ -218,18 +281,83 @@
       document.getElementById('catWhatsBtn').href = CAT.whatsapp + '&text=' + waText;
 
       const files = cat.files || Array.from({ length: cat.count }, (_, i) => (i + 1) + '.jpg');
-      files.forEach((file) => {
+      const total = files.length;
+      const photos = [];
+      files.forEach((file, i) => {
         const src = cat.dir + '/' + file;
+        const alt = total > 1 ? `${cat.title} — foto ${i + 1} de ${total}` : cat.title;
+        photos.push({ src, alt });
+
         const card = document.createElement('a');
         card.className = 'photo-card';
         card.href = src;
-        card.target = '_blank';
         card.rel = 'noopener';
         card.innerHTML = `
-          <img src="${src}" alt="${cat.title}" loading="lazy">
-          <span class="photo-card__foot">Ver foto <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span>`;
-        card.querySelector('img').addEventListener('error', () => card.remove());
+          <img src="${src}" alt="${alt}" loading="lazy">
+          <span class="photo-card__foot">Vista rápida <svg class="icon icon--xs"><use href="#icon-arrow-right"/></svg></span>`;
+        const imgEl = card.querySelector('img');
+        imgEl.addEventListener('error', () => card.remove());
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          openLightbox(i);
+        });
         catGrid.appendChild(card);
+      });
+
+      /* ---------- Lightbox: vista rápida con descripción y WhatsApp ---------- */
+      const lightbox = document.getElementById('photoLightbox');
+      let lightboxIndex = 0;
+      let lightboxTrigger = null;
+
+      const renderLightbox = () => {
+        const photo = photos[lightboxIndex];
+        if (!photo) return;
+        document.getElementById('lightboxImg').src = photo.src;
+        document.getElementById('lightboxImg').alt = photo.alt;
+        document.getElementById('lightboxTitle').textContent = cat.title;
+        document.getElementById('lightboxDesc').textContent = cat.desc;
+        document.getElementById('lightboxCount').textContent = total > 1 ? `Foto ${lightboxIndex + 1} de ${total}` : cat.title;
+        const waText = encodeURIComponent(`Hola, vi la foto ${lightboxIndex + 1} de "${cat.title}" en su página web y quiero más información.`);
+        document.getElementById('lightboxWhatsApp').href = CAT.whatsapp + '&text=' + waText;
+        document.getElementById('lightboxPrev').disabled = lightboxIndex === 0;
+        document.getElementById('lightboxNext').disabled = lightboxIndex === total - 1;
+      };
+
+      function openLightbox(index) {
+        lightboxIndex = index;
+        lightboxTrigger = document.activeElement;
+        renderLightbox();
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('lightboxClose').focus();
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lightboxTrigger) lightboxTrigger.focus();
+      }
+      const showPrev = () => { if (lightboxIndex > 0) { lightboxIndex--; renderLightbox(); } };
+      const showNext = () => { if (lightboxIndex < total - 1) { lightboxIndex++; renderLightbox(); } };
+
+      lightbox.querySelectorAll('[data-lightbox-close]').forEach(el => el.addEventListener('click', closeLightbox));
+      document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+      document.getElementById('lightboxPrev').addEventListener('click', showPrev);
+      document.getElementById('lightboxNext').addEventListener('click', showNext);
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { closeLightbox(); return; }
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'Tab') {
+          const focusables = Array.from(lightbox.querySelectorAll('button:not(:disabled), a[href]'));
+          if (!focusables.length) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
       });
 
       /* Sidebar: other categories in the same group */

@@ -150,9 +150,16 @@ Todo el catálogo vive en **`js/catalog.js`**. Cada categoría es una entrada:
    futuro se puede revertir con `git log` / `git checkout`. Si más adelante
    se agregan fotos nuevas, no vienen optimizadas automáticamente — hay que
    repetir el proceso (o pedir que se automatice como paso de publicación).
-3. **Accesibilidad**: revisar contraste de textos sobre dorado, `alt` de
-   fotos de producto (hoy usan el título de categoría; podrían describir la
-   pieza), navegación completa por teclado del mega menú.
+3. ~~**Accesibilidad**~~ — hecho (jul 2026): se midió el contraste real
+   (WCAG) de la paleta — `--color-muted` y `--color-gold-dark` estaban justo
+   por debajo de 4.5:1 sobre fondo crema oscuro (topbar) y el botón flotante
+   de WhatsApp estaba en 1.98:1 (blanco sobre verde brillante); los tres se
+   ajustaron a tonos ligeramente más oscuros que pasan AA sin cambiar el
+   aspecto general. Las fotos de categoría ya no repiten el mismo `alt` en
+   cada una (ahora incluyen "foto N de M"). El mega menú y el submenú
+   "Quiénes Somos" ya se pueden abrir/cerrar por teclado (Tab + Enter/Escape,
+   con `aria-expanded`/`aria-haspopup`), verificado con Playwright simulando
+   teclado real.
 4. **Analítica**: agregar Google Analytics o Meta Pixel para saber qué
    categorías generan más tráfico/consultas por WhatsApp y priorizar fotos
    nuevas donde más se necesiten.
@@ -161,3 +168,22 @@ Todo el catálogo vive en **`js/catalog.js`**. Cada categoría es una entrada:
 6. **Backend de correo opcional**: si además de WhatsApp quieren recibir las
    consultas por email, conectar el formulario a un servicio como Formspree
    o EmailJS (no requiere servidor propio).
+7. ~~**Vista rápida de producto (lightbox)**~~ — hecho (jul 2026): en
+   `categoria.html`, cada foto decía "Ver foto" y abría la imagen sola en una
+   pestaña nueva del navegador, sin contexto ni forma de contactar — un
+   callejón sin salida. Ahora "Vista rápida" abre un panel dentro de la
+   misma página con la foto en grande, la descripción de la categoría,
+   flechas para pasar a la foto anterior/siguiente (también con ← →) y un
+   botón "Más información por WhatsApp" que arma el mensaje con el número de
+   foto exacto que el cliente vio. Funciona con mouse, teclado (Tab/Enter,
+   foco atrapado dentro del panel mientras está abierto, Escape cierra y
+   devuelve el foco a la foto) y en móvil.
+8. ~~**Buscador del header**~~ — hecho (jul 2026): el buscador visible en
+   todas las páginas ("Buscar anillos, relojes, perfumes...") era
+   decorativo — el formulario tenía `onsubmit="return false"` y no hacía
+   nada. Ahora busca en vivo entre las 53 categorías reales (con foto,
+   nombre y línea de producto), filtra por el selector de categoría, se
+   navega con flechas + Enter, y si no hay coincidencia exacta ofrece "Ver
+   catálogo completo". De paso se eliminó del código un bloque de filtros de
+   `productos.html` que ya no tenía HTML correspondiente (quedó huérfano de
+   una versión anterior de la página).

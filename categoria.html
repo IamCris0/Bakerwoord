@@ -86,18 +86,19 @@
       <img src="assets/logo-1.png" alt="Joyería El Palacio del Amor" class="logo__img">
     </a>
 
-    <form class="search" role="search" action="#" onsubmit="return false;">
-      <select class="search__select" aria-label="Categoría">
-        <option>Todas las categorías</option>
-        <option>Joyas en Oro 18k</option>
-        <option>Relojería</option>
-        <option>Perfumes</option>
-        <option>Trofeos &amp; Medallas</option>
-        <option>Placas &amp; Grabados</option>
-        <option>Corporativos</option>
-        <option>Implementos Deportivos</option>
+    <form class="search" id="searchForm" role="search" action="productos.html" autocomplete="off">
+      <select class="search__select" id="searchGroup" name="grupo" aria-label="Categoría">
+        <option value="">Todas las categorías</option>
+        <option value="joyas">Joyas en Oro 18k</option>
+        <option value="aretes">Aretes &amp; Piercings</option>
+        <option value="relojeria">Relojería</option>
+        <option value="perfumes">Perfumes</option>
+        <option value="trofeos">Trofeos &amp; Medallas</option>
+        <option value="placas">Placas &amp; Grabados</option>
+        <option value="corporativos">Corporativos &amp; Regalos</option>
+        <option value="deportes">Implementos Deportivos</option>
       </select>
-      <input type="search" class="search__input" placeholder="Buscar anillos, relojes, perfumes...">
+      <input type="search" id="searchInput" name="q" class="search__input" placeholder="Buscar anillos, relojes, perfumes..." autocomplete="off">
       <button type="submit" class="search__btn"><svg class="icon icon--sm"><use href="#icon-search"/></svg><span>Buscar</span></button>
     </form>
 
@@ -120,7 +121,7 @@
       <div class="main-nav__item"><a href="index.html" class="main-nav__link">Inicio</a></div>
 
       <div class="main-nav__item" data-has-panel>
-        <a href="quienes-somos.html" class="main-nav__link">Quiénes Somos <svg class="icon icon--xs"><use href="#icon-chevron-down"/></svg></a>
+        <a href="quienes-somos.html" class="main-nav__link" aria-haspopup="true" aria-expanded="false">Quiénes Somos <svg class="icon icon--xs"><use href="#icon-chevron-down"/></svg></a>
         <div class="dropdown">
           <a href="quienes-somos.html#historia"><svg class="icon icon--sm"><use href="#icon-clock"/></svg>Nuestra Historia</a>
           <a href="quienes-somos.html#mision-vision"><svg class="icon icon--sm"><use href="#icon-diamond"/></svg>Misión y Visión</a>
@@ -130,7 +131,7 @@
       </div>
 
       <div class="main-nav__item" data-has-panel>
-        <a href="productos.html" class="main-nav__link is-active">Productos <svg class="icon icon--xs"><use href="#icon-chevron-down"/></svg></a>
+        <a href="productos.html" class="main-nav__link is-active" aria-haspopup="true" aria-expanded="false">Productos <svg class="icon icon--xs"><use href="#icon-chevron-down"/></svg></a>
         <div class="mega">
           <div class="mega__col">
             <img class="mega__col-img" src="assets/joyas/matrimonio/1.jpg" alt="Joyas" loading="lazy">
@@ -277,6 +278,27 @@
 </footer>
 
 <a href="https://api.whatsapp.com/send?phone=593982693332" target="_blank" rel="noopener" class="wa-float"><svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg><span>¡Chat en línea!</span></a>
+
+<!-- ================= LIGHTBOX (vista rápida de foto) ================= -->
+<div class="lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightboxTitle">
+  <div class="lightbox__backdrop" data-lightbox-close></div>
+  <div class="lightbox__panel">
+    <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Cerrar"><svg class="icon icon--sm"><use href="#icon-x"/></svg></button>
+    <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Foto anterior"><svg class="icon"><use href="#icon-chevron-left"/></svg></button>
+    <div class="lightbox__media">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+    <button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Foto siguiente"><svg class="icon"><use href="#icon-chevron-right"/></svg></button>
+    <div class="lightbox__info">
+      <span class="lightbox__count" id="lightboxCount"></span>
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxDesc"></p>
+      <a id="lightboxWhatsApp" class="btn btn--gold" target="_blank" rel="noopener">
+        <svg class="icon icon--sm"><use href="#icon-whatsapp"/></svg> Más información por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
 
 <script src="js/catalog.js"></script>
 <script src="js/main.js"></script>

@@ -128,13 +128,17 @@ input,textarea,select{ font-family:inherit; }
 .site-header{ background: var(--color-cream); border-bottom: 1px solid var(--color-border); position: sticky; top:0; z-index: 60; }
 .header__inner{ display:flex; align-items:center; gap:26px; padding-block:10px; transition: padding .25s var(--ease); }
 .site-header.is-compact .header__inner{ padding-block:6px; }
-.site-header.is-compact .logo__img{ height:60px; }
+.site-header.is-compact .logo__img{ height:66px; }
 
 .logo{ display:flex; align-items:center; gap:12px; flex-shrink:0; }
-.logo__img{ height:84px; width:auto; display:block; transition: height .25s var(--ease); }
+/* El logo nuevo es apaisado-cuadrado (ratio ~1.35) en vez del horizontal
+   anterior, por eso necesita más alto para verse del mismo tamaño. */
+.logo__img{ height:96px; width:auto; display:block; transition: height .25s var(--ease); }
 .logo--footer .logo__img{ height:96px; }
 
-.search{ position:relative; flex:1; display:flex; max-width: 620px; }
+/* min-width:0 para que el buscador pueda encogerse dentro del header en
+   pantallas medianas; sin esto empujaba el header fuera de la pantalla. */
+.search{ position:relative; flex:1; min-width:0; display:flex; max-width: 620px; }
 .search__results{
   position:absolute; top:calc(100% + 8px); left:0; right:0; z-index:65;
   background:#fff; border:1px solid var(--color-border); border-radius: var(--radius-md);
@@ -163,13 +167,16 @@ input,textarea,select{ font-family:inherit; }
   transition: border-color .2s;
 }
 .search__input:focus{ outline:none; border-color: var(--color-gold); }
+/* Botón gris (#CCCCCC) con texto oscuro: sobre ese gris el texto blanco no
+   se leería (1.6:1), en oscuro queda en 11:1. */
 .search__btn{
   display:flex; align-items:center; gap:8px;
-  background: var(--color-ink); color:#fff; border:none;
+  background: #CCCCCC; color: var(--color-ink);
+  border: 1.5px solid var(--color-border); border-left:none;
   padding: 0 22px; border-radius: 0 10px 10px 0; font-weight:600; font-size:.88rem;
   transition: background .2s;
 }
-.search__btn:hover{ background: var(--color-wine); }
+.search__btn:hover{ background: #BDBDBD; }
 
 .header__actions{ display:flex; align-items:center; gap:20px; flex-shrink:0; }
 .header__call{ display:flex; align-items:center; gap:10px; }
@@ -182,7 +189,10 @@ input,textarea,select{ font-family:inherit; }
 /* =====================================================
    Nav bar
 ===================================================== */
-.navbar{ background: var(--color-white); border-bottom:1px solid var(--color-border); box-shadow: var(--shadow-sm); position: sticky; top:0; z-index:50; }
+/* El navbar se pega justo DEBAJO del header (que también es sticky); si ambos
+   usaran top:0 el header taparía el menú al hacer scroll y quedaba un hueco
+   vacío. --header-h lo calcula js/main.js según la altura real del header. */
+.navbar{ background: var(--color-white); border-bottom:1px solid var(--color-border); box-shadow: var(--shadow-sm); position: sticky; top: var(--header-h, 104px); z-index:50; }
 .navbar__inner{ display:flex; align-items:center; gap:4px; height:52px; }
 .main-nav{ display:flex; align-items:center; gap:2px; flex:1; height:100%; }
 /* Items are static so the mega menu anchors to the sticky navbar (full width)
@@ -223,15 +233,16 @@ input,textarea,select{ font-family:inherit; }
 .dropdown a:hover{ background: var(--color-cream-alt); color: var(--color-wine); padding-left:18px; }
 
 /* Mega menu (Productos) — anchored to the navbar, centered, clamped to viewport
-   5 columnas (JOYAS / RELOJERÍA / TROFEOS & PLACAS / PERFUMES / IMPLE. DEPORTIVOS),
-   igual a la distribución de la página antigua; el título de cada columna
-   enlaza a su sección en productos.html. */
+   6 columnas (JOYAS / RELOJERÍA / TROFEOS & PLACAS / PERFUMES /
+   CORPORATIVOS & REGALOS / IMPLE. DEPORTIVOS), misma distribución de la
+   página antigua más Corporativos, que antes solo se alcanzaba por el
+   buscador; el título de cada columna enlaza a su sección en productos.html. */
 .mega{
   position:absolute; top:100%; left:50%;
-  width:min(920px, calc(100vw - 32px));
+  width:min(1180px, calc(100vw - 32px));
   background:#fff; border-radius: 0 0 var(--radius-md) var(--radius-md);
   box-shadow: var(--shadow-lg); padding: 24px 24px 0;
-  display:grid; grid-template-columns: repeat(5,1fr); gap: 0 20px;
+  display:grid; grid-template-columns: repeat(6,1fr); gap: 0 18px;
   opacity:0; visibility:hidden; transform: translate(-50%,-6px);
   transition: opacity .22s var(--ease), transform .22s var(--ease), visibility 0s linear .22s;
   z-index:55;
@@ -240,9 +251,9 @@ input,textarea,select{ font-family:inherit; }
   opacity:1; visibility:visible; transform: translate(-50%,0);
   transition: opacity .22s var(--ease), transform .22s var(--ease);
 }
-.mega__col{ padding:0 16px 20px; border-left:1px solid var(--color-cream-alt); }
+.mega__col{ padding:0 14px 20px; border-left:1px solid var(--color-cream-alt); }
 .mega__col:first-child{ border-left:none; padding-left:0; }
-.mega__col:last-child{ padding-right:0; }
+.mega__col:nth-child(6){ padding-right:0; }
 .mega__col-img{ width:100%; aspect-ratio: 16/10; border-radius: var(--radius-sm); object-fit:cover; margin-bottom:12px; border:1px solid var(--color-border); }
 .mega__col h5{ font-family: var(--font-body); font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color: var(--color-gold-dark); margin-bottom:10px; }
 .mega__col h5 a{ color:inherit; }
@@ -258,9 +269,6 @@ input,textarea,select{ font-family:inherit; }
 .mega__foot p strong{ color: var(--color-ink); }
 .mega__cta{ display:inline-flex; align-items:center; gap:8px; font-weight:700; color: var(--color-wine); font-size:.9rem; white-space:nowrap; }
 .mega__cta:hover{ color: var(--color-gold-dark); }
-
-.nav-backdrop{ position:fixed; inset:0; top:106px; background: rgba(15,12,8,.32); opacity:0; pointer-events:none; transition: opacity .2s var(--ease); z-index:44; }
-.nav-backdrop.is-open{ opacity:1; pointer-events:auto; }
 
 /* =====================================================
    Page hero banner (subpages)
@@ -305,28 +313,33 @@ input,textarea,select{ font-family:inherit; }
 .hero__desc{ font-size:.98rem; line-height:1.6; color:#EDE6D8; margin-bottom:26px; max-width:420px; }
 .hero__actions{ display:flex; gap:12px; flex-wrap:wrap; }
 
-.hero__nav{ position:absolute; top:50%; translate:0 -50%; width:44px; height:44px; border-radius:50%; background: rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3); backdrop-filter: blur(4px); display:grid; place-items:center; color:#fff; opacity:0; transition: opacity .25s, background .2s, transform .2s; z-index:5; }
-.hero__slider:hover .hero__nav{ opacity:1; }
-.hero__nav:hover{ background: rgba(255,255,255,.3); transform: translateY(-50%) scale(1.06); }
-.hero__nav--prev{ left:20px; } .hero__nav--next{ right:20px; }
+/* Las flechas van abajo a la derecha: antes iban a media altura sobre los
+   bordes y la de la izquierda se montaba encima del título del slider. */
+.hero__nav{ position:absolute; bottom:22px; width:40px; height:40px; border-radius:50%; background: rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); backdrop-filter: blur(4px); display:grid; place-items:center; color:#fff; opacity:0; transition: opacity .25s, background .2s, transform .2s; z-index:5; }
+.hero__slider:hover .hero__nav, .hero__nav:focus-visible{ opacity:1; }
+.hero__nav:hover{ background: rgba(255,255,255,.34); transform: scale(1.06); }
+.hero__nav--prev{ right:74px; } .hero__nav--next{ right:24px; }
 .hero__dots{ position:absolute; left:60px; bottom:26px; display:flex; gap:9px; z-index:5; }
 .hero__dot{ width:9px; height:9px; border-radius:50%; background: rgba(255,255,255,.4); border:none; padding:0; cursor:pointer; transition: background .25s, width .25s; }
 .hero__dot.is-active{ background: var(--color-gold-light); width:26px; border-radius:6px; }
 
-.promo-stack{ display:flex; flex-direction:column; gap:22px; }
-.promo-card{
-  position:relative; flex:1; border-radius: var(--radius-lg); overflow:hidden; padding:22px;
-  display:flex; align-items:flex-end; min-height:136px;
-  background-image: var(--tint-gradient), var(--img);
-  background-size: cover, cover; background-position: center, 80% center;
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease), background-position .5s var(--ease);
+/* Accesos rápidos junto al slider — antes eran 3 tarjetas grandes con foto de
+   fondo teñida cuya imagen no correspondía al rótulo. Ahora son 6 cuadros
+   blancos con la foto real del producto y el nombre debajo: se muestran más
+   productos y el texto no depende del color de la foto. */
+.promo-stack{ display:grid; grid-template-columns: repeat(2,1fr); gap:12px; align-content:start; }
+.promo-tile{
+  display:flex; flex-direction:column; background:#fff;
+  border:1px solid var(--color-border); border-radius: var(--radius-md); overflow:hidden;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .2s;
 }
-.promo-card--ink{ --tint-gradient: linear-gradient(100deg, var(--color-espresso) 0%, var(--color-espresso) 42%, rgba(74,52,35,0) 88%); }
-.promo-card--wine{ --tint-gradient: linear-gradient(100deg, var(--color-wine) 0%, var(--color-wine) 42%, rgba(110,31,43,0) 88%); }
-.promo-card--gold{ --tint-gradient: linear-gradient(100deg, var(--color-gold-dark) 0%, var(--color-gold-dark) 42%, rgba(143,106,32,0) 88%); }
-.promo-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); background-position: center, 70% center; }
-.promo-card__tag{ display:inline-block; background: rgba(255,255,255,.92); font-weight:700; font-size:.68rem; letter-spacing:.04em; padding:4px 10px; border-radius:999px; margin-bottom:8px; color: var(--color-ink); }
-.promo-card h3{ font-size:1.1rem; line-height:1.2; color:#fff; font-family: var(--font-display); }
+.promo-tile:hover{ transform: translateY(-3px); box-shadow: var(--shadow-sm); border-color: var(--color-gold-light); }
+.promo-tile img{ width:100%; aspect-ratio: 1/1; object-fit:contain; display:block; padding:10px; background:#fff; }
+.promo-tile span{
+  display:block; text-align:center; font-size:.72rem; font-weight:700;
+  letter-spacing:.04em; color: var(--color-ink);
+  padding:7px 6px; border-top:1px solid var(--color-cream-alt);
+}
 
 /* Stats ribbon */
 .stats{ background: var(--color-gold-pale); border-block: 1px solid var(--color-border); }
@@ -345,21 +358,23 @@ input,textarea,select{ font-family:inherit; }
 .section__head h2{ font-size: clamp(1.6rem,2.6vw,2.1rem); margin: 10px 0 12px; }
 .section__head p{ color: var(--color-muted); font-size:.96rem; line-height:1.6; }
 
-/* Category grid (home) */
+/* Category grid (home) — foto del producto en cuadro blanco, texto debajo.
+   Antes el texto iba encima de la foto con un degradado oscuro: el producto
+   se perdía y el color del texto cambiaba según la foto. */
 .cat-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
 .cat-card{
-  position:relative; border-radius: var(--radius-lg); overflow:hidden; min-height:240px;
-  display:flex; align-items:flex-end; padding:24px;
-  background-color: var(--color-cream-alt);
-  background-size:contain; background-repeat:no-repeat; background-position:center;
+  display:flex; flex-direction:column;
+  background:#fff; border:1px solid var(--color-border); border-radius: var(--radius-lg);
+  overflow:hidden;
   transition: transform .3s var(--ease), box-shadow .3s var(--ease);
 }
-.cat-card::before{ content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(20,15,10,0) 45%, rgba(20,15,10,.88)); }
 .cat-card:hover{ transform: translateY(-5px); box-shadow: var(--shadow-md); }
-.cat-card__body{ position:relative; z-index:1; color:#fff; }
-.cat-card__body span{ font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color: var(--color-gold-light); }
-.cat-card__body h3{ color:#fff; font-size:1.3rem; margin:4px 0 8px; }
-.cat-card__body .cat-card__cta{ font-size:.82rem; font-weight:700; color:#fff; display:inline-flex; align-items:center; gap:6px; border-bottom:1px solid rgba(255,255,255,.5); padding-bottom:2px; }
+.cat-card__media{ display:block; background:#fff; padding:12px; }
+.cat-card__media img{ width:100%; aspect-ratio: 4/3; object-fit:contain; display:block; }
+.cat-card__body{ padding: 4px 18px 18px; border-top:1px solid var(--color-cream-alt); padding-top:14px; }
+.cat-card__body span{ font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color: var(--color-gold-dark); font-weight:700; }
+.cat-card__body h3{ color: var(--color-ink); font-size:1rem; margin:5px 0 8px; line-height:1.3; }
+.cat-card__body .cat-card__cta{ font-size:.76rem; font-weight:700; color: var(--color-wine); display:inline-flex; align-items:center; gap:6px; }
 
 /* Quote banner */
 .quote-banner{
@@ -374,19 +389,23 @@ input,textarea,select{ font-family:inherit; }
 .product-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:22px; }
 .product-card{ background:#fff; border-radius: var(--radius-md); overflow:hidden; border:1px solid var(--color-border); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
 .product-card:hover{ transform: translateY(-5px); box-shadow: var(--shadow-md); }
+/* Fondo blanco (no crema) para que las fotos de producto —que casi todas
+   vienen recortadas sobre blanco— se fundan con el cuadro y no se vean
+   franjas de color alrededor del producto. */
 .product-card__img{
   position:relative; aspect-ratio: 1/1;
-  background-color: var(--color-cream-alt);
+  background-color:#fff;
   background-size:contain; background-repeat:no-repeat; background-position:center;
   background-origin:content-box; background-clip:content-box;
   padding:14px;
+  border-bottom:1px solid var(--color-cream-alt);
 }
-.product-card__badge{ position:absolute; top:12px; left:12px; background: var(--color-wine); color:#fff; font-size:.66rem; font-weight:700; letter-spacing:.06em; padding:5px 10px; border-radius:999px; }
-.product-card__body{ padding: 16px 18px 20px; }
-.product-card__cat{ font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; color: var(--color-gold-dark); font-weight:700; }
-.product-card__body h3{ font-size:1rem; margin: 6px 0 8px; line-height:1.3; }
-.product-card__body p{ font-size:.82rem; color: var(--color-muted); line-height:1.5; }
-.product-card__cta{ margin-top:12px; display:inline-flex; align-items:center; gap:6px; font-size:.8rem; font-weight:700; color: var(--color-wine); }
+.product-card__badge{ position:absolute; top:12px; left:12px; background: var(--color-wine); color:#fff; font-size:.62rem; font-weight:700; letter-spacing:.06em; padding:4px 9px; border-radius:999px; }
+.product-card__body{ padding: 14px 16px 18px; }
+.product-card__cat{ font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color: var(--color-gold-dark); font-weight:700; }
+.product-card__body h3{ font-size:.92rem; margin: 5px 0 6px; line-height:1.3; }
+.product-card__body p{ font-size:.78rem; color: var(--color-muted); line-height:1.5; }
+.product-card__cta{ margin-top:10px; display:inline-flex; align-items:center; gap:6px; font-size:.76rem; font-weight:700; color: var(--color-wine); }
 
 /* Photo grid (category listing pages — real product photos) */
 .photo-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:18px; }
@@ -395,9 +414,45 @@ input,textarea,select{ font-family:inherit; }
   overflow:hidden; display:block;
   transition: transform .25s var(--ease), box-shadow .25s var(--ease);
 }
-.photo-card img{ width:100%; aspect-ratio: 1/1; object-fit:cover; display:block; }
+/* contain (no cover): así no se recorta el producto y queda entero dentro
+   del cuadro blanco, igual en todas las fotos aunque vengan de distinto tamaño. */
+.photo-card img{ width:100%; aspect-ratio: 1/1; object-fit:contain; display:block; background:#fff; padding:10px; }
 .photo-card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); }
 .photo-card__foot{ display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 12px; font-size:.78rem; font-weight:700; color: var(--color-gold-dark); border-top:1px solid var(--color-cream-alt); }
+
+/* =====================================================
+   Popup publicitario del Inicio
+===================================================== */
+.promo-popup{
+  position:fixed; inset:0; z-index:210;
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; visibility:hidden;
+  transition: opacity .3s var(--ease), visibility 0s linear .3s;
+}
+.promo-popup.is-open{ opacity:1; visibility:visible; transition: opacity .3s var(--ease); }
+.promo-popup__backdrop{ position:absolute; inset:0; background: rgba(15,12,8,.7); }
+.promo-popup__panel{
+  position:relative; z-index:1; background:#fff; border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); padding:14px;
+  width:min(460px, 100%); max-height:92vh;
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  transform: scale(.94); transition: transform .3s var(--ease);
+}
+.promo-popup.is-open .promo-popup__panel{ transform: scale(1); }
+.promo-popup__x{
+  position:absolute; top:-12px; right:-12px; z-index:2; width:36px; height:36px; border-radius:50%;
+  background:#fff; color: var(--color-ink); display:grid; place-items:center;
+  box-shadow: var(--shadow-md); transition: transform .2s, background .2s;
+}
+.promo-popup__x:hover{ background: var(--color-cream-alt); transform: scale(1.08); }
+.promo-popup__link{ display:block; width:100%; border-radius: var(--radius-md); overflow:hidden; }
+.promo-popup__link img{ width:100%; height:auto; max-height:70vh; object-fit:contain; display:block; }
+.promo-popup__close{ width:100%; }
+
+@media (max-width: 560px){
+  .promo-popup{ padding:16px; }
+  .promo-popup__x{ top:6px; right:6px; }
+}
 
 /* =====================================================
    Lightbox — vista rápida de una foto de producto
@@ -417,7 +472,7 @@ input,textarea,select{ font-family:inherit; }
   transform: scale(.96) translateY(8px); transition: transform .25s var(--ease);
 }
 .lightbox.is-open .lightbox__panel{ transform: scale(1) translateY(0); }
-.lightbox__media{ position:relative; background: var(--color-cream-alt); display:flex; align-items:center; justify-content:center; min-height:280px; }
+.lightbox__media{ position:relative; background:#fff; display:flex; align-items:center; justify-content:center; min-height:280px; }
 .lightbox__media img{ width:100%; height:100%; max-height:80vh; object-fit:contain; display:block; }
 .lightbox__close{
   position:absolute; top:14px; right:14px; z-index:2; width:36px; height:36px; border-radius:50%;
@@ -479,6 +534,15 @@ input,textarea,select{ font-family:inherit; }
 
 /* Sidebar (subpages) */
 .layout-sidebar{ display:grid; grid-template-columns: 1fr 300px; gap:36px; align-items:start; }
+/* Los items de grid traen min-width:auto y por eso una palabra larga (un
+   correo, por ejemplo) podía ensanchar la columna y sacar la página de la
+   pantalla en móvil. */
+.layout-sidebar > *{ min-width:0; }
+/* Variantes por clase (antes iban como style="" en el HTML, y al ser estilos
+   en línea le ganaban a las media queries: en móvil no se apilaban y la
+   página se salía de la pantalla). */
+.layout-sidebar--form{ grid-template-columns: 1.2fr 1fr; }
+.branch-grid--3{ grid-template-columns: repeat(3,1fr); }
 .side-card{ background:#fff; border:1px solid var(--color-border); border-radius: var(--radius-md); padding:22px; }
 .side-card h5{ font-family: var(--font-display); font-size:1.05rem; margin-bottom:14px; }
 .side-card ul{ display:flex; flex-direction:column; gap:2px; }
@@ -594,7 +658,18 @@ input,textarea,select{ font-family:inherit; }
 /* =====================================================
    Footer
 ===================================================== */
-.site-footer{ background: var(--color-cream-alt); color: var(--color-muted); border-top: 1px solid var(--color-border); margin-top: 20px; }
+/* Gris #CCCCCC, el mismo de la página antigua. Sobre ese gris el gris-texto
+   normal se queda corto de contraste, así que dentro del footer se redefinen
+   los tokens a tonos un poco más oscuros (solo aquí, no afecta al resto). */
+.site-footer{
+  background: #CCCCCC;
+  color: #5C5343;
+  border-top: 1px solid rgba(0,0,0,.14);
+  margin-top: 20px;
+  --color-muted: #5C5343;
+  --color-gold-dark: #6B5018;
+  --color-border: rgba(0,0,0,.14);
+}
 .footer__grid{ display:grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap:32px; padding-block:52px 36px; }
 .footer__col h5{ color: var(--color-ink); font-family: var(--font-display); font-size:1rem; margin-bottom:18px; }
 .footer__col ul{ display:flex; flex-direction:column; gap:12px; font-size:.86rem; }
@@ -619,25 +694,29 @@ input,textarea,select{ font-family:inherit; }
    Responsive
 ===================================================== */
 @media (max-width: 1100px){
+  /* El bloque "Llámanos" no encogía y empujaba el header fuera de la pantalla
+     en tablets (aparecía barra de scroll horizontal). */
+  .header__call{ display:none; }
   .hero{ grid-template-columns: 1fr; }
-  .promo-stack{ flex-direction:row; }
+  .promo-stack{ grid-template-columns: repeat(6,1fr); }
   .hero__slider{ min-height:400px; }
   .cat-grid{ grid-template-columns: repeat(2,1fr); }
   .product-grid{ grid-template-columns: repeat(3,1fr); }
   .photo-grid{ grid-template-columns: repeat(3,1fr); }
   .gallery{ grid-template-columns: repeat(3,1fr); }
   .features{ grid-template-columns: repeat(3,1fr); }
-  .layout-sidebar{ grid-template-columns: 1fr; }
+  .layout-sidebar, .layout-sidebar--form{ grid-template-columns: 1fr; }
+  .branch-grid--3{ grid-template-columns: repeat(2,1fr); }
   .stats__inner{ grid-template-columns: repeat(2,1fr); row-gap:24px; }
   .stat:nth-child(2){ border-right:none; }
   .service-grid{ grid-template-columns: repeat(2,1fr); }
   .news-grid{ grid-template-columns: repeat(2,1fr); }
   .map-grid{ grid-template-columns: 1fr; }
+  /* 6 columnas → 2 filas de 3 */
   .mega{ grid-template-columns: repeat(3,1fr); width:min(760px, calc(100vw - 32px)); }
   .mega__col{ border-left:1px solid var(--color-cream-alt); border-top:none; padding:0 14px 18px; }
-  .mega__col:nth-child(4n+1){ border-left:1px solid var(--color-cream-alt); padding-left:14px; }
   .mega__col:nth-child(3n+1){ border-left:none; padding-left:0; }
-  .mega__col:nth-child(n+5){ border-top:none; padding-top:0; }
+  .mega__col:nth-child(3n){ padding-right:0; }
   .mega__col:nth-child(n+4){ border-top:1px solid var(--color-cream-alt); padding-top:16px; }
   .mega__foot{ flex-direction:column; align-items:flex-start; gap:8px; }
 }
@@ -645,7 +724,9 @@ input,textarea,select{ font-family:inherit; }
 @media (max-width: 860px){
   .topbar__social{ display:none; }
   .header__call{ display:none; }
-  .search{ order:3; max-width:none; width:100%; margin-top:12px; }
+  /* flex-basis 100% SIN encoger: obliga al buscador a bajar a su propia fila.
+     Con width:100% + flex-shrink por defecto se quedaba apretado junto al logo. */
+  .search{ order:3; flex: 1 0 100%; max-width:none; margin-top:12px; }
   .header__inner{ flex-wrap:wrap; }
   .hamburger{ display:flex; }
   .main-nav{ position:absolute; top:100%; left:0; right:0; background: var(--color-white); border-bottom:1px solid var(--color-border); box-shadow: var(--shadow-md); flex-direction:column; align-items:stretch; padding:8px; gap:2px; max-height:0; overflow:hidden; transition: max-height .3s var(--ease); height:auto; z-index:54; }
@@ -662,7 +743,7 @@ input,textarea,select{ font-family:inherit; }
   .mega__foot{ flex-direction:column; align-items:flex-start; gap:8px; padding:14px 0; }
   .navbar__inner{ flex-wrap:wrap; position:relative; }
   .promo-pill span{ display:none; }
-  .promo-stack{ flex-direction:column; }
+  .promo-stack{ grid-template-columns: repeat(3,1fr); }
   .cat-grid{ grid-template-columns: 1fr; }
   .product-grid{ grid-template-columns: repeat(2,1fr); }
   .photo-grid{ grid-template-columns: repeat(2,1fr); }
@@ -671,7 +752,7 @@ input,textarea,select{ font-family:inherit; }
   .form-row{ grid-template-columns: 1fr; }
   .service-grid{ grid-template-columns: 1fr; }
   .news-grid{ grid-template-columns: 1fr; }
-  .branch-grid{ grid-template-columns: 1fr; }
+  .branch-grid, .branch-grid--3{ grid-template-columns: 1fr; }
   .footer__grid{ grid-template-columns: 1fr 1fr; }
   .pillars{ grid-template-columns: 1fr; }
   .lightbox{ padding:0; }

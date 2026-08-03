@@ -6,12 +6,74 @@
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
 
-  /* ---------- Sticky header compact-on-scroll ---------- */
+  /* ---------- Sticky header compact-on-scroll ----------
+     Publica la altura real del header en --header-h para que el navbar se
+     pegue justo debajo y el menú no quede escondido detrás al hacer scroll. */
   const header = document.getElementById('siteHeader');
   if (header) {
-    const onScroll = () => header.classList.toggle('is-compact', window.scrollY > 40);
+    const publishHeaderHeight = () => {
+      document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    };
+    const onScroll = () => {
+      header.classList.toggle('is-compact', window.scrollY > 40);
+      publishHeaderHeight();
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', publishHeaderHeight, { passive: true });
+    window.addEventListener('load', publishHeaderHeight);
+  }
+
+  /* ---------- Popup publicitario del Inicio ----------
+     Se muestra una sola vez por visita (sessionStorage). Si la imagen no
+     existe todavía, no se abre nada: nunca se ve una imagen rota. */
+  const promoPopup = document.getElementById('promoPopup');
+  if (promoPopup) {
+    const STORAGE_KEY = 'pda_promo_visto';
+    const popupImg = document.getElementById('promoPopupImg');
+    let popupTrigger = null;
+
+    const openPopup = () => {
+      popupTrigger = document.activeElement;
+      promoPopup.classList.add('is-open');
+      promoPopup.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('promoPopupX').focus();
+      try { sessionStorage.setItem(STORAGE_KEY, '1'); } catch (e) { /* modo privado */ }
+    };
+    const closePopup = () => {
+      promoPopup.classList.remove('is-open');
+      promoPopup.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (popupTrigger && popupTrigger.focus) popupTrigger.focus();
+    };
+
+    promoPopup.querySelectorAll('[data-popup-close]').forEach(el => el.addEventListener('click', closePopup));
+    document.getElementById('promoPopupX').addEventListener('click', closePopup);
+    document.getElementById('promoPopupLink').addEventListener('click', closePopup);
+    document.addEventListener('keydown', (e) => {
+      if (!promoPopup.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { closePopup(); return; }
+      if (e.key === 'Tab') {
+        const focusables = Array.from(promoPopup.querySelectorAll('button, a[href]'));
+        if (!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+
+    let yaVisto = false;
+    try { yaVisto = sessionStorage.getItem(STORAGE_KEY) === '1'; } catch (e) { /* modo privado */ }
+    if (!yaVisto) {
+      /* solo si la imagen carga bien */
+      if (popupImg.complete) {
+        if (popupImg.naturalWidth > 0) setTimeout(openPopup, 900);
+      } else {
+        popupImg.addEventListener('load', () => setTimeout(openPopup, 900));
+      }
+    }
   }
 
   /* ---------- Header search (sugerencias en vivo + envío real) ---------- */

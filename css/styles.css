@@ -20,8 +20,10 @@
   --color-text: #2A2117;
   --color-muted: #716755;
 
-  --font-display: "Playfair Display", "Georgia", serif;
-  --font-body: "Inter", "Segoe UI", sans-serif;
+  /* Toda la tipografía del sitio en Arial (pedido del cliente).
+     Helvetica/sans-serif quedan como respaldo para equipos que no la tengan. */
+  --font-display: Arial, Helvetica, sans-serif;
+  --font-body: Arial, Helvetica, sans-serif;
 
   --container: 1280px;
   --radius-sm: 8px;
@@ -299,12 +301,22 @@ input,textarea,select{ font-family:inherit; }
 ===================================================== */
 .hero{ display:grid; grid-template-columns: 1fr 320px; gap:22px; padding-block:28px; }
 .hero__slider{ position:relative; border-radius: var(--radius-lg); overflow:hidden; min-height:480px; background: var(--color-cream-alt); }
+/* Cada slide admite dos imágenes: --img (horizontal, computadora/tablet) y
+   --img-movil (vertical, celular). En celular el hueco es más alto que ancho,
+   así que una foto horizontal se recortaría demasiado. Si un slide no tiene
+   versión de celular, se usa la horizontal automáticamente. */
 .hero__slide{
   position:absolute; inset:0; display:flex; align-items:center; padding:0 60px;
   background-image: linear-gradient(100deg, rgba(15,12,8,.55) 0%, rgba(15,12,8,.05) 60%), var(--img);
   background-size:cover; background-position:center;
   opacity:0; visibility:hidden; transform: scale(1.04);
   transition: opacity .8s var(--ease), transform 7s linear, visibility 0s linear .8s;
+}
+@media (max-width: 560px){
+  .hero__slide{
+    /* velo parejo: el texto va centrado, así se lee sobre cualquier foto */
+    background-image: linear-gradient(180deg, rgba(15,12,8,.42) 0%, rgba(15,12,8,.62) 100%), var(--img-movil, var(--img));
+  }
 }
 .hero__slide.is-active{ opacity:1; visibility:visible; transform: scale(1); transition: opacity .8s var(--ease), transform 7s linear; }
 .hero__copy{ max-width:480px; color:#fff; }
@@ -765,8 +777,11 @@ input,textarea,select{ font-family:inherit; }
   .search__select{ display:none; }
   .search__input{ border-left:1.5px solid var(--color-border); border-radius:10px 0 0 10px; }
   .search__btn span{ display:none; }
-  .hero__slide{ padding: 0 24px; }
+  /* espacio abajo para que los botones no choquen con los puntos y las flechas */
+  .hero__slide{ padding: 0 24px 62px; }
   .hero__dots{ left:24px; bottom:16px; }
+  .hero__nav{ bottom:14px; width:34px; height:34px; }
+  .hero__nav--prev{ right:64px; } .hero__nav--next{ right:20px; }
   .product-grid{ grid-template-columns: 1fr; }
   .features{ grid-template-columns: 1fr; }
   .footer__grid{ grid-template-columns: 1fr; }

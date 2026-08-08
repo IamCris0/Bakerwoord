@@ -13,3 +13,7 @@ Desktop.ini
 
 # Dependencias (el sitio no usa ninguna; esto es por si se añaden herramientas)
 node_modules/
+
+# Plantilla del sitio anterior: 205 MB de plugins e imágenes de stock que no
+# se reutilizan. Se conserva sólo en local como referencia.
+pagina-antigua/

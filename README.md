@@ -1,8 +1,11 @@
 # Agencia Detective — Sitio web
 
 Rediseño completo del sitio de Agencia Detective (investigación privada, Ecuador).
-Sustituye la plantilla Bootstrap 3 «Jango» anterior, conservada en
-[pagina-antigua/](pagina-antigua/) sólo como referencia.
+Sustituye la plantilla Bootstrap 3 «Jango» anterior.
+
+> La plantilla original vive en `pagina-antigua/`, **fuera del control de versiones**:
+> son 205 MB de plugins e imágenes de stock que no se reutilizan. Se conserva sólo
+> en local como referencia del contenido previo.
 
 ## Stack
 

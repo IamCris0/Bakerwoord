@@ -31,8 +31,10 @@ assets/
     base.css              Reset, tipografía base, utilidades, revelado al scroll
     layout.css            Cabecera, portada, cabeceras interiores, pie, flotantes
     components.css        Botones, tarjetas, acordeón, pestañas, formulario, etc.
+    chat.css              Asistente de admisión flotante
   js/
     main.js               Cabecera, menú, pestañas, contadores, formulario
+    chat.js               Asistente de admisión (construye su propio marcado)
   video/
     investigacion.mp4     Video rescatado del slider del sitio anterior
   brand/
@@ -67,12 +69,49 @@ El sitio no tiene servidor detrás. El formulario de `contactos.html` valida en 
 navegador y compone un mensaje de WhatsApp ya redactado que el usuario decide si
 envía. Nada sale del dispositivo antes de eso.
 
+Tiene tres bloques: **sus datos** y **el encargo** (obligatorios) y **persona a
+investigar** (todo opcional: nombre, relación, edad, documento, teléfono, ciudad,
+domicilio, trabajo, vehículo, redes, rutina y fotografía).
+
+El mensaje se redacta con formato de WhatsApp (`*negrita*`) y **omite los campos
+vacíos**, para que quien lo recibe no lea una lista de «no indicado».
+
+### La fotografía
+
+`wa.me` sólo transporta texto, así que el envío se bifurca:
+
+| Situación | Qué ocurre |
+| --- | --- |
+| Móvil con Web Share API | `navigator.share()` manda texto **e imagen** juntos; el usuario elige WhatsApp |
+| Escritorio, o sin soporte | Se abre `wa.me` con el texto y se avisa de que adjunte la foto; la vista previa se mantiene en pantalla |
+
+La compartición nativa se limita a dispositivos táctiles a propósito: Chrome de
+escritorio expone la API pero abre la hoja de Windows, donde WhatsApp casi nunca
+aparece.
+
 Para cambiar el número destinatario, edite el atributo `data-whatsapp` del
 formulario en `contactos.html`.
 
 Si en el futuro se quiere recibir las consultas por correo, hace falta añadir un
 endpoint (PHP en el propio hosting, o un servicio tipo Formspree) y sustituir el
 bloque de envío en `initForm()` dentro de `assets/js/main.js`.
+
+## Asistente de admisión
+
+Burbuja flotante presente en las cinco páginas. Hace una triaje de cinco preguntas
+(caso, datos disponibles, urgencia, ciudad y un campo libre), muestra un resumen y
+entrega la consulta al canal real: WhatsApp, teléfono o el formulario completo.
+Si el usuario indica que tiene una fotografía, prioriza el formulario, que es el
+único sitio donde se sube directamente.
+
+No es un modelo de lenguaje ni responde preguntas abiertas: es un guion cerrado.
+Todo ocurre en el navegador y nada se almacena, salvo una marca en `sessionStorage`
+para no repetir el aviso emergente en cada página.
+
+El guion vive en la constante `FLUJO` al inicio de
+[assets/js/chat.js](assets/js/chat.js): añadir, quitar o reordenar preguntas es
+editar ese objeto. El widget construye su propio marcado, así que las páginas sólo
+necesitan el `<link>` y el `<script>`.
 
 ## Datos de contacto publicados
 

@@ -246,11 +246,134 @@
     }
 
     form.querySelectorAll('input, select, textarea').forEach(function (control) {
+      if (control.type === 'file') return;
       control.addEventListener('blur', function () { validate(control); });
       control.addEventListener('input', function () {
         if (fieldOf(control) && fieldOf(control).classList.contains('has-error')) validate(control);
       });
     });
+
+    /* --- Fotografía de la persona a investigar --- */
+
+    var photoInput = form.querySelector('#obj_foto');
+    var photoPreview = form.querySelector('[data-photo-preview]');
+    var photoThumb = form.querySelector('[data-photo-thumb]');
+    var photoName = form.querySelector('[data-photo-name]');
+    var photoSize = form.querySelector('[data-photo-size]');
+    var photoRemove = form.querySelector('[data-photo-remove]');
+    var photoError = form.querySelector('[data-photo-error]');
+    var MAX_BYTES = 8 * 1024 * 1024;
+    var thumbUrl = null;
+
+    function humanSize(bytes) {
+      if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1).replace('.', ',') + ' MB';
+    }
+
+    function clearPhoto() {
+      if (thumbUrl) { URL.revokeObjectURL(thumbUrl); thumbUrl = null; }
+      if (photoInput) photoInput.value = '';
+      if (photoPreview) photoPreview.hidden = true;
+      if (photoThumb) photoThumb.removeAttribute('src');
+    }
+
+    function currentPhoto() {
+      return photoInput && photoInput.files && photoInput.files[0] ? photoInput.files[0] : null;
+    }
+
+    if (photoInput) {
+      photoInput.addEventListener('change', function () {
+        var file = currentPhoto();
+        if (photoError) photoError.textContent = '';
+        if (!file) { clearPhoto(); return; }
+
+        if (!/^image\//.test(file.type)) {
+          if (photoError) photoError.textContent = 'El archivo debe ser una imagen.';
+          clearPhoto();
+          return;
+        }
+
+        if (file.size > MAX_BYTES) {
+          if (photoError) photoError.textContent = 'La imagen supera los 8 MB. Envíe una más ligera.';
+          clearPhoto();
+          return;
+        }
+
+        if (thumbUrl) URL.revokeObjectURL(thumbUrl);
+        thumbUrl = URL.createObjectURL(file);
+        if (photoThumb) photoThumb.src = thumbUrl;
+        if (photoName) photoName.textContent = file.name;
+        if (photoSize) photoSize.textContent = humanSize(file.size);
+        if (photoPreview) photoPreview.hidden = false;
+      });
+    }
+
+    if (photoRemove) {
+      photoRemove.addEventListener('click', function () {
+        clearPhoto();
+        if (photoError) photoError.textContent = '';
+        if (photoInput) photoInput.focus();
+      });
+    }
+
+    /* --- Redacción del mensaje ---
+       WhatsApp interpreta *texto* como negrita. Los campos vacíos no se
+       imprimen: un mensaje con quince líneas «no indicado» es ilegible para
+       quien lo recibe. */
+
+    function buildMessage(data, hasPhoto) {
+      var parts = ['*CONSULTA — AGENCIA DETECTIVE*', '_Enviada desde agencia-detective.com_'];
+
+      function section(title, rows) {
+        var filled = rows.filter(function (row) { return row[1] && String(row[1]).trim(); });
+        if (!filled.length) return;
+        parts.push('', '*' + title + '*');
+        filled.forEach(function (row) {
+          var value = String(row[1]).trim();
+          // Los campos largos van en su propia línea para que se lean bien.
+          parts.push(value.indexOf('\n') >= 0 ? row[0] + ':\n' + value : row[0] + ': ' + value);
+        });
+      }
+
+      section('SOLICITANTE', [
+        ['Nombre', data.get('nombre')],
+        ['Teléfono', data.get('telefono')],
+        ['Correo', data.get('email')],
+        ['Ciudad', data.get('ciudad')]
+      ]);
+
+      section('ENCARGO', [
+        ['Tipo de caso', data.get('servicio')],
+        ['Detalle', data.get('mensaje')]
+      ]);
+
+      section('PERSONA A INVESTIGAR', [
+        ['Nombre', data.get('obj_nombre')],
+        ['Relación', data.get('obj_relacion')],
+        ['Edad', data.get('obj_edad')],
+        ['Documento', data.get('obj_documento')],
+        ['Teléfono', data.get('obj_telefono')],
+        ['Ciudad y sector', data.get('obj_ciudad')],
+        ['Domicilio', data.get('obj_direccion')],
+        ['Trabajo', data.get('obj_trabajo')],
+        ['Vehículo', data.get('obj_vehiculo')],
+        ['Redes sociales', data.get('obj_redes')],
+        ['Rutina', data.get('obj_rutina')]
+      ]);
+
+      if (hasPhoto) {
+        parts.push('', '*FOTOGRAFÍA*', 'Se adjunta imagen de la persona a investigar.');
+      }
+
+      return parts.join('\n');
+    }
+
+    function announce(text) {
+      if (!status) return;
+      status.hidden = false;
+      status.textContent = text;
+      status.focus();
+    }
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -259,6 +382,7 @@
       var firstInvalid = null;
 
       controls.forEach(function (control) {
+        if (control.type === 'file') return;
         if (!validate(control) && !firstInvalid) firstInvalid = control;
       });
 
@@ -267,31 +391,47 @@
         return;
       }
 
-      var data = new FormData(form);
-      var lines = [
-        'Consulta desde agencia-detective.com',
-        '',
-        'Nombre: ' + (data.get('nombre') || ''),
-        'Teléfono: ' + (data.get('telefono') || ''),
-        'Correo: ' + (data.get('email') || ''),
-        'Servicio: ' + (data.get('servicio') || ''),
-        'Ciudad: ' + (data.get('ciudad') || 'No indicada'),
-        '',
-        'Detalle:',
-        (data.get('mensaje') || '')
-      ];
+      var photo = currentPhoto();
+      var text = buildMessage(new FormData(form), !!photo);
 
-      var url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(lines.join('\n'));
-      window.open(url, '_blank', 'noopener');
+      function openWhatsApp() {
+        window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
 
-      if (status) {
-        status.hidden = false;
-        status.textContent =
-          'Abrimos WhatsApp con su consulta lista para enviar. Si no se abrió, escríbanos a info@agencia-detective.com.';
-        status.focus();
+        if (photo) {
+          // El enlace de WhatsApp sólo transporta texto. La vista previa se deja
+          // en pantalla para que la fotografía siga a mano al adjuntarla.
+          announce('Abrimos WhatsApp con su consulta. Falta la fotografía: adjúntela en el chat, la tiene aquí debajo. Si no se abrió, escríbanos a info@agencia-detective.com.');
+          return;
+        }
+
+        announce('Abrimos WhatsApp con su consulta lista para enviar. Si no se abrió, escríbanos a info@agencia-detective.com.');
+        form.reset();
       }
 
-      form.reset();
+      // La compartición nativa sólo se usa en dispositivos táctiles. En Chrome
+      // de escritorio existe la API, pero abre la hoja del sistema operativo,
+      // donde WhatsApp casi nunca aparece: ahí el enlace wa.me es más fiable.
+      var esTactil = window.matchMedia('(pointer: coarse)').matches && navigator.maxTouchPoints > 0;
+
+      var puedeCompartirFoto = !!photo && esTactil &&
+        typeof navigator.share === 'function' &&
+        typeof navigator.canShare === 'function' &&
+        navigator.canShare({ files: [photo] });
+
+      if (!puedeCompartirFoto) {
+        openWhatsApp();
+        return;
+      }
+
+      navigator.share({ text: text, files: [photo] }).then(function () {
+        announce('Consulta compartida con la fotografía. Un investigador le responde en breve.');
+        clearPhoto();
+        form.reset();
+      }).catch(function (error) {
+        // Cancelar la hoja de compartir no es un error y no merece aviso.
+        if (error && error.name === 'AbortError') return;
+        openWhatsApp();
+      });
     });
   }
 

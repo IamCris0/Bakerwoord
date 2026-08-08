@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
 <link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/chat.css">
 
 <script type="application/ld+json">
 {
@@ -121,67 +122,214 @@
           <p class="form-card__note">
             Al enviar, abrimos WhatsApp con el mensaje ya redactado para que usted
             decida si lo manda. Nada sale de su dispositivo hasta que pulse enviar allí.
+            Sólo el primer bloque es obligatorio.
           </p>
 
           <form class="form" data-consulta-form data-whatsapp="593981428621" novalidate>
-            <div class="form__row">
-              <div class="field">
-                <label class="field__label" for="nombre">Nombre o alias <span class="req" aria-hidden="true">*</span></label>
-                <input type="text" id="nombre" name="nombre" placeholder="Como prefiera que le llamemos" required autocomplete="name">
-                <p class="field__error" aria-live="polite"></p>
+
+            <!-- ---- Bloque 1: quién consulta ---- -->
+            <fieldset class="form-block">
+              <legend class="form-block__legend">Sus datos</legend>
+              <div class="form-block__fields">
+                <div class="form__row">
+                  <div class="field">
+                    <label class="field__label" for="nombre">Nombre o alias <span class="req" aria-hidden="true">*</span></label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Como prefiera que le llamemos" required autocomplete="name">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="telefono">Teléfono <span class="req" aria-hidden="true">*</span></label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="09XX XXX XXXX" required autocomplete="tel">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+                </div>
+
+                <div class="form__row">
+                  <div class="field">
+                    <label class="field__label" for="email">Correo</label>
+                    <input type="email" id="email" name="email" placeholder="Opcional" autocomplete="email">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="ciudad">Ciudad</label>
+                    <input type="text" id="ciudad" name="ciudad" placeholder="Dónde ocurriría el trabajo" autocomplete="address-level2">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+                </div>
               </div>
+            </fieldset>
 
-              <div class="field">
-                <label class="field__label" for="telefono">Teléfono <span class="req" aria-hidden="true">*</span></label>
-                <input type="tel" id="telefono" name="telefono" placeholder="09XX XXX XXXX" required autocomplete="tel">
-                <p class="field__error" aria-live="polite"></p>
+            <!-- ---- Bloque 2: el encargo ---- -->
+            <fieldset class="form-block">
+              <legend class="form-block__legend">El encargo</legend>
+              <div class="form-block__fields">
+                <div class="field">
+                  <label class="field__label" for="servicio">Tipo de caso <span class="req" aria-hidden="true">*</span></label>
+                  <select id="servicio" name="servicio" required>
+                    <option value="">Seleccione una opción</option>
+                    <option>Infidelidad conyugal</option>
+                    <option>Seguimiento y vigilancia</option>
+                    <option>Redes sociales y rastro digital</option>
+                    <option>Localización de personas</option>
+                    <option>Investigación corporativa o laboral</option>
+                    <option>Investigación patrimonial</option>
+                    <option>Informe para proceso judicial</option>
+                    <option>Preservación de evidencia digital</option>
+                    <option>Informe prematrimonial o de entorno</option>
+                    <option>Otro / no estoy seguro</option>
+                  </select>
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="mensaje">Qué necesita saber <span class="req" aria-hidden="true">*</span></label>
+                  <textarea id="mensaje" name="mensaje" placeholder="Cuente lo esencial: qué sospecha, desde cuándo y qué le gustaría conseguir." required minlength="20"></textarea>
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
               </div>
-            </div>
+            </fieldset>
 
-            <div class="form__row">
-              <div class="field">
-                <label class="field__label" for="email">Correo</label>
-                <input type="email" id="email" name="email" placeholder="Opcional" autocomplete="email">
-                <p class="field__error" aria-live="polite"></p>
+            <!-- ---- Bloque 3: la persona a investigar ---- -->
+            <fieldset class="form-block">
+              <legend class="form-block__legend">Persona a investigar</legend>
+              <p class="form-block__hint">
+                Todo este bloque es opcional. Complete sólo lo que sepa con certeza:
+                cuanto más concreto sea el punto de partida, más corto y más barato
+                sale el operativo. Si no sabe algo, déjelo en blanco antes que suponer.
+              </p>
+
+              <div class="form-block__fields">
+                <div class="form__row">
+                  <div class="field">
+                    <label class="field__label" for="obj_nombre">Nombre completo</label>
+                    <input type="text" id="obj_nombre" name="obj_nombre" placeholder="O como se le conoce" autocomplete="off">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="obj_relacion">Relación con usted</label>
+                    <select id="obj_relacion" name="obj_relacion">
+                      <option value="">Seleccione una opción</option>
+                      <option>Pareja o cónyuge</option>
+                      <option>Ex pareja</option>
+                      <option>Familiar</option>
+                      <option>Hijo o hija</option>
+                      <option>Empleado o subordinado</option>
+                      <option>Socio, cliente o proveedor</option>
+                      <option>Deudor</option>
+                      <option>Vecino o conocido</option>
+                      <option>No tengo relación directa</option>
+                    </select>
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+                </div>
+
+                <div class="form__row">
+                  <div class="field">
+                    <label class="field__label" for="obj_edad">Edad aproximada</label>
+                    <input type="text" id="obj_edad" name="obj_edad" placeholder="Por ejemplo, 35 años" autocomplete="off">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="obj_documento">Cédula o documento</label>
+                    <input type="text" id="obj_documento" name="obj_documento" placeholder="Sólo si lo conoce" autocomplete="off">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+                </div>
+
+                <div class="form__row">
+                  <div class="field">
+                    <label class="field__label" for="obj_telefono">Teléfono conocido</label>
+                    <input type="tel" id="obj_telefono" name="obj_telefono" placeholder="09XX XXX XXXX" autocomplete="off">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+
+                  <div class="field">
+                    <label class="field__label" for="obj_ciudad">Ciudad y sector</label>
+                    <input type="text" id="obj_ciudad" name="obj_ciudad" placeholder="Dónde vive o se mueve" autocomplete="off">
+                    <p class="field__error" aria-live="polite"></p>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="obj_direccion">Domicilio o referencia</label>
+                  <input type="text" id="obj_direccion" name="obj_direccion" placeholder="Dirección, urbanización o punto de referencia cercano" autocomplete="off">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="obj_trabajo">Trabajo u ocupación</label>
+                  <input type="text" id="obj_trabajo" name="obj_trabajo" placeholder="Empresa, cargo o actividad, y dónde queda" autocomplete="off">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="obj_vehiculo">Vehículo</label>
+                  <input type="text" id="obj_vehiculo" name="obj_vehiculo" placeholder="Marca, modelo, color y placa" autocomplete="off">
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="obj_redes">Perfiles en redes sociales</label>
+                  <textarea id="obj_redes" name="obj_redes" rows="3" placeholder="Usuarios o enlaces de Facebook, Instagram, TikTok, X u otras. Uno por línea."></textarea>
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="field">
+                  <label class="field__label" for="obj_rutina">Rutina y horarios conocidos</label>
+                  <textarea id="obj_rutina" name="obj_rutina" rows="3" placeholder="Horario de trabajo, días libres, lugares que frecuenta, franjas en las que no da explicaciones."></textarea>
+                  <p class="field__error" aria-live="polite"></p>
+                </div>
+
+                <div class="photo-field">
+                  <span class="field__label" id="foto-label">Fotografía reciente</span>
+
+                  <input type="file" id="obj_foto" name="obj_foto" accept="image/*" aria-labelledby="foto-label" aria-describedby="foto-ayuda">
+                  <label class="photo-drop" for="obj_foto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <rect x="3" y="6" width="18" height="14" rx="2"/>
+                      <path d="M8 6l1.4-2.2h5.2L16 6"/>
+                      <circle cx="12" cy="13" r="3.4"/>
+                    </svg>
+                    <span class="photo-drop__text">
+                      Adjuntar una fotografía
+                      <span class="photo-drop__hint">Una imagen nítida y de frente. Máximo 8 MB.</span>
+                    </span>
+                  </label>
+
+                  <div class="photo-preview" data-photo-preview hidden>
+                    <img class="photo-preview__thumb" data-photo-thumb src="" alt="Vista previa de la fotografía adjuntada">
+                    <div class="photo-preview__meta">
+                      <p class="photo-preview__name" data-photo-name></p>
+                      <p class="photo-preview__size" data-photo-size></p>
+                    </div>
+                    <button class="photo-remove" type="button" data-photo-remove aria-label="Quitar la fotografía">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+                    </button>
+                  </div>
+
+                  <p class="field__error" data-photo-error aria-live="polite"></p>
+
+                  <p class="form-block__hint" id="foto-ayuda" style="margin-top: 0;">
+                    En el teléfono la foto viaja junto al mensaje. Desde el ordenador,
+                    WhatsApp no admite adjuntos por enlace: se lo recordaremos para que
+                    la arrastre al chat en cuanto se abra.
+                  </p>
+                </div>
               </div>
-
-              <div class="field">
-                <label class="field__label" for="ciudad">Ciudad</label>
-                <input type="text" id="ciudad" name="ciudad" placeholder="Dónde ocurriría el trabajo" autocomplete="address-level2">
-                <p class="field__error" aria-live="polite"></p>
-              </div>
-            </div>
-
-            <div class="field">
-              <label class="field__label" for="servicio">Tipo de caso <span class="req" aria-hidden="true">*</span></label>
-              <select id="servicio" name="servicio" required>
-                <option value="">Seleccione una opción</option>
-                <option>Infidelidad conyugal</option>
-                <option>Seguimiento y vigilancia</option>
-                <option>Redes sociales y rastro digital</option>
-                <option>Localización de personas</option>
-                <option>Investigación corporativa o laboral</option>
-                <option>Investigación patrimonial</option>
-                <option>Informe para proceso judicial</option>
-                <option>Preservación de evidencia digital</option>
-                <option>Informe prematrimonial o de entorno</option>
-                <option>Otro / no estoy seguro</option>
-              </select>
-              <p class="field__error" aria-live="polite"></p>
-            </div>
-
-            <div class="field">
-              <label class="field__label" for="mensaje">Qué necesita saber <span class="req" aria-hidden="true">*</span></label>
-              <textarea id="mensaje" name="mensaje" placeholder="Cuente lo esencial: qué sospecha, desde cuándo y qué le gustaría conseguir. No hace falta dar nombres todavía." required minlength="20"></textarea>
-              <p class="field__error" aria-live="polite"></p>
-            </div>
+            </fieldset>
 
             <div class="field">
               <label class="consent" for="consentimiento">
                 <input type="checkbox" id="consentimiento" name="consentimiento" required>
                 <span>
-                  Autorizo el tratamiento de estos datos con la única finalidad de responder
-                  a mi consulta, conforme a la <a href="politicaprivacidad.html">política de privacidad</a>.
+                  Autorizo el tratamiento de estos datos con la única finalidad de valorar
+                  y atender mi consulta, conforme a la
+                  <a href="politicaprivacidad.html">política de privacidad</a>. Declaro que
+                  la información sobre terceros que aporto la conozco de forma lícita.
                 </span>
               </label>
               <p class="field__error" aria-live="polite"></p>
@@ -429,5 +577,6 @@
 </div>
 
 <script src="assets/js/main.js" defer></script>
+<script src="assets/js/chat.js" defer></script>
 </body>
 </html>

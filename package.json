@@ -1,9 +1,0 @@
-{
-  "name": "palacio-del-amor-joyeria",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Sitio de demostracion (HTML/CSS/JS) para Joyeria El Palacio del Amor, con servidor local.",
-  "scripts": {
-    "start": "node server.js"
-  }
-}

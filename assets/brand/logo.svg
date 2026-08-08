@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" role="img" aria-label="Agencia Detective — Investigación Profesional">
+  <title>Agencia Detective</title>
+  <g transform="translate(8, 26)">
+    <!-- Monograma AD -->
+    <g fill="none" stroke="#1B4E9B" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter">
+      <path d="M14 114 L66 14 L118 114"/>
+      <path d="M150 114 V14 H176 A50 50 0 0 1 176 114 Z"/>
+    </g>
+    <path d="M66 58 L92 114 L40 114 Z" fill="#F2A93B"/>
+  </g>
+  <g fill="#0A1424" font-family="Archivo, 'Segoe UI', sans-serif">
+    <text x="278" y="98" font-size="54" font-weight="700" letter-spacing="-1.6">AGENCIA DETECTIVE</text>
+    <text x="280" y="136" font-size="21" font-weight="400" letter-spacing="5.6" fill="#5A6779" font-family="'IBM Plex Mono', monospace">INVESTIGACIÓN PROFESIONAL</text>
+  </g>
+</svg>

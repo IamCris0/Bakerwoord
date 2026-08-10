@@ -155,6 +155,17 @@ strong, b { font-weight: 600; }
   flex: none;
 }
 
+/* En pantallas muy estrechas el antetítulo parte en dos y deja la marca
+   descolgada: se aprieta el interletrado para que quepa en una línea. */
+@media (max-width: 420px) {
+  .eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    gap: 0.5rem;
+  }
+  .eyebrow::before { width: 16px; }
+}
+
 .section--ink .eyebrow,
 .section--navy .eyebrow,
 .on-dark .eyebrow { color: var(--text-invert-soft); }
@@ -200,6 +211,36 @@ strong, b { font-weight: 600; }
   text-transform: uppercase;
 }
 
+/* ---- Justificación ----
+   Sólo en bloques de texto anchos y de varias líneas. La partición de palabras
+   es obligatoria aquí: justificar sin ella abre ríos de espacio en castellano,
+   que tiene palabras largas. El idioma lo toma del `lang` del documento.
+   En columnas estrechas se vuelve a alinear a la izquierda, porque ahí ni
+   siquiera la partición evita los huecos. */
+
+.prose p,
+.legal p,
+.legal ul li,
+.dossier__body p,
+.accordion__panel {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+@media (max-width: 700px) {
+  .prose p,
+  .legal p,
+  .legal ul li,
+  .dossier__body p,
+  .accordion__panel {
+    text-align: left;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+}
+
 .prose > * + * { margin-top: var(--sp-4); }
 .prose p { color: var(--text-soft); max-width: var(--measure); }
 .prose h2 { margin-top: var(--sp-8); }
@@ -223,7 +264,9 @@ strong, b { font-weight: 600; }
    Revelado al hacer scroll
    ========================================================================== */
 
-.reveal {
+/* El estado oculto sólo se aplica si hay JavaScript para revelarlo. Sin él,
+   la clase `js` no llega al documento y todo el contenido se ve de entrada. */
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition:

@@ -452,15 +452,24 @@
     var video = document.querySelector('.hero__video');
     if (!video) return;
 
-    if (reduceMotion) {
-      video.removeAttribute('autoplay');
-      video.pause();
-      return;
-    }
+    var fuente = video.dataset.src;
+    if (!fuente) return;
 
-    var attempt = video.play();
-    if (attempt && typeof attempt.catch === 'function') {
-      attempt.catch(function () { /* Reproducción bloqueada: se deja el póster. */ });
+    var conexion = navigator.connection || {};
+    var pantallaPequena = window.matchMedia('(max-width: 760px)').matches;
+    var ahorroDatos = conexion.saveData === true;
+    var redLenta = /(^|-)2g$/.test(conexion.effectiveType || '');
+
+    // En cualquiera de estos casos el póster cuenta lo mismo por 41 KB
+    // en lugar de 8 MB, así que el video ni se pide.
+    if (reduceMotion || pantallaPequena || ahorroDatos || redLenta) return;
+
+    video.src = fuente;
+    video.load();
+
+    var intento = video.play();
+    if (intento && typeof intento.catch === 'function') {
+      intento.catch(function () { /* Reproducción bloqueada: se deja el póster. */ });
     }
   }
 

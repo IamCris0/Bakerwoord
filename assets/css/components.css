@@ -233,6 +233,127 @@
 }
 
 /* --------------------------------------------------------------------------
+   Imagen junto al texto
+
+   Se tratan todas igual (leve desaturación y contraste frío) para que el
+   conjunto se lea como un mismo material y no como fotos sueltas de archivo.
+   -------------------------------------------------------------------------- */
+
+.media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--paper-2);
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.3) contrast(1.06) saturate(0.9);
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.media:hover img { transform: scale(1.03); }
+
+/* Marca ámbar en la esquina inferior: el mismo tick de los antetítulos */
+.media::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--amber);
+}
+
+.media--tall { aspect-ratio: 4 / 5; }
+.media--wide { aspect-ratio: 16 / 10; }
+.media--square { aspect-ratio: 1 / 1; }
+
+.media__caption {
+  margin-top: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.04em;
+  color: var(--slate);
+}
+
+.section--ink .media__caption,
+.section--navy .media__caption { color: var(--text-invert-soft); }
+
+/* En pantallas estrechas la imagen se aplana para no empujar el texto */
+@media (max-width: 900px) {
+  .media--tall { aspect-ratio: 16 / 10; }
+}
+
+/* --------------------------------------------------------------------------
+   Sección con imagen de fondo
+
+   Se combina con `.section--ink`, que aporta los colores de texto. El velo va
+   en el propio `background-image` para no añadir otra capa al árbol.
+   -------------------------------------------------------------------------- */
+
+.section--image {
+  position: relative;
+  isolation: isolate;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* A diferencia de las cabeceras, aquí el texto ocupa las dos columnas: el velo
+   se mantiene alto hasta donde llega el contenido y sólo se abre en el margen. */
+.section--image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgba(10, 20, 36, 0.96) 0%,
+    rgba(10, 20, 36, 0.89) 32%,
+    rgba(10, 20, 36, 0.76) 66%,
+    rgba(10, 20, 36, 0.70) 86%,
+    rgba(10, 20, 36, 0.44) 100%);
+}
+
+/* Sobre fotografía el texto secundario necesita más peso que sobre tinta plana */
+.section--image .checklist li,
+.section--image .lead,
+.section--image p:not(.statement) { color: rgba(238, 242, 248, 0.90); }
+
+.section--image .limits p { color: rgba(238, 242, 248, 0.86); }
+
+/* En móvil el texto ocupa todo el ancho: el velo debe cubrir por igual */
+@media (max-width: 760px) {
+  .section--image::before {
+    background: linear-gradient(
+      180deg,
+      rgba(10, 20, 36, 0.91) 0%,
+      rgba(10, 20, 36, 0.88) 60%,
+      rgba(10, 20, 36, 0.82) 100%);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Imágenes de fondo disponibles
+
+   Las rutas viven aquí, junto a la hoja, para que se resuelvan bien. Se
+   aplican tanto a `.page-head--image` como a `.section--image`.
+   -------------------------------------------------------------------------- */
+
+.img-vigilancia   { background-image: url("../img/vigilancia-nocturna.jpg"); }
+.img-corporativo  { background-image: url("../img/entorno-corporativo.jpg"); }
+.img-seguimiento  { background-image: url("../img/seguimiento-calle.jpg"); }
+.img-urbano       { background-image: url("../img/movimiento-urbano.jpg"); }
+.img-encuentros   { background-image: url("../img/lugares-de-encuentro.jpg"); }
+.img-noche        { background-image: url("../img/ciudad-de-noche.jpg"); }
+.img-niebla       { background-image: url("../img/niebla-duda.jpg"); }
+.img-judicial     { background-image: url("../img/via-judicial.jpg"); }
+
+/* --------------------------------------------------------------------------
    Acordeón — <details> nativo, accesible por defecto
    -------------------------------------------------------------------------- */
 

@@ -200,6 +200,36 @@ strong, b { font-weight: 600; }
   text-transform: uppercase;
 }
 
+/* ---- Justificación ----
+   Sólo en bloques de texto anchos y de varias líneas. La partición de palabras
+   es obligatoria aquí: justificar sin ella abre ríos de espacio en castellano,
+   que tiene palabras largas. El idioma lo toma del `lang` del documento.
+   En columnas estrechas se vuelve a alinear a la izquierda, porque ahí ni
+   siquiera la partición evita los huecos. */
+
+.prose p,
+.legal p,
+.legal ul li,
+.dossier__body p,
+.accordion__panel {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+@media (max-width: 700px) {
+  .prose p,
+  .legal p,
+  .legal ul li,
+  .dossier__body p,
+  .accordion__panel {
+    text-align: left;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+  }
+}
+
 .prose > * + * { margin-top: var(--sp-4); }
 .prose p { color: var(--text-soft); max-width: var(--measure); }
 .prose h2 { margin-top: var(--sp-8); }

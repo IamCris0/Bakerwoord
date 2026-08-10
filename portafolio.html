@@ -25,6 +25,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
+<script>document.documentElement.classList.add("js")</script>
+
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
@@ -130,7 +132,10 @@
 
           <figure style="margin-top: var(--sp-6);">
             <div class="media media--wide">
-              <img src="assets/img/seguimiento-calle.jpg" alt="Persona caminando de espaldas por una calle transitada" loading="lazy" width="1200" height="800">
+              <picture>
+                <source srcset="assets/img/seguimiento-calle.webp" type="image/webp">
+                <img src="assets/img/seguimiento-calle.jpg" alt="Persona caminando de espaldas por una calle transitada" loading="lazy" decoding="async" width="900" height="506">
+              </picture>
             </div>
             <figcaption class="media__caption">Toda investigación empieza por entender una rutina.</figcaption>
           </figure>

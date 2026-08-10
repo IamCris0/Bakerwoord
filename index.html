@@ -25,6 +25,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
+<script>document.documentElement.classList.add("js")</script>
+
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
@@ -111,10 +113,13 @@
   <!-- ==================================================================== -->
   <section class="hero">
     <div class="hero__media">
-      <video class="hero__video" autoplay muted loop playsinline preload="auto"
-             aria-hidden="true" tabindex="-1">
-        <source src="assets/video/investigacion.mp4" type="video/mp4">
-      </video>
+      <!-- El video pesa 8 MB: sólo se descarga si el contexto lo justifica.
+           En móvil, con ahorro de datos o red lenta se queda el póster, que
+           es un fotograma del propio video y pesa 41 KB en WebP. -->
+      <video class="hero__video" muted loop playsinline preload="none"
+             poster="assets/img/portada-poster.jpg"
+             data-src="assets/video/investigacion.mp4"
+             aria-hidden="true" tabindex="-1"></video>
     </div>
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__grid" aria-hidden="true"></div>
@@ -457,6 +462,68 @@
   </section>
 
   <!-- ==================================================================== -->
+  <!-- El operativo por dentro                                               -->
+  <!-- ==================================================================== -->
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">El operativo por dentro</p>
+        <h2>Vigilar bien es, sobre todo, saber esperar</h2>
+        <p>
+          Un seguimiento se sostiene con equipo adecuado, relevos y paciencia.
+          Esto es parte de lo que hay detrás de cada informe que entregamos.
+        </p>
+      </div>
+
+      <div class="mosaic reveal">
+        <figure class="mosaic__tile">
+          <picture>
+            <source srcset="assets/img/optica-larga-distancia.webp" type="image/webp">
+            <img src="assets/img/optica-larga-distancia.jpg" alt="Objetivo fotográfico de largo alcance" loading="lazy" decoding="async" width="700" height="525">
+          </picture>
+          <figcaption class="mosaic__label">
+            <span class="mosaic__name">Óptica de largo alcance</span>
+            <span class="mosaic__note">Permite documentar desde vía pública, sin acercarse ni invadir espacios reservados.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="mosaic__tile">
+          <picture>
+            <source srcset="assets/img/rastro-anden.webp" type="image/webp">
+            <img src="assets/img/rastro-anden.jpg" alt="Andén de estación al amanecer" loading="lazy" decoding="async" width="700" height="525">
+          </picture>
+          <figcaption class="mosaic__label">
+            <span class="mosaic__name">Desplazamientos</span>
+            <span class="mosaic__note">Equipos que se relevan para no ser reconocidos en trayectos largos.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="mosaic__tile">
+          <picture>
+            <source srcset="assets/img/arquitectura-vigilancia.webp" type="image/webp">
+            <img src="assets/img/arquitectura-vigilancia.jpg" alt="Fachada de un edificio vista desde abajo" loading="lazy" decoding="async" width="700" height="525">
+          </picture>
+          <figcaption class="mosaic__label">
+            <span class="mosaic__name">Puntos fijos</span>
+            <span class="mosaic__note">Observación estática en accesos y salidas, con registro horario continuo.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="mosaic__tile">
+          <picture>
+            <source srcset="assets/img/cobertura-aerea.webp" type="image/webp">
+            <img src="assets/img/cobertura-aerea.jpg" alt="Vista aérea de una ciudad" loading="lazy" decoding="async" width="700" height="525">
+          </picture>
+          <figcaption class="mosaic__label">
+            <span class="mosaic__name">Cobertura nacional</span>
+            <span class="mosaic__note">Investigadores en las principales ciudades y desplazamiento a cualquier provincia.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================================== -->
   <!-- Áreas de investigación                                                -->
   <!-- ==================================================================== -->
   <section class="section section--navy">
@@ -588,7 +655,10 @@
 
           <figure style="margin-top: var(--sp-7);">
             <div class="media media--wide">
-              <img src="assets/img/lugares-de-encuentro.jpg" alt="Interior de un local concurrido visto desde la barra" loading="lazy" width="1200" height="750">
+              <picture>
+                <source srcset="assets/img/lugares-de-encuentro.webp" type="image/webp">
+                <img src="assets/img/lugares-de-encuentro.jpg" alt="Interior de un local concurrido visto desde la barra" loading="lazy" decoding="async" width="900" height="506">
+              </picture>
             </div>
             <figcaption class="media__caption">Los encuentros ocurren en sitios públicos. Ahí es donde trabajamos.</figcaption>
           </figure>

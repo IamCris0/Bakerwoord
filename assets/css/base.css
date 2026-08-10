@@ -155,6 +155,17 @@ strong, b { font-weight: 600; }
   flex: none;
 }
 
+/* En pantallas muy estrechas el antetítulo parte en dos y deja la marca
+   descolgada: se aprieta el interletrado para que quepa en una línea. */
+@media (max-width: 420px) {
+  .eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    gap: 0.5rem;
+  }
+  .eyebrow::before { width: 16px; }
+}
+
 .section--ink .eyebrow,
 .section--navy .eyebrow,
 .on-dark .eyebrow { color: var(--text-invert-soft); }
@@ -253,7 +264,9 @@ strong, b { font-weight: 600; }
    Revelado al hacer scroll
    ========================================================================== */
 
-.reveal {
+/* El estado oculto sólo se aplica si hay JavaScript para revelarlo. Sin él,
+   la clase `js` no llega al documento y todo el contenido se ve de entrada. */
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition:

@@ -35,6 +35,7 @@ assets/
   js/
     main.js               Cabecera, menú, pestañas, contadores, formulario
     chat.js               Asistente de admisión (construye su propio marcado)
+  img/                    Fotografía en JPEG y WebP (el WebP es el que se sirve)
   video/
     investigacion.mp4     Video rescatado del slider del sitio anterior
   brand/
@@ -122,6 +123,33 @@ necesitan el `<link>` y el `<script>`.
 Aparecen en la cabecera, el pie, la página de contacto y el JSON-LD de cada página.
 Si cambian, hay que actualizarlos en las cinco páginas.
 
+## Imágenes y rendimiento
+
+Cada fotografía existe en dos formatos: **WebP**, que es el que reciben los
+navegadores actuales, y **JPEG** como respaldo. En las etiquetas se resuelve con
+`<picture>`; en los fondos CSS, declarando primero el JPEG y luego la misma regla
+con `image-set()`, que los navegadores antiguos descartan sin perder el fallback.
+
+Los tamaños se fijan según el uso real: 1700 px los fondos a pantalla completa,
+900 px las imágenes dentro de una columna y 700 px las piezas del mosaico.
+El conjunto en WebP ocupa **980 KB**, y ninguna página carga más de unas pocas.
+
+> **Importante para regenerarlas.** Las rutas de imagen en CSS se declaran en
+> clases (`.img-niebla`, `.img-noche`…) y **nunca** dentro de una custom
+> property: las `url()` de una variable se resuelven contra la hoja que las
+> consume, no contra el documento, y terminan apuntando a `assets/css/assets/img/`.
+
+### El video de portada
+
+Pesa 8 MB, así que no se descarga siempre. El elemento lleva `preload="none"` y
+la fuente en `data-src`; `initHeroVideo()` sólo la asigna cuando tiene sentido.
+Se queda en el póster (41 KB en WebP, un fotograma del propio video) si:
+
+- la pantalla mide 760 px o menos,
+- el navegador pide ahorro de datos (`navigator.connection.saveData`),
+- la conexión es 2G,
+- o el sistema pide movimiento reducido.
+
 ## Accesibilidad y rendimiento
 
 - Enlace de salto al contenido y foco visible en todos los elementos interactivos.
@@ -129,6 +157,15 @@ Si cambian, hay que actualizarlos en las cinco páginas.
 - Acordeones sobre `<details>` nativo.
 - `prefers-reduced-motion` desactiva animaciones, contadores y autoplay del video.
 - Sin librerías externas: la única petición a terceros es la de Google Fonts.
+- El contenido no depende del JavaScript: el estado oculto de `.reveal` sólo se
+  aplica bajo la clase `js`, que añade un script en línea del `<head>`. Sin JS,
+  todo se ve de entrada.
+
+> **Cuidado con `backdrop-filter` en la cabecera.** Crea bloque contenedor para
+> los descendientes `position: fixed`, y el panel de navegación móvil vive dentro
+> de la cabecera. Aplicado sobre `.site-header`, el menú quedaba recortado a la
+> altura del header en cuanto se hacía scroll. Por eso el fondo desenfocado está
+> en `.site-header::before` y no en el elemento.
 
 ## Vista previa local
 

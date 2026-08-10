@@ -16,18 +16,29 @@
   align-items: center;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition:
-    background-color var(--dur) var(--ease-out),
-    border-color var(--dur) var(--ease-out),
-    backdrop-filter var(--dur) var(--ease-out);
+  transition: border-color var(--dur) var(--ease-out);
 }
 
-.site-header.is-scrolled {
+/* El fondo desenfocado va en una capa aparte y NUNCA en la cabecera.
+   `backdrop-filter` crea bloque contenedor para los descendientes
+   `position: fixed`, y el panel de navegación móvil vive dentro de la
+   cabecera: aplicado aquí, el menú quedaba recortado a la altura del
+   header en cuanto se hacía scroll. Un pseudoelemento no contiene nada. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(10, 20, 36, 0.92);
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border-bottom-color: var(--rule-dark-soft);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease-out);
 }
+
+.site-header.is-scrolled::before { opacity: 1; }
+.site-header.is-scrolled { border-bottom-color: var(--rule-dark-soft); }
 
 .site-header__inner {
   width: min(100% - (var(--gutter) * 2), var(--container));
@@ -681,4 +692,12 @@
 
 @media (max-width: 480px) {
   .float-btn { height: 48px; padding-inline: 0.95rem; }
+}
+
+/* En pantallas estrechas los flotantes se comen el ancho útil */
+@media (max-width: 380px) {
+  .float-stack { gap: 0.5rem; }
+  .float-btn { height: 44px; padding-inline: 0.7rem; }
+  .float-btn svg { width: 19px; height: 19px; }
+  .to-top { width: 38px; height: 38px; }
 }

@@ -246,6 +246,15 @@
   background: var(--paper-2);
 }
 
+/* `picture` es inline por defecto y no propaga la altura a la imagen, que
+   entonces se queda a su tamaño natural dentro de una celda más alta. */
+.media picture,
+.mosaic__tile picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .media img {
   display: block;
   width: 100%;
@@ -268,9 +277,149 @@
   background: var(--amber);
 }
 
+/* Cortina que se retira al entrar en pantalla. Es el mismo gesto que la
+   palabra tachada de la portada: algo cubierto que se destapa. */
+.media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 820ms var(--ease-in-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js .reveal:not(.is-visible) .media::before { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .media::before { display: none; }
+}
+
 .media--tall { aspect-ratio: 4 / 5; }
 .media--wide { aspect-ratio: 16 / 10; }
 .media--square { aspect-ratio: 1 / 1; }
+
+/* --------------------------------------------------------------------------
+   Mosaico del operativo
+
+   Cuatro piezas de distinto peso: evita la rejilla regular, que se lee como
+   galería de plantilla, y deja que la imagen principal mande.
+   -------------------------------------------------------------------------- */
+
+.mosaic {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(0, 1fr);
+  gap: var(--sp-3);
+  aspect-ratio: 16 / 9;
+}
+
+.mosaic__tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  isolation: isolate;
+}
+
+.mosaic__tile:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.mosaic__tile:nth-child(4) { grid-column: span 2; }
+
+.mosaic__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.35) contrast(1.08) saturate(0.85);
+  transition:
+    transform 900ms var(--ease-out),
+    filter var(--dur-slow) var(--ease-out);
+}
+
+.mosaic__tile:hover img,
+.mosaic__tile:focus-within img {
+  transform: scale(1.05);
+  filter: grayscale(0) contrast(1.06) saturate(1);
+}
+
+/* Velo inferior para que la etiqueta se lea sobre cualquier fotograma */
+.mosaic__tile::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 62%;
+  background: linear-gradient(180deg, transparent, rgba(10, 20, 36, 0.88));
+  pointer-events: none;
+}
+
+.mosaic__label {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  padding: var(--sp-4);
+  color: var(--white);
+}
+
+.mosaic__name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: block;
+}
+
+.mosaic__name::before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--amber);
+  margin-bottom: 0.6rem;
+  transition: width var(--dur) var(--ease-out);
+}
+
+.mosaic__tile:hover .mosaic__name::before { width: 48px; }
+
+.mosaic__note {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: var(--fs-sm);
+  color: rgba(238, 242, 248, 0.82);
+  max-width: 34ch;
+  /* Se despliega al pasar el cursor: la etiqueta basta para escanear */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height var(--dur) var(--ease-out),
+    opacity var(--dur) var(--ease-out);
+}
+
+.mosaic__tile:hover .mosaic__note,
+.mosaic__tile:focus-within .mosaic__note {
+  max-height: 6rem;
+  opacity: 1;
+}
+
+@media (max-width: 860px) {
+  .mosaic { aspect-ratio: 4 / 3; }
+  .mosaic__note { max-height: 6rem; opacity: 1; }
+}
+
+@media (max-width: 560px) {
+  .mosaic {
+    grid-template-columns: 1fr 1fr;
+    aspect-ratio: auto;
+    grid-auto-rows: 46vw;
+  }
+  .mosaic__tile:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+  .mosaic__tile:nth-child(4) { grid-column: span 2; }
+  .mosaic__label { padding: var(--sp-3); }
+  .mosaic__note { display: none; }
+}
 
 .media__caption {
   margin-top: var(--sp-3);
@@ -344,6 +493,9 @@
    aplican tanto a `.page-head--image` como a `.section--image`.
    -------------------------------------------------------------------------- */
 
+/* Primero el JPEG, que entienden todos. Después la misma regla con
+   `image-set`, que sirve WebP a quien pueda con él: los navegadores que no
+   reconocen la función descartan sólo esa declaración y conservan el JPEG. */
 .img-vigilancia   { background-image: url("../img/vigilancia-nocturna.jpg"); }
 .img-corporativo  { background-image: url("../img/entorno-corporativo.jpg"); }
 .img-seguimiento  { background-image: url("../img/seguimiento-calle.jpg"); }
@@ -352,6 +504,39 @@
 .img-noche        { background-image: url("../img/ciudad-de-noche.jpg"); }
 .img-niebla       { background-image: url("../img/niebla-duda.jpg"); }
 .img-judicial     { background-image: url("../img/via-judicial.jpg"); }
+
+.img-vigilancia {
+  background-image: image-set(url("../img/vigilancia-nocturna.webp") type("image/webp"),
+                              url("../img/vigilancia-nocturna.jpg") type("image/jpeg"));
+}
+.img-corporativo {
+  background-image: image-set(url("../img/entorno-corporativo.webp") type("image/webp"),
+                              url("../img/entorno-corporativo.jpg") type("image/jpeg"));
+}
+.img-seguimiento {
+  background-image: image-set(url("../img/seguimiento-calle.webp") type("image/webp"),
+                              url("../img/seguimiento-calle.jpg") type("image/jpeg"));
+}
+.img-urbano {
+  background-image: image-set(url("../img/movimiento-urbano.webp") type("image/webp"),
+                              url("../img/movimiento-urbano.jpg") type("image/jpeg"));
+}
+.img-encuentros {
+  background-image: image-set(url("../img/lugares-de-encuentro.webp") type("image/webp"),
+                              url("../img/lugares-de-encuentro.jpg") type("image/jpeg"));
+}
+.img-noche {
+  background-image: image-set(url("../img/ciudad-de-noche.webp") type("image/webp"),
+                              url("../img/ciudad-de-noche.jpg") type("image/jpeg"));
+}
+.img-niebla {
+  background-image: image-set(url("../img/niebla-duda.webp") type("image/webp"),
+                              url("../img/niebla-duda.jpg") type("image/jpeg"));
+}
+.img-judicial {
+  background-image: image-set(url("../img/via-judicial.webp") type("image/webp"),
+                              url("../img/via-judicial.jpg") type("image/jpeg"));
+}
 
 /* --------------------------------------------------------------------------
    Acordeón — <details> nativo, accesible por defecto

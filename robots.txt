@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-# La plantilla anterior se conserva sólo como referencia interna.
-Disallow: /pagina-antigua/
-
-Sitemap: https://agencia-detective.com/sitemap.xml

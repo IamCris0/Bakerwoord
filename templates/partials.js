@@ -227,7 +227,11 @@ function footer(b = '') {
   return `<footer class="foot">
     <div class="wrap foot__grid">
       <div class="foot__brand">
-        <img src="${b}${site.logoClaro}" alt="${site.nombre}" width="184" height="54" loading="lazy">
+        <!-- Sin loading="lazy": la regla img[loading='lazy'] pinta un degradado
+             claro de placeholder mientras carga, pensado para fotos opacas.
+             En un PNG transparente ese fondo se ve permanentemente a través
+             del logo, como una caja clara detrás del texto. -->
+        <img src="${b}${site.logoClaro}" alt="${site.nombre}" width="184" height="54">
         <p>${esc(site.descripcion)}</p>
         <div class="foot__social">
           ${site.redes

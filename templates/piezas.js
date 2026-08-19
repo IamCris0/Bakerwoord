@@ -96,6 +96,20 @@ function mosaicoCategorias(b = '') {
       </div>`;
 }
 
+/* Mosaico de trabajos entregados, con visor a pantalla completa */
+function mosaicoTrabajos(fotos, b = '') {
+  return `<div class="mosaic" data-lightbox-group>
+        ${fotos
+          .map(
+            (src, i) =>
+              `<a href="${b}${src}" data-lb aria-label="Ampliar trabajo ${i + 1}"><img src="${b}${src}" alt="Trabajo entregado por el taller ${
+                i + 1
+              }" loading="lazy" decoding="async" width="400" height="300"></a>`
+          )
+          .join('\n        ')}
+      </div>`;
+}
+
 function garantias() {
   return `<section class="guarantees">
       <div class="wrap">
@@ -213,7 +227,7 @@ function cierre(b = '', { titulo, texto } = {}) {
           <div class="closer__row"><i class="fa-regular fa-clock"></i><span><strong>${esc(
             site.contacto.horario
           )}</strong>Domingos cerrado</span></div>
-          <div class="closer__row"><i class="fa-solid fa-truck-fast"></i><span><strong>Envíos a todo Ecuador</strong>Servientrega con guía de rastreo</span></div>
+          <div class="closer__row"><i class="fa-solid fa-truck-fast"></i><span><strong>Envíos a todo Ecuador</strong>Y también al exterior, con número de guía</span></div>
         </div>
       </div>
     </section>`;
@@ -267,6 +281,7 @@ module.exports = {
   cabecera,
   filaOcasiones,
   mosaicoCategorias,
+  mosaicoTrabajos,
   garantias,
   proceso,
   preguntas,

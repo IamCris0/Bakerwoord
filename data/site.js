@@ -14,7 +14,12 @@ const site = {
   dominio: 'https://www.creatividad-laser.com',
   descripcion:
     'Taller de corte y grabado láser en Lago Agrio. Lámparas LED en acrílico grabado, cúpulas con flores preservadas, placas de reconocimiento y recuerdos personalizados con envíos a todo Ecuador.',
-  fundacion: 2016,
+
+  /* Año de apertura del taller.
+     Dejalo en `null` mientras no esté confirmado: con null, el sitio no dice
+     ninguna fecha ni cuenta años de trayectoria. Poné el año real (ej. 2016)
+     y las frases correspondientes aparecen solas. */
+  fundacion: null,
   logo: IMG + '/logo.png',
   logoClaro: IMG + '/footer-logo.png',
   favicon: IMG + '/favicon.png',
@@ -36,20 +41,32 @@ const site = {
     mapa: 'https://maps.google.com/?q=Creatividad+Laser+Lago+Agrio+Ecuador',
   },
 
+  /* Sólo Facebook está confirmado (es el enlace que usaba el sitio anterior).
+     Para sumar Instagram o TikTok, descomentá la línea y poné el usuario real:
+     un ícono que lleva a un perfil inexistente hace perder al visitante. */
   redes: [
     { nombre: 'Facebook', icono: 'facebook-f', url: 'https://www.facebook.com/creatividadlaser.ec' },
-    { nombre: 'Instagram', icono: 'instagram', url: 'https://www.instagram.com/creatividadlaser.ec' },
-    { nombre: 'TikTok', icono: 'tiktok', url: 'https://www.tiktok.com/@creatividadlaser' },
+    // { nombre: 'Instagram', icono: 'instagram', url: 'https://www.instagram.com/TU_USUARIO' },
+    // { nombre: 'TikTok', icono: 'tiktok', url: 'https://www.tiktok.com/@TU_USUARIO' },
+    { nombre: 'WhatsApp', icono: 'whatsapp', url: 'https://wa.me/593989926138' },
   ],
 
   /* Barra superior rotativa */
   avisos: [
-    'Envíos a todo el Ecuador · Servientrega con número de guía',
+    'Envíos a todo el Ecuador y también al exterior',
     'Boceto digital sin costo antes de fabricar',
-    'Producción propia en Lago Agrio desde 2016',
+    'Producción propia en el taller de Lago Agrio',
   ],
 
-  /* Franja de garantías bajo el hero */
+  /* -------------------------------------------------------------------------
+     PROMESAS AL CLIENTE — revisalas antes de publicar.
+
+     Estas cuatro frases aparecen en toda la web y son compromisos concretos:
+     plazos, garantía y forma de trabajo. Están redactadas según lo que hace un
+     taller de este tipo, pero nadie las confirmó todavía. Leelas y ajustá lo
+     que no coincida con cómo trabajás realmente. Prometer algo que después no
+     se cumple cuesta más caro que no prometerlo.
+     ---------------------------------------------------------------------- */
   garantias: [
     {
       icono: 'pen-ruler',
@@ -131,6 +148,17 @@ const site = {
     },
   ],
 
+  /* Mosaicos de trabajos entregados. Son fotos del archivo del taller, elegidas
+     por tener fondo cálido para que el mosaico no tenga huecos blancos dentro
+     de la franja oscura. Para cambiarlas, mirá pagina-antigua/galeria/img/ */
+  galeriaPortada: [25, 2, 6, 9, 26, 42, 31, 50, 53, 37].map(
+    (n) => `pagina-antigua/galeria/img/${String(n).padStart(3, '0')}.jpg`
+  ),
+
+  galeriaTaller: [24, 5, 20, 27, 41, 49, 51, 55, 29, 43].map(
+    (n) => `pagina-antigua/galeria/img/${String(n).padStart(3, '0')}.jpg`
+  ),
+
   /* -------------------------------------------------------------------------
      TESTIMONIOS — la lista está vacía a propósito.
 
@@ -166,7 +194,7 @@ const site = {
     },
     {
       p: '¿Hacen envíos fuera de Lago Agrio?',
-      r: 'Sí, despachamos a todo el Ecuador por Servientrega con guía de rastreo. Las piezas de vidrio y acrílico viajan con doble empaque anti-golpes.',
+      r: 'Sí. Damos servicio a nivel nacional y también al exterior. Coordinamos la transportadora al momento de cerrar el pedido y te pasamos el número de guía. Las piezas de vidrio y acrílico viajan con doble empaque anti-golpes.',
     },
     {
       p: '¿Cómo puedo pagar?',

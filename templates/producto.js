@@ -181,7 +181,7 @@ function producto(p) {
           <p><strong>Retiro en taller:</strong> ${esc(site.contacto.direccion)}, ${esc(
     site.contacto.referencia
   )}. ${esc(site.contacto.horario)}.</p>
-          <p><strong>Envíos:</strong> despachamos a todo el Ecuador por Servientrega con número de guía. Las piezas de vidrio y acrílico viajan con doble empaque anti-golpes.</p>
+          <p><strong>Envíos:</strong> damos servicio a nivel nacional y también al exterior. Te pasamos el número de guía el día del despacho. Las piezas de vidrio y acrílico viajan con doble empaque anti-golpes.</p>
           <p><strong>Pagos:</strong> transferencia o depósito a Banco Pichincha, Banco Guayaquil y Banco Internacional, o efectivo en el taller. Para pedidos personalizados pedimos el 50% de anticipo.</p>
         </div>
       </div>

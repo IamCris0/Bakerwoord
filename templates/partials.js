@@ -311,7 +311,8 @@ function overlays(b = '') {
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
     <button class="lightbox__x" data-lb-close aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
     <button class="lightbox__nav lightbox__nav--prev" data-lb-prev aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
-    <img id="lightboxImg" src="" alt="">
+    <!-- sin src: uno vacío hace que el navegador vuelva a pedir la página entera -->
+    <img id="lightboxImg" alt="">
     <button class="lightbox__nav lightbox__nav--next" data-lb-next aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
     <span class="lightbox__count" id="lightboxCount"></span>
   </div>

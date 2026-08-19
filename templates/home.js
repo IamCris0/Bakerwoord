@@ -133,10 +133,6 @@ function home() {
   const destacados = productos.filter((p) => p.destacado).slice(0, 8);
   const novedades = productos.filter((p) => !p.destacado).slice(0, 8);
 
-  /* Fotos verificadas del archivo del taller, todas sobre fondo cálido para
-     que el mosaico no tenga huecos blancos dentro de la franja de tinta. */
-  const galeria = [25, 2, 6, 9, 26, 42, 31, 50, 53, 37]
-    .map((n) => `pagina-antigua/galeria/img/${String(n).padStart(3, '0')}.jpg`);
 
   return `${hero()}
 
@@ -291,16 +287,7 @@ function home() {
         titulo: 'Piezas que ya están en una sala, una oficina o una vitrina',
         texto: 'Fotos de pedidos reales del taller. Tocá cualquiera para verla en grande.',
       })}
-      <div class="mosaic" data-lightbox-group>
-        ${galeria
-          .map(
-            (src, i) =>
-              `<a href="${src}" data-lb aria-label="Ampliar trabajo ${i + 1}"><img src="${src}" alt="Trabajo entregado ${
-                i + 1
-              }" loading="lazy" decoding="async" width="400" height="300"></a>`
-          )
-          .join('\n        ')}
-      </div>
+      ${P.mosaicoTrabajos(site.galeriaPortada)}
     </div>
   </section>
 

@@ -28,11 +28,13 @@ function pagehead({ eyebrow, titulo, texto, imagen, crumbs, base = '' }) {
 
 /* --------------------------------------------------------------- taller --- */
 function nosotros() {
-  const anios = new Date().getFullYear() - site.fundacion;
+  /* Sólo se menciona el año si está confirmado en data/site.js */
+  const desde = site.fundacion ? ` desde ${site.fundacion}` : '';
+  const anios = site.fundacion ? new Date().getFullYear() - site.fundacion : null;
 
   return `${pagehead({
     eyebrow: 'El taller',
-    titulo: 'Cortamos y grabamos en Nueva Loja desde ' + site.fundacion,
+    titulo: `Cortamos y grabamos en Nueva Loja${desde}`,
     texto:
       'Somos un taller de producción propia. La máquina, el diseño y el armado están en el mismo lugar, y eso es lo que nos deja responder rápido y corregir a mitad de camino.',
     imagen: IMG + '/productos/acrilico/5.png',
@@ -42,24 +44,28 @@ function nosotros() {
   <section class="section">
     <div class="wrap split">
       <div data-reveal>
-        <p class="eyebrow">Cómo empezó</p>
-        <h2 class="t-lg">Una máquina, un cuarto prestado y muchos bocetos a mano</h2>
-        <p class="lede" style="margin-top:1rem">
-          Creatividad Láser arrancó en ${site.fundacion} con un solo equipo de corte y pedidos que
-          llegaban por mensaje de Facebook. La primera lámpara con foto grabada salió para un
-          aniversario, y a partir de ahí el trabajo se fue armando de boca en boca: un grado,
-          una boda, una placa para el municipio.
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h2 class="t-lg">Todo pasa por la misma mesa</h2>
+        <p class="lede">
+          El diseño, el corte, el armado y el empaque ocurren en un solo lugar, en la
+          Calle 12 de Febrero. No tercerizamos el grabado ni importamos piezas
+          armadas: por eso podemos parar una producción a mitad de camino si el
+          cliente quiere cambiar una foto o corregir un nombre.
         </p>
         <p class="lede" style="margin-top:1rem">
-          Hoy atendemos pedidos de una sola pieza y también producciones de varios cientos para
-          instituciones. Lo que no cambió es el orden de las cosas: primero el boceto, después
-          el corte.
+          Atendemos lo mismo un pedido de una sola pieza —una lámpara con la foto de la
+          familia— que una producción de varios cientos de recuerdos para un colegio o un
+          municipio, con factura.
         </p>
         <div class="figures">
-          <div class="figure"><p class="figure__n">${anios}<em>+</em></p><p>años cortando en Sucumbíos</p></div>
+          ${
+            anios
+              ? `<div class="figure"><p class="figure__n">${anios}<em>+</em></p><p>años cortando en Sucumbíos</p></div>`
+              : `<div class="figure"><p class="figure__n">100<em>%</em></p><p>producción propia en Lago Agrio</p></div>`
+          }
           <div class="figure"><p class="figure__n">${productos.length}</p><p>productos en catálogo</p></div>
-          <div class="figure"><p class="figure__n">6</p><p>materiales que procesamos</p></div>
-          <div class="figure"><p class="figure__n">24</p><p>provincias a las que enviamos</p></div>
+          <div class="figure"><p class="figure__n">${site.materiales.length}</p><p>materiales que procesamos</p></div>
+          <div class="figure"><p class="figure__n">${categorias.length}</p><p>líneas de trabajo</p></div>
         </div>
       </div>
       <div class="split__media lit" data-reveal style="--d:.08s">
@@ -117,17 +123,7 @@ function nosotros() {
         eyebrow: 'Trabajos entregados',
         titulo: 'Piezas que salieron de acá',
       })}
-      <div class="mosaic" data-lightbox-group>
-        ${[24, 5, 20, 27, 41, 49, 51, 55, 29, 43]
-          .map((n) => `pagina-antigua/galeria/img/${String(n).padStart(3, '0')}.jpg`)
-          .map(
-            (src, i) =>
-              `<a href="${src}" data-lb aria-label="Ampliar trabajo ${i + 1}"><img src="${src}" alt="Trabajo entregado ${
-                i + 1
-              }" loading="lazy" decoding="async" width="400" height="300"></a>`
-          )
-          .join('\n        ')}
-      </div>
+      ${P.mosaicoTrabajos(site.galeriaTaller)}
     </div>
   </section>
 
@@ -205,7 +201,7 @@ function contacto() {
           </div>
           <div class="closer__row" style="color:var(--txt-2);border-color:var(--line)">
             <i class="fa-solid fa-truck-fast"></i>
-            <span><strong style="color:var(--txt)">Envíos a todo Ecuador</strong>Servientrega con guía de rastreo</span>
+            <span><strong style="color:var(--txt)">Envíos a todo Ecuador</strong>Y también al exterior, con número de guía</span>
           </div>
           <div class="closer__row" style="color:var(--txt-2);border-color:var(--line)">
             <i class="fa-solid fa-building-columns"></i>

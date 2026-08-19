@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node build.js",
     "dev": "node build.js && node servidor.js",
-    "serve": "node servidor.js"
+    "serve": "node servidor.js",
+    "imagenes": "node optimizar-imagenes.js"
   },
   "engines": {
     "node": ">=18"

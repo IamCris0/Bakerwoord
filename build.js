@@ -50,7 +50,45 @@ const AVISO = `<!--
 -->
 `;
 
-const html = (s) => AVISO + s;
+/* --------------------------------------------------- imágenes optimizadas ---
+   `npm run imagenes` deja copias livianas en assets/img/. Si existen, todas
+   las referencias apuntan ahí; si no, se sirven los originales sin romper nada.
+   Sólo se sustituyen fotografías: los logos siguen siendo PNG con transparencia.
+*/
+const cacheOptimizadas = new Map();
+
+function rutaOptimizada(original) {
+  if (cacheOptimizadas.has(original)) return cacheOptimizadas.get(original);
+
+  let final = original;
+  if (/^pagina-antigua\/(assets\/images\/(productos|eventos)|galeria\/img)\//.test(original)) {
+    /* Este mapeo tiene que coincidir con destinoDe() de optimizar-imagenes.js */
+    const candidata =
+      'assets/img/' +
+      original
+        .replace(/^pagina-antigua\/assets\/images\//, '')
+        .replace(/^pagina-antigua\/galeria\/img\//, 'galeria/')
+        .replace(/\.(png|jpe?g)$/i, '.jpg');
+    if (fs.existsSync(path.join(RAIZ, candidata))) final = candidata;
+  }
+
+  cacheOptimizadas.set(original, final);
+  return final;
+}
+
+function usarOptimizadas(texto) {
+  return texto.replace(
+    /(?:\.\.\/)*pagina-antigua\/[A-Za-z0-9/_.-]+\.(?:png|jpe?g)/g,
+    (coincidencia) => {
+      const subida = (coincidencia.match(/^(\.\.\/)*/) || [''])[0];
+      const limpia = coincidencia.slice(subida.length);
+      const optimizada = rutaOptimizada(limpia);
+      return optimizada === limpia ? coincidencia : subida + optimizada;
+    }
+  );
+}
+
+const html = (s) => AVISO + usarOptimizadas(s);
 
 /* ------------------------------------------------------------------ CSS --- */
 function construirCss() {
@@ -107,13 +145,15 @@ function construirDatos() {
 
   escribir(
     'assets/js/catalogo-data.js',
-    '/* Generado por build.js — no editar */\n' +
-      'window.CATALOGO = ' +
-      JSON.stringify(compacto) +
-      ';\n' +
-      'window.CATALOGO_META = ' +
-      JSON.stringify(meta) +
-      ';\n'
+    usarOptimizadas(
+      '/* Generado por build.js — no editar */\n' +
+        'window.CATALOGO = ' +
+        JSON.stringify(compacto) +
+        ';\n' +
+        'window.CATALOGO_META = ' +
+        JSON.stringify(meta) +
+        ';\n'
+    )
   );
   return compacto.length;
 }
@@ -298,7 +338,9 @@ function construirPaginas() {
     html(
       layout({
         titulo: `El taller · ${site.nombre}`,
-        descripcion: `Taller de corte y grabado láser en ${site.contacto.ciudad} desde ${site.fundacion}. Producción propia de lámparas, cúpulas florales, placas y recuerdos personalizados.`,
+        descripcion: `Taller de corte y grabado láser en ${site.contacto.ciudad}${
+          site.fundacion ? ` desde ${site.fundacion}` : ''
+        }. Producción propia de lámparas LED, cúpulas florales, placas y recuerdos personalizados.`,
         contenido: nosotros(),
         activo: 'nosotros',
         canonica: 'nosotros.html',

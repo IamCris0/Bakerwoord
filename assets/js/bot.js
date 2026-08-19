@@ -328,7 +328,7 @@
       },
       function () {
         decir(
-          '**Envíos:** a todo el Ecuador por Servientrega con número de guía. El vidrio y el acrílico van con doble empaque.\n\n**Retiro:** en el taller de Nueva Loja, de lunes a sábado de 09:00 a 20:00.'
+          '**Envíos:** servicio a nivel nacional y también al exterior, con número de guía. El vidrio y el acrílico van con doble empaque.\n\n**Retiro:** en el taller de Nueva Loja, de lunes a sábado de 09:00 a 20:00.'
         );
         opciones([{ texto: 'Consultar por mi ciudad', hacer: hablar().hacer }, volver()]);
       },

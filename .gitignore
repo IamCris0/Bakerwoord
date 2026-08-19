@@ -17,3 +17,9 @@ node_modules/
 # Plantilla del sitio anterior: 205 MB de plugins e imágenes de stock que no
 # se reutilizan. Se conserva sólo en local como referencia.
 .playwright-mcp/
+
+# Copias optimizadas de las fotos: se regeneran con `npm run imagenes`.
+# Se versionan igual porque el sitio se sube por FTP tal cual está la carpeta;
+# si preferís no versionarlas, descomentá la línea de abajo y acordate de
+# ejecutar el script antes de cada publicación.
+# assets/img/

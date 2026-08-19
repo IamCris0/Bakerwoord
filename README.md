@@ -11,9 +11,16 @@ cualquier hosting. No necesita base de datos, PHP ni servidor especial.
 ```bash
 npm run build     # regenera todo el HTML
 npm run dev       # regenera y levanta http://localhost:4321 para revisar
+npm run imagenes  # optimiza las fotos (sólo al agregar fotos nuevas)
 ```
 
 No hay dependencias que instalar. Sólo hace falta Node 18 o superior.
+
+**Sobre las imágenes.** Muchas fotos del archivo estaban guardadas como PNG y
+pesaban hasta 400 KB cada una; la portada llegaba a 2,6 MB. `npm run imagenes`
+genera copias en JPEG dentro de `assets/img/` y el sitio las usa
+automáticamente: la portada bajó a 1,3 MB. Corré ese comando sólo cuando sumes
+o cambies fotos; el resto del tiempo alcanza con `npm run build`.
 
 > **Importante:** los archivos `.html` de la raíz, de `producto/` y de
 > `ocasiones/` **se generan automáticamente**. Si los editás a mano, el próximo
@@ -58,24 +65,48 @@ existe.
 
 ---
 
-## Qué falta antes de publicar
+## ⚠️ Revisar antes de publicar
 
-Tres cosas que dependen del taller, no del código:
+Del sitio anterior se pudo confirmar la dirección, los teléfonos, el correo, el
+horario, los bancos, el Facebook y las fotos de los productos. **Todo lo demás
+son textos comerciales que hay que verificar**, porque son compromisos con el
+cliente. Repasá esta lista:
 
-1. **Opiniones de clientes.** `data/site.js` → `testimonios` está vacío a
-   propósito y la sección no aparece. No pusimos reseñas de relleno porque
-   inventarlas engaña al comprador. Copiá ahí comentarios reales (Facebook,
-   Google, capturas de WhatsApp con permiso) y la sección se activa sola.
+1. **Plazos de producción.** Cada ficha dice «3 a 5 días hábiles» (o 1 a 2, o 5
+   a 7). Están en `data/productos.js`, campo `tiempo`. Ajustalos a lo que
+   realmente tardás.
 
-2. **Fotos en mejor resolución.** El archivo actual tiene fotos de 320 a 450
-   píxeles de ancho. El sitio está armado para que se vean bien a ese tamaño
-   (nunca se estiran), pero si algún día se fotografían las piezas de nuevo, con
-   1600 px de lado el sitio gana bastante. Varias fotos del archivo tienen una
-   marca «1/9» de catálogo en la esquina; conviene reemplazarlas.
+2. **Pedidos mínimos.** Algunas fichas piden «desde 20 piezas». Campo `minimo`.
 
-3. **Enlaces de redes.** Verificá los perfiles en `data/site.js` → `redes`.
-   Instagram y TikTok están puestos con el usuario esperado; si el usuario real
-   es otro, corregilo.
+3. **Medidas.** Las medidas de cada producto (`medidas`) son estimadas a partir
+   de las fotos. Corregí las que no coincidan.
+
+4. **Las 4 promesas de la franja principal.** `data/site.js` → `garantias`:
+   boceto previo, plazo, envíos y garantía de rehacer piezas falladas. Aparecen
+   en todas las páginas.
+
+5. **Preguntas frecuentes.** `data/site.js` → `faq`. En especial el 50% de
+   anticipo y la respuesta sobre envíos.
+
+6. **Los 4 pasos del proceso.** `data/site.js` → `proceso`.
+
+7. **Año de apertura.** `data/site.js` → `fundacion` está en `null`, así que el
+   sitio no dice ninguna fecha ni cuenta años de trayectoria. Poné el año real y
+   las frases aparecen solas.
+
+8. **Opiniones de clientes.** `data/site.js` → `testimonios` está vacío y la
+   sección no se muestra. No pusimos reseñas de relleno: inventarlas engaña al
+   comprador. Pegá ahí comentarios reales y la sección se activa sola.
+
+9. **Redes sociales.** Sólo Facebook y WhatsApp están puestos, porque son los
+   únicos confirmados. Instagram y TikTok quedaron comentados en `redes`;
+   descomentalos con el usuario real si existen.
+
+10. **Fotos en mejor resolución.** El archivo actual llega a 450 px de ancho. El
+    sitio está armado para que se vean nítidas a ese tamaño (ninguna se estira),
+    pero si algún día se vuelven a fotografiar las piezas a 1600 px, el sitio
+    gana mucho. Varias fotos traen una marca «1/9» de catálogo en la esquina;
+    conviene reemplazarlas.
 
 ---
 
@@ -84,9 +115,14 @@ Tres cosas que dependen del taller, no del código:
 Subí al hosting **todo el contenido de la carpeta**, incluyendo:
 
 - los `.html` de la raíz, `producto/` y `ocasiones/`
-- `assets/`
-- `pagina-antigua/assets/` y `pagina-antigua/galeria/` (ahí viven las fotos)
+- `assets/` completo (ahí están el CSS, el JS y las fotos optimizadas)
+- `pagina-antigua/assets/images/logo.png`, el favicon y los logos de bancos
 - `.htaccess`, `sitemap.xml`, `robots.txt`
+
+Si ya corriste `npm run imagenes`, el sitio sirve las fotos desde
+`assets/img/` y no necesita el resto de `pagina-antigua/` para funcionar.
+Conviene subirlo igual la primera vez, por si alguna referencia quedó apuntando
+al original.
 
 `.htaccess` fuerza HTTPS y redirige las 63 URLs del sitio anterior a su página
 nueva, para no perder el posicionamiento en Google ni romper los enlaces

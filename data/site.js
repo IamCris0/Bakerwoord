@@ -20,8 +20,15 @@ const site = {
      ninguna fecha ni cuenta años de trayectoria. Poné el año real (ej. 2016)
      y las frases correspondientes aparecen solas. */
   fundacion: null,
+
+  /* Dos versiones del isotipo: logo.png tiene "Creatividad" en trazo oscuro
+     (para fondos claros: cabecera, cajón móvil). logo-2.png lo tiene en
+     blanco (para fondos oscuros: el pie de página). No uses footer-logo.png
+     ni small-logo.png — son restos de una plantilla anterior: el primero
+     queda en gris medio y no se lee ni sobre blanco ni sobre oscuro, y el
+     segundo es el logo de otra empresa (quedó mezclado en el archivo viejo). */
   logo: IMG + '/logo.png',
-  logoClaro: IMG + '/footer-logo.png',
+  logoClaro: IMG + '/logo-2.png',
   favicon: IMG + '/favicon.png',
 
   contacto: {

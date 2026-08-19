@@ -48,7 +48,7 @@
 
 .pdp__thumb.on {
   border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(224, 154, 62, 0.18);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
 }
 
 /* La foto se muestra completa, sin recorte ni ampliación forzada: el archivo
@@ -258,7 +258,7 @@
 .field textarea:focus {
   outline: none;
   border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(224, 154, 62, 0.16);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.16);
 }
 
 .field--row {
@@ -434,7 +434,7 @@
   width: clamp(120px, 17vw, 210px);
   border-radius: var(--r-md);
   overflow: hidden;
-  border: 1px solid rgba(255, 227, 180, 0.24);
+  border: 1px solid rgba(169, 242, 230, 0.24);
   box-shadow: 0 24px 54px rgba(0, 0, 0, 0.5);
 }
 
@@ -455,8 +455,8 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(95deg, rgba(20, 18, 28, 0.96) 12%, rgba(20, 18, 28, 0.72) 58%, rgba(20, 18, 28, 0.45) 100%),
-    radial-gradient(60% 100% at 88% 30%, rgba(224, 154, 62, 0.24), transparent 60%);
+  background: linear-gradient(95deg, rgba(14, 31, 27, 0.96) 12%, rgba(14, 31, 27, 0.72) 58%, rgba(14, 31, 27, 0.45) 100%),
+    radial-gradient(60% 100% at 88% 30%, rgba(20, 184, 166, 0.24), transparent 60%);
 }
 
 .pagehead__body {
@@ -601,7 +601,7 @@
 .searchbox input:focus {
   outline: none;
   border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(224, 154, 62, 0.16);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.16);
 }
 
 .searchbox button {
@@ -694,7 +694,7 @@
   display: grid;
   place-items: center;
   border-radius: var(--r-full);
-  background: rgba(20, 18, 28, 0.12);
+  background: rgba(14, 31, 27, 0.12);
   font-size: 0.58rem;
   transition: background var(--t-fast);
 }

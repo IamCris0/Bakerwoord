@@ -19,37 +19,37 @@
 
 /* ---------------------------------------------------------------- 01 tokens */
 :root {
-  /* Tinta: negro con sesgo violeta, el color del acrílico apagado */
-  --ink: #14121c;
-  --ink-2: #1d1a28;
-  --ink-3: #2a2637;
-  --ink-4: #3a3549;
+  /* Tinta: verde-azulado casi negro, el color del acrílico apagado bajo luz teal */
+  --ink: #0e1f1b;
+  --ink-2: #16302a;
+  --ink-3: #204a40;
+  --ink-4: #2e6b5c;
 
-  /* Papel: blanco de galería y una banda gris-violeta para alternar */
+  /* Papel: blanco de galería y una banda gris-verdosa para alternar */
   --paper: #ffffff;
-  --tint: #f4f2f8;
-  --tint-2: #eae6f1;
+  --tint: #f1f7f6;
+  --tint-2: #e3f0ee;
 
-  --line: #e3dfeb;
-  --line-2: #d0cade;
+  --line: #dceae7;
+  --line-2: #c4dad6;
   --line-dark: rgba(255, 255, 255, 0.13);
 
-  --txt: #14121c;
-  --txt-2: #56506b;
-  --txt-3: #837c99;
-  --txt-inv: #f6f4fb;
-  --txt-inv-2: #b7b0c9;
+  --txt: #0e1f1b;
+  --txt-2: #4c6b64;
+  --txt-3: #7c9c94;
+  --txt-inv: #f2fbf9;
+  --txt-inv-2: #a9cec6;
 
-  /* Ámbar: la luz LED cálida. Se usa como relleno, nunca como texto sobre papel */
-  --amber: #e09a3e;
-  --amber-hot: #f0ae52;
-  --amber-deep: #9c6510;
-  --halo: #ffe3b4;
+  /* Teal: la luz LED de la marca. Se usa como relleno, nunca como texto sobre papel */
+  --amber: #14b8a6;
+  --amber-hot: #1ed1bc;
+  --amber-deep: #0b6b60;
+  --halo: #a9f2e6;
 
-  /* Vidrio: el canto frío del acrílico. Estructura, enlaces, iconos */
-  --glass: #86aec2;
-  --glass-deep: #1e5468;
-  --glass-soft: #e7f0f4;
+  /* Vidrio: el canto frío del acrílico, un cian más apagado que el teal de acción */
+  --glass: #5ec8d8;
+  --glass-deep: #0e6b7a;
+  --glass-soft: #e7f7f9;
 
   --wa: #25d366;
   --wa-deep: #128c7e;
@@ -64,10 +64,10 @@
   --r-lg: 22px;
   --r-full: 999px;
 
-  --sh-1: 0 1px 2px rgba(20, 18, 28, 0.05), 0 4px 14px rgba(20, 18, 28, 0.05);
-  --sh-2: 0 2px 6px rgba(20, 18, 28, 0.06), 0 14px 34px rgba(20, 18, 28, 0.09);
-  --sh-3: 0 30px 70px rgba(20, 18, 28, 0.18);
-  --sh-lit: 0 0 0 1px rgba(224, 154, 62, 0.35), 0 12px 40px rgba(224, 154, 62, 0.18);
+  --sh-1: 0 1px 2px rgba(14, 31, 27, 0.05), 0 4px 14px rgba(14, 31, 27, 0.05);
+  --sh-2: 0 2px 6px rgba(14, 31, 27, 0.06), 0 14px 34px rgba(14, 31, 27, 0.09);
+  --sh-3: 0 30px 70px rgba(14, 31, 27, 0.18);
+  --sh-lit: 0 0 0 1px rgba(20, 184, 166, 0.35), 0 12px 40px rgba(20, 184, 166, 0.18);
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --t-fast: 0.18s var(--ease);
@@ -379,12 +379,12 @@ h3 + .lede {
 .btn--amber {
   --btn-bg: var(--amber);
   --btn-fg: var(--ink);
-  box-shadow: 0 6px 22px rgba(224, 154, 62, 0.32);
+  box-shadow: 0 6px 22px rgba(20, 184, 166, 0.32);
 }
 
 .btn--amber:hover {
   --btn-bg: var(--amber-hot);
-  box-shadow: 0 10px 30px rgba(224, 154, 62, 0.42);
+  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.42);
 }
 
 .btn--wa {
@@ -494,8 +494,8 @@ h3 + .lede {
     135deg,
     var(--amber) 0%,
     var(--halo) 22%,
-    rgba(255, 227, 180, 0) 46%,
-    rgba(255, 227, 180, 0) 100%
+    rgba(169, 242, 230, 0) 46%,
+    rgba(169, 242, 230, 0) 100%
   );
   background-size: 320% 320%;
   background-position: 100% 100%;
@@ -514,7 +514,7 @@ h3 + .lede {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(120% 80% at 50% -10%, rgba(255, 227, 180, 0.5), transparent 62%);
+  background: radial-gradient(120% 80% at 50% -10%, rgba(169, 242, 230, 0.5), transparent 62%);
   opacity: 0;
   transition: opacity var(--t);
   pointer-events: none;
@@ -621,7 +621,7 @@ h3 + .lede {
 }
 
 .hdr.stuck {
-  box-shadow: 0 8px 30px rgba(20, 18, 28, 0.08);
+  box-shadow: 0 8px 30px rgba(14, 31, 27, 0.08);
   background: rgba(255, 255, 255, 0.95);
 }
 
@@ -854,7 +854,7 @@ h3 + .lede {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(20, 18, 28, 0.94) 8%, rgba(20, 18, 28, 0.1) 68%);
+  background: linear-gradient(to top, rgba(14, 31, 27, 0.94) 8%, rgba(14, 31, 27, 0.1) 68%);
 }
 
 .mega__feature-body {
@@ -994,7 +994,7 @@ h3 + .lede {
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(20, 18, 28, 0.55);
+  background: rgba(14, 31, 27, 0.55);
   backdrop-filter: blur(3px);
   z-index: 390;
   opacity: 0;
@@ -1129,8 +1129,8 @@ h3 + .lede {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(96deg, rgba(20, 18, 28, 0.93) 4%, rgba(20, 18, 28, 0.7) 40%, rgba(20, 18, 28, 0.34) 78%, rgba(20, 18, 28, 0.6) 100%),
-    radial-gradient(75% 90% at 74% 44%, rgba(224, 154, 62, 0.16), transparent 62%);
+  background: linear-gradient(96deg, rgba(14, 31, 27, 0.93) 4%, rgba(14, 31, 27, 0.7) 40%, rgba(14, 31, 27, 0.34) 78%, rgba(14, 31, 27, 0.6) 100%),
+    radial-gradient(75% 90% at 74% 44%, rgba(20, 184, 166, 0.16), transparent 62%);
 }
 
 /* Trama de puntos: el mismo tramado con el que el láser rellena una foto */
@@ -1169,9 +1169,9 @@ h3 + .lede {
   align-items: center;
   gap: 0.55rem;
   padding: 0.42rem 0.95rem 0.42rem 0.75rem;
-  border: 1px solid rgba(255, 227, 180, 0.4);
+  border: 1px solid rgba(169, 242, 230, 0.4);
   border-radius: var(--r-full);
-  background: rgba(255, 227, 180, 0.09);
+  background: rgba(169, 242, 230, 0.09);
   backdrop-filter: blur(6px);
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -1245,9 +1245,9 @@ h3 + .lede {
   position: relative;
   border-radius: var(--r-lg);
   overflow: hidden;
-  border: 1px solid rgba(255, 227, 180, 0.28);
+  border: 1px solid rgba(169, 242, 230, 0.28);
   background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), 0 0 70px rgba(224, 154, 62, 0.18);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), 0 0 70px rgba(20, 184, 166, 0.18);
   animation: floatArt 7s ease-in-out infinite;
 }
 
@@ -1276,7 +1276,7 @@ h3 + .lede {
   bottom: -26px;
   height: 60px;
   border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(255, 227, 180, 0.5), transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(169, 242, 230, 0.5), transparent 70%);
   filter: blur(12px);
   z-index: -1;
 }
@@ -1360,7 +1360,7 @@ h3 + .lede {
   bottom: 0;
   z-index: 6;
   border-top: 1px solid rgba(255, 255, 255, 0.14);
-  background: linear-gradient(to top, rgba(20, 18, 28, 0.78), transparent);
+  background: linear-gradient(to top, rgba(14, 31, 27, 0.78), transparent);
   backdrop-filter: blur(6px);
 }
 
@@ -1401,7 +1401,7 @@ h3 + .lede {
   height: 2px;
   width: 0;
   background: var(--amber);
-  box-shadow: 0 0 12px rgba(224, 154, 62, 0.85);
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.85);
 }
 
 .hero__chip:hover,
@@ -1469,7 +1469,7 @@ h3 + .lede {
   place-items: center;
   border-radius: var(--r-full);
   border: 1px solid rgba(255, 255, 255, 0.26);
-  background: rgba(20, 18, 28, 0.34);
+  background: rgba(14, 31, 27, 0.34);
   backdrop-filter: blur(8px);
   color: #fff;
   transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
@@ -1992,7 +1992,7 @@ h3 + .lede {
   max-width: 150px;
   border-radius: var(--r-sm);
   overflow: hidden;
-  border: 1px solid rgba(255, 227, 180, 0.26);
+  border: 1px solid rgba(169, 242, 230, 0.26);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
   transition: transform var(--t);
 }
@@ -2039,12 +2039,12 @@ h3 + .lede {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(75deg, rgba(20, 18, 28, 0.95) 18%, rgba(20, 18, 28, 0.66) 62%, rgba(20, 18, 28, 0.3) 100%);
+  background: linear-gradient(75deg, rgba(14, 31, 27, 0.95) 18%, rgba(14, 31, 27, 0.66) 62%, rgba(14, 31, 27, 0.3) 100%);
   transition: background var(--t);
 }
 
 .tile:hover::after {
-  background: linear-gradient(75deg, rgba(20, 18, 28, 0.97) 18%, rgba(20, 18, 28, 0.74) 66%, rgba(20, 18, 28, 0.4) 100%);
+  background: linear-gradient(75deg, rgba(14, 31, 27, 0.97) 18%, rgba(14, 31, 27, 0.74) 66%, rgba(14, 31, 27, 0.4) 100%);
 }
 
 .tile__body {
@@ -2194,7 +2194,7 @@ h3 + .lede {
 .occ:hover .occ__ring {
   transform: translateY(-4px);
   border-color: var(--amber);
-  box-shadow: 0 10px 26px rgba(224, 154, 62, 0.24);
+  box-shadow: 0 10px 26px rgba(20, 184, 166, 0.24);
 }
 
 .occ:hover .occ__ring img {
@@ -2271,8 +2271,8 @@ h3 + .lede {
   display: grid;
   place-items: center;
   border-radius: var(--r-sm);
-  background: rgba(255, 227, 180, 0.12);
-  border: 1px solid rgba(255, 227, 180, 0.24);
+  background: rgba(169, 242, 230, 0.12);
+  border: 1px solid rgba(169, 242, 230, 0.24);
   color: var(--halo);
   font-size: 1.05rem;
   margin-bottom: 1rem;
@@ -2392,7 +2392,7 @@ h3 + .lede {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(20, 18, 28, 0.09) 0.6px, transparent 0.7px);
+  background-image: radial-gradient(rgba(14, 31, 27, 0.09) 0.6px, transparent 0.7px);
   background-size: 5px 5px;
 }
 
@@ -2404,7 +2404,7 @@ h3 + .lede {
   height: auto;
   object-fit: contain;
   border-radius: var(--r-sm);
-  box-shadow: 0 18px 44px rgba(20, 18, 28, 0.22);
+  box-shadow: 0 18px 44px rgba(14, 31, 27, 0.22);
 }
 
 .split__note {
@@ -2716,8 +2716,8 @@ h3 + .lede {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(70% 120% at 82% 20%, rgba(224, 154, 62, 0.3), transparent 62%),
-    radial-gradient(60% 100% at 8% 90%, rgba(134, 174, 194, 0.22), transparent 60%);
+  background: radial-gradient(70% 120% at 82% 20%, rgba(20, 184, 166, 0.3), transparent 62%),
+    radial-gradient(60% 100% at 8% 90%, rgba(94, 200, 216, 0.22), transparent 60%);
 }
 
 .closer__grid {
@@ -2997,7 +2997,7 @@ h3 + .lede {
 
 .pdp__thumb.on {
   border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(224, 154, 62, 0.18);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
 }
 
 /* La foto se muestra completa, sin recorte ni ampliación forzada: el archivo
@@ -3207,7 +3207,7 @@ h3 + .lede {
 .field textarea:focus {
   outline: none;
   border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(224, 154, 62, 0.16);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.16);
 }
 
 .field--row {
@@ -3383,7 +3383,7 @@ h3 + .lede {
   width: clamp(120px, 17vw, 210px);
   border-radius: var(--r-md);
   overflow: hidden;
-  border: 1px solid rgba(255, 227, 180, 0.24);
+  border: 1px solid rgba(169, 242, 230, 0.24);
   box-shadow: 0 24px 54px rgba(0, 0, 0, 0.5);
 }
 
@@ -3404,8 +3404,8 @@ h3 + .lede {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(95deg, rgba(20, 18, 28, 0.96) 12%, rgba(20, 18, 28, 0.72) 58%, rgba(20, 18, 28, 0.45) 100%),
-    radial-gradient(60% 100% at 88% 30%, rgba(224, 154, 62, 0.24), transparent 60%);
+  background: linear-gradient(95deg, rgba(14, 31, 27, 0.96) 12%, rgba(14, 31, 27, 0.72) 58%, rgba(14, 31, 27, 0.45) 100%),
+    radial-gradient(60% 100% at 88% 30%, rgba(20, 184, 166, 0.24), transparent 60%);
 }
 
 .pagehead__body {
@@ -3550,7 +3550,7 @@ h3 + .lede {
 .searchbox input:focus {
   outline: none;
   border-color: var(--amber);
-  box-shadow: 0 0 0 3px rgba(224, 154, 62, 0.16);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.16);
 }
 
 .searchbox button {
@@ -3643,7 +3643,7 @@ h3 + .lede {
   display: grid;
   place-items: center;
   border-radius: var(--r-full);
-  background: rgba(20, 18, 28, 0.12);
+  background: rgba(14, 31, 27, 0.12);
   font-size: 0.58rem;
   transition: background var(--t-fast);
 }
@@ -3733,7 +3733,7 @@ h3 + .lede {
   display: grid;
   place-items: center;
   padding: clamp(0.6rem, 3vw, 2rem);
-  background: rgba(20, 18, 28, 0.72);
+  background: rgba(14, 31, 27, 0.72);
   backdrop-filter: blur(6px);
   opacity: 0;
   visibility: hidden;
@@ -3956,7 +3956,7 @@ h3 + .lede {
   color: #fff;
   font-size: 0.88rem;
   font-weight: 600;
-  box-shadow: 0 12px 34px rgba(20, 18, 28, 0.35);
+  box-shadow: 0 12px 34px rgba(14, 31, 27, 0.35);
   transition: transform var(--t-fast), background var(--t-fast);
 }
 
@@ -4343,7 +4343,7 @@ h3 + .lede {
   position: fixed;
   inset: 0;
   z-index: 550;
-  background: rgba(20, 18, 28, 0.6);
+  background: rgba(14, 31, 27, 0.6);
   backdrop-filter: blur(6px);
   opacity: 0;
   visibility: hidden;

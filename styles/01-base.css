@@ -19,37 +19,37 @@
 
 /* ---------------------------------------------------------------- 01 tokens */
 :root {
-  /* Tinta: negro con sesgo violeta, el color del acrílico apagado */
-  --ink: #14121c;
-  --ink-2: #1d1a28;
-  --ink-3: #2a2637;
-  --ink-4: #3a3549;
+  /* Tinta: verde-azulado casi negro, el color del acrílico apagado bajo luz teal */
+  --ink: #0e1f1b;
+  --ink-2: #16302a;
+  --ink-3: #204a40;
+  --ink-4: #2e6b5c;
 
-  /* Papel: blanco de galería y una banda gris-violeta para alternar */
+  /* Papel: blanco de galería y una banda gris-verdosa para alternar */
   --paper: #ffffff;
-  --tint: #f4f2f8;
-  --tint-2: #eae6f1;
+  --tint: #f1f7f6;
+  --tint-2: #e3f0ee;
 
-  --line: #e3dfeb;
-  --line-2: #d0cade;
+  --line: #dceae7;
+  --line-2: #c4dad6;
   --line-dark: rgba(255, 255, 255, 0.13);
 
-  --txt: #14121c;
-  --txt-2: #56506b;
-  --txt-3: #837c99;
-  --txt-inv: #f6f4fb;
-  --txt-inv-2: #b7b0c9;
+  --txt: #0e1f1b;
+  --txt-2: #4c6b64;
+  --txt-3: #7c9c94;
+  --txt-inv: #f2fbf9;
+  --txt-inv-2: #a9cec6;
 
-  /* Ámbar: la luz LED cálida. Se usa como relleno, nunca como texto sobre papel */
-  --amber: #e09a3e;
-  --amber-hot: #f0ae52;
-  --amber-deep: #9c6510;
-  --halo: #ffe3b4;
+  /* Teal: la luz LED de la marca. Se usa como relleno, nunca como texto sobre papel */
+  --amber: #14b8a6;
+  --amber-hot: #1ed1bc;
+  --amber-deep: #0b6b60;
+  --halo: #a9f2e6;
 
-  /* Vidrio: el canto frío del acrílico. Estructura, enlaces, iconos */
-  --glass: #86aec2;
-  --glass-deep: #1e5468;
-  --glass-soft: #e7f0f4;
+  /* Vidrio: el canto frío del acrílico, un cian más apagado que el teal de acción */
+  --glass: #5ec8d8;
+  --glass-deep: #0e6b7a;
+  --glass-soft: #e7f7f9;
 
   --wa: #25d366;
   --wa-deep: #128c7e;
@@ -64,10 +64,10 @@
   --r-lg: 22px;
   --r-full: 999px;
 
-  --sh-1: 0 1px 2px rgba(20, 18, 28, 0.05), 0 4px 14px rgba(20, 18, 28, 0.05);
-  --sh-2: 0 2px 6px rgba(20, 18, 28, 0.06), 0 14px 34px rgba(20, 18, 28, 0.09);
-  --sh-3: 0 30px 70px rgba(20, 18, 28, 0.18);
-  --sh-lit: 0 0 0 1px rgba(224, 154, 62, 0.35), 0 12px 40px rgba(224, 154, 62, 0.18);
+  --sh-1: 0 1px 2px rgba(14, 31, 27, 0.05), 0 4px 14px rgba(14, 31, 27, 0.05);
+  --sh-2: 0 2px 6px rgba(14, 31, 27, 0.06), 0 14px 34px rgba(14, 31, 27, 0.09);
+  --sh-3: 0 30px 70px rgba(14, 31, 27, 0.18);
+  --sh-lit: 0 0 0 1px rgba(20, 184, 166, 0.35), 0 12px 40px rgba(20, 184, 166, 0.18);
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --t-fast: 0.18s var(--ease);
@@ -379,12 +379,12 @@ h3 + .lede {
 .btn--amber {
   --btn-bg: var(--amber);
   --btn-fg: var(--ink);
-  box-shadow: 0 6px 22px rgba(224, 154, 62, 0.32);
+  box-shadow: 0 6px 22px rgba(20, 184, 166, 0.32);
 }
 
 .btn--amber:hover {
   --btn-bg: var(--amber-hot);
-  box-shadow: 0 10px 30px rgba(224, 154, 62, 0.42);
+  box-shadow: 0 10px 30px rgba(20, 184, 166, 0.42);
 }
 
 .btn--wa {
@@ -494,8 +494,8 @@ h3 + .lede {
     135deg,
     var(--amber) 0%,
     var(--halo) 22%,
-    rgba(255, 227, 180, 0) 46%,
-    rgba(255, 227, 180, 0) 100%
+    rgba(169, 242, 230, 0) 46%,
+    rgba(169, 242, 230, 0) 100%
   );
   background-size: 320% 320%;
   background-position: 100% 100%;
@@ -514,7 +514,7 @@ h3 + .lede {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: radial-gradient(120% 80% at 50% -10%, rgba(255, 227, 180, 0.5), transparent 62%);
+  background: radial-gradient(120% 80% at 50% -10%, rgba(169, 242, 230, 0.5), transparent 62%);
   opacity: 0;
   transition: opacity var(--t);
   pointer-events: none;

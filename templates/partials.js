@@ -227,7 +227,7 @@ function footer(b = '') {
   return `<footer class="foot">
     <div class="wrap foot__grid">
       <div class="foot__brand">
-        <img src="${b}${site.logo}" alt="${site.nombre}" width="176" height="54" loading="lazy">
+        <img src="${b}${site.logoClaro}" alt="${site.nombre}" width="184" height="54" loading="lazy">
         <p>${esc(site.descripcion)}</p>
         <div class="foot__social">
           ${site.redes

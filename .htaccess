@@ -1,0 +1,97 @@
+# ==========================================================================
+# GENERADO POR build.js — no editar a mano.
+# Las redirecciones viven en data/redirecciones.js
+# ==========================================================================
+
+# --- Forzar HTTPS ---------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+</IfModule>
+
+# --- Página de error ------------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Compresión -----------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# --- Caché de estáticos ---------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# --- Redirecciones del sitio anterior -------------------------------------
+# Cada URL que se compartió en Facebook o WhatsApp durante años sigue
+# funcionando y traspasa su posicionamiento a la página nueva.
+Redirect 301 /empresa.html https://www.creatividad-laser.com/nosotros.html
+Redirect 301 /contactos.html https://www.creatividad-laser.com/contacto.html
+Redirect 301 /pedidos.html https://www.creatividad-laser.com/contacto.html
+Redirect 301 /error.html https://www.creatividad-laser.com/404.html
+Redirect 301 /productos.html https://www.creatividad-laser.com/catalogo.html
+Redirect 301 /productos100.html https://www.creatividad-laser.com/catalogo.html
+Redirect 301 /personalizados.html https://www.creatividad-laser.com/catalogo.html
+Redirect 301 /recuerdos-personalizados.html https://www.creatividad-laser.com/recuerdos-eventos.html
+Redirect 301 /eventos-especiales.html https://www.creatividad-laser.com/recuerdos-eventos.html
+Redirect 301 /eventos-actual.html https://www.creatividad-laser.com/recuerdos-eventos.html
+Redirect 301 /led-base-madera.html https://www.creatividad-laser.com/producto/lampara-led-base-madera.html
+Redirect 301 /led-base-grietas.html https://www.creatividad-laser.com/producto/lampara-led-grietas.html
+Redirect 301 /led-base-negra.html https://www.creatividad-laser.com/producto/lampara-led-base-negra.html
+Redirect 301 /led-cuadros.html https://www.creatividad-laser.com/producto/cuadro-led-pared.html
+Redirect 301 /lampara-led-base-madera-con-parlante.html https://www.creatividad-laser.com/producto/lampara-led-parlante.html
+Redirect 301 /lampara-led-base-madera-con-bateria.html https://www.creatividad-laser.com/producto/lampara-led-bateria.html
+Redirect 301 /lampara-led-base-parlante-giratoria.html https://www.creatividad-laser.com/producto/lampara-led-giratoria.html
+Redirect 301 /lampara-luna.html https://www.creatividad-laser.com/producto/lampara-luna.html
+Redirect 301 /reloj-cubo-luz-led.html https://www.creatividad-laser.com/producto/lamparas-coleccion.html
+Redirect 301 /detalles-led.html https://www.creatividad-laser.com/producto/cuadros-led-evento.html
+Redirect 301 /cupula-con-flor-de-gypsophila-rosa-girasol.html https://www.creatividad-laser.com/producto/cupula-girasol.html
+Redirect 301 /llaveros-personalizados.html https://www.creatividad-laser.com/producto/llaveros-personalizados.html
+Redirect 301 /agendas-personalizadas.html https://www.creatividad-laser.com/producto/agenda-personalizada.html
+Redirect 301 /portaretratos-doble-impresion.html https://www.creatividad-laser.com/producto/portarretrato-doble.html
+Redirect 301 /placas-reconocimientos-agradecimientos.html https://www.creatividad-laser.com/producto/placa-reconocimiento.html
+Redirect 301 /plascas-medallas-personalizadas.html https://www.creatividad-laser.com/placas-reconocimientos.html
+Redirect 301 /acrilico-laser.html https://www.creatividad-laser.com/producto/corte-acrilico.html
+Redirect 301 /madera-mdf.html https://www.creatividad-laser.com/producto/corte-madera-mdf.html
+Redirect 301 /cuero-laser.html https://www.creatividad-laser.com/producto/corte-cuero.html
+Redirect 301 /papel-cartulina.html https://www.creatividad-laser.com/producto/tarjetas-invitacion.html
+Redirect 301 /graduados.html https://www.creatividad-laser.com/ocasiones/grados.html
+Redirect 301 /matrimonios.html https://www.creatividad-laser.com/ocasiones/matrimonios.html
+Redirect 301 /bautizos.html https://www.creatividad-laser.com/ocasiones/bautizos.html
+Redirect 301 /babyshower.html https://www.creatividad-laser.com/ocasiones/babyshower.html
+Redirect 301 /cumpleanos.html https://www.creatividad-laser.com/ocasiones/cumpleanos.html
+Redirect 301 /dia-de-la-madre.html https://www.creatividad-laser.com/ocasiones/madre.html
+Redirect 301 /dia-del-padre.html https://www.creatividad-laser.com/ocasiones/padre.html
+Redirect 301 /dia-del-maestro.html https://www.creatividad-laser.com/ocasiones/maestro.html
+Redirect 301 /dia-del-ninio.html https://www.creatividad-laser.com/ocasiones/nino.html
+Redirect 301 /dia-de-la-mujer.html https://www.creatividad-laser.com/ocasiones/mujer.html
+Redirect 301 /enamorados.html https://www.creatividad-laser.com/ocasiones/enamorados.html
+Redirect 301 /san-valentin-matrimonios.html https://www.creatividad-laser.com/ocasiones/enamorados.html
+Redirect 301 /navidad.html https://www.creatividad-laser.com/ocasiones/navidad.html
+Redirect 301 /sacramentos.html https://www.creatividad-laser.com/producto/recuerdos-sacramentos.html
+Redirect 301 /lampara-submenu.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu2.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu3.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu4.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu5.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-6.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-7.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-8.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-9.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-10.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-11.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-12.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-13.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-14.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-15.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /lampara-submenu-16.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /base-madera-submenu.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /base-madera-submenu-1.html https://www.creatividad-laser.com/lamparas-led.html
+Redirect 301 /base-madera-submenu-2.html https://www.creatividad-laser.com/lamparas-led.html

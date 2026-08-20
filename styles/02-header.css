@@ -85,7 +85,7 @@
 }
 
 .hdr.stuck {
-  box-shadow: 0 8px 30px rgba(14, 31, 27, 0.08);
+  box-shadow: 0 8px 30px rgba(16, 32, 61, 0.08);
   background: rgba(255, 255, 255, 0.95);
 }
 
@@ -132,14 +132,16 @@
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: -0.008em;
-  color: var(--txt-2);
+  /* Negro corporativo por defecto, no un gris atenuado: el navbar entero
+     se lee como texto sólido, sólo cambia el fondo al pasar el mouse. */
+  color: var(--txt);
   white-space: nowrap;
   transition: color var(--t-fast), background var(--t-fast);
 }
 
 .nav__link:hover,
 .nav__item.open .nav__link {
-  color: var(--txt);
+  color: var(--amber-deep);
   background: var(--tint);
 }
 
@@ -318,7 +320,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(14, 31, 27, 0.94) 8%, rgba(14, 31, 27, 0.1) 68%);
+  background: linear-gradient(to top, rgba(16, 32, 61, 0.94) 8%, rgba(16, 32, 61, 0.1) 68%);
 }
 
 .mega__feature-body {
@@ -458,7 +460,7 @@
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(14, 31, 27, 0.55);
+  background: rgba(16, 32, 61, 0.55);
   backdrop-filter: blur(3px);
   z-index: 390;
   opacity: 0;

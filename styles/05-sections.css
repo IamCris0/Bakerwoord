@@ -37,8 +37,8 @@
   display: grid;
   place-items: center;
   border-radius: var(--r-sm);
-  background: rgba(169, 242, 230, 0.12);
-  border: 1px solid rgba(169, 242, 230, 0.24);
+  background: rgba(247, 221, 176, 0.12);
+  border: 1px solid rgba(247, 221, 176, 0.24);
   color: var(--halo);
   font-size: 1.05rem;
   margin-bottom: 1rem;
@@ -158,7 +158,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(14, 31, 27, 0.09) 0.6px, transparent 0.7px);
+  background-image: radial-gradient(rgba(16, 32, 61, 0.09) 0.6px, transparent 0.7px);
   background-size: 5px 5px;
 }
 
@@ -170,7 +170,7 @@
   height: auto;
   object-fit: contain;
   border-radius: var(--r-sm);
-  box-shadow: 0 18px 44px rgba(14, 31, 27, 0.22);
+  box-shadow: 0 18px 44px rgba(16, 32, 61, 0.22);
 }
 
 .split__note {
@@ -482,8 +482,8 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(70% 120% at 82% 20%, rgba(20, 184, 166, 0.3), transparent 62%),
-    radial-gradient(60% 100% at 8% 90%, rgba(94, 200, 216, 0.22), transparent 60%);
+  background: radial-gradient(70% 120% at 82% 20%, rgba(225, 145, 47, 0.3), transparent 62%),
+    radial-gradient(60% 100% at 8% 90%, rgba(74, 111, 165, 0.22), transparent 60%);
 }
 
 .closer__grid {
@@ -553,8 +553,14 @@
 }
 
 /* --------------------------------------------------------------- 14 pie */
+/* Mezcla de marino oscuro con un resplandor naranja y otro azul más claro,
+   en vez de un bloque plano: es lo que pediste como "mezcla de varios". */
 .foot {
-  background: var(--ink);
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(60% 140% at 88% 0%, rgba(225, 145, 47, 0.12), transparent 55%),
+    radial-gradient(70% 120% at 4% 100%, rgba(58, 92, 148, 0.28), transparent 60%),
+    linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
   color: var(--txt-inv-2);
   font-size: 0.88rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);

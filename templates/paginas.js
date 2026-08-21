@@ -213,8 +213,8 @@ function contacto() {
           </div>
         </div>
 
-        <div class="split__media lit" style="margin-top:1.2rem;aspect-ratio:16/10">
-          <img src="${IMG}/productos/led-cuadros/3.jpg" alt="Cuadro LED grabado en el taller" loading="lazy" decoding="async">
+        <div class="split__media lit" style="margin-top:1.2rem;aspect-ratio:5/4">
+          <img src="assets/img/contacto.jpg" alt="Atención personalizada por WhatsApp" loading="lazy" decoding="async">
         </div>
       </div>
     </div>

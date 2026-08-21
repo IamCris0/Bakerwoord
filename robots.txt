@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /pagina-antigua/*.html
 
 Sitemap: https://www.creatividad-laser.com/sitemap.xml

@@ -23,13 +23,12 @@ const site = {
 
   /* Dos versiones del isotipo: logo.png tiene "Creatividad" en trazo oscuro
      (para fondos claros: cabecera, cajón móvil). logo-2.png lo tiene en
-     blanco (para fondos oscuros: el pie de página). No uses footer-logo.png
-     ni small-logo.png — son restos de una plantilla anterior: el primero
-     queda en gris medio y no se lee ni sobre blanco ni sobre oscuro, y el
-     segundo es el logo de otra empresa (quedó mezclado en el archivo viejo). */
-  logo: IMG + '/logo.png',
-  logoClaro: IMG + '/logo-2.png',
-  favicon: IMG + '/favicon.png',
+     blanco (para fondos oscuros: el pie de página). Viven en assets/img/marca/
+     —no en pagina-antigua/— para que el sitio no dependa de esa carpeta al
+     subirlo al servidor. */
+  logo: 'assets/img/marca/logo.png',
+  logoClaro: 'assets/img/marca/logo-2.png',
+  favicon: 'assets/img/marca/favicon.png',
 
   contacto: {
     telefono1: '098 992 6138',
@@ -214,10 +213,10 @@ const site = {
   ],
 
   bancos: [
-    { nombre: 'Banco Pichincha', imagen: IMG + '/banco-pichincha.png' },
-    { nombre: 'Banco Guayaquil', imagen: IMG + '/banco-guayaquil.png' },
-    { nombre: 'Banco Internacional', imagen: IMG + '/banco-internacional.png' },
-    { nombre: 'Tarjetas de crédito', imagen: IMG + '/tarjetas.png' },
+    { nombre: 'Banco Pichincha', imagen: 'assets/img/bancos/banco-pichincha.png' },
+    { nombre: 'Banco Guayaquil', imagen: 'assets/img/bancos/banco-guayaquil.png' },
+    { nombre: 'Banco Internacional', imagen: 'assets/img/bancos/banco-internacional.png' },
+    { nombre: 'Tarjetas de crédito', imagen: 'assets/img/bancos/tarjetas.png' },
   ],
 };
 

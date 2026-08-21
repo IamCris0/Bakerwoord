@@ -712,7 +712,7 @@
       var el = e.target;
       if (el.tagName !== 'IMG' || el.dataset.fallback) return;
       el.dataset.fallback = '1';
-      el.src = BASE + 'pagina-antigua/assets/images/logo.png';
+      el.src = BASE + 'assets/img/marca/logo.png';
       el.style.objectFit = 'contain';
       el.style.padding = '12%';
       el.style.opacity = '.35';

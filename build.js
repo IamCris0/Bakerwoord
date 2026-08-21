@@ -408,7 +408,7 @@ ${urls
 
   escribir(
     'robots.txt',
-    `User-agent: *\nAllow: /\nDisallow: /pagina-antigua/*.html\n\nSitemap: ${site.dominio}/sitemap.xml\n`
+    `User-agent: *\nAllow: /\n\nSitemap: ${site.dominio}/sitemap.xml\n`
   );
 
   return urls.length;

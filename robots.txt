@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /pagina-antigua/
+Disallow: /plantillas/
 
-Sitemap: https://www.creatividad-laser.com/sitemap.xml
+Sitemap: https://www.mawewe.com.ec/sitemap.xml

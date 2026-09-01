@@ -1,0 +1,70 @@
+    <main id="contenido" data-catalogo>
+
+      <div class="cabecera-pagina">
+        <div class="contenedor">
+          <ol class="migas">
+            <li><a href="index.html">Inicio</a></li>
+            <li aria-current="page" data-miga-actual>Catálogo</li>
+          </ol>
+          <h1 data-titulo>Catálogo completo</h1>
+          <p class="bajada" data-bajada>Todo lo que tenemos publicado.</p>
+        </div>
+      </div>
+
+      <div class="seccion seccion--crema">
+        <div class="contenedor catalogo">
+
+          <!-- Filtros ------------------------------------------------------ -->
+          <aside class="filtros" aria-label="Filtros del catálogo">
+            <div class="filtros__bloque">
+              <h2 class="filtros__titulo">Departamento</h2>
+              <div class="filtros__lista" data-filtro-departamentos></div>
+            </div>
+            <div class="filtros__bloque">
+              <h2 class="filtros__titulo">Categoría</h2>
+              <div class="filtros__lista" data-filtro-categorias></div>
+            </div>
+            <div class="filtros__bloque">
+              <h2 class="filtros__titulo">Marca</h2>
+              <div class="filtros__lista" data-filtro-marcas></div>
+            </div>
+            <div class="filtros__bloque">
+              <h2 class="filtros__titulo">¿No lo encontrás?</h2>
+              <p style="font-size:var(--t-sm);color:var(--gris);margin-bottom:14px">
+                En el local manejamos bastante más de lo que alcanzamos a publicar. Preguntanos y te confirmamos al momento.
+              </p>
+              <a class="boton boton--wsp boton--sm boton--bloque" data-wsp="Hola Mawëwë, busco un producto que no encuentro en el catálogo web.">Consultar por WhatsApp</a>
+            </div>
+          </aside>
+
+          <!-- Resultados --------------------------------------------------- -->
+          <div>
+            <div class="barra-resultados">
+              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+                <button class="boton boton--contorno boton--sm filtros-movil" type="button" data-toggle-filtros aria-expanded="false">Filtros</button>
+                <span class="barra-resultados__conteo" data-conteo aria-live="polite"></span>
+              </div>
+              <label style="display:flex;align-items:center;gap:10px">
+                <span style="font-size:var(--t-sm);color:var(--gris)">Ordenar</span>
+                <select class="selector" data-orden>
+                  <option value="destacados">Destacados</option>
+                  <option value="nombre">Nombre (A–Z)</option>
+                  <option value="nombre-desc">Nombre (Z–A)</option>
+                  <option value="categoria">Categoría</option>
+                  <option value="marca">Marca</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="chips" data-chips style="margin-bottom:22px"></div>
+
+            <div data-resultados class="rejilla-productos"></div>
+
+            <div class="paginacion">
+              <button class="boton boton--contorno" type="button" data-ver-mas hidden>Ver más productos</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>

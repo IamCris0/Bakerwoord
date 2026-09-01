@@ -1,97 +1,79 @@
-# ==========================================================================
-# GENERADO POR build.js — no editar a mano.
-# Las redirecciones viven en data/redirecciones.js
-# ==========================================================================
+# =============================================================================
+# Mawëwë — configuración Apache
+# =============================================================================
 
-# --- Forzar HTTPS ---------------------------------------------------------
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteCond %{HTTPS} !=on
-  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+# --- Codificación ------------------------------------------------------------
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .html .css .js .json .xml .svg
 </IfModule>
 
-# --- Página de error ------------------------------------------------------
+# --- Página de error ---------------------------------------------------------
 ErrorDocument 404 /404.html
 
-# --- Compresión -----------------------------------------------------------
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+# --- Redirecciones del sitio anterior ---------------------------------------
+# Mantienen el posicionamiento de las URLs viejas apuntándolas a la
+# categoría equivalente del catálogo nuevo (301 = permanente).
+<IfModule mod_alias.c>
+
+  RedirectMatch 301 ^/peluches\.html$                  /catalogo.html?cat=peluches
+  RedirectMatch 301 ^/accesorios\.html$                /catalogo.html?cat=accesorios
+  RedirectMatch 301 ^/relojes\.html$                   /catalogo.html?cat=relojes
+  RedirectMatch 301 ^/juguetes-ninas\.html$            /catalogo.html?cat=juguetes-ninas
+  RedirectMatch 301 ^/juguetes-ninos-avengers\.html$   /catalogo.html?cat=juguetes-ninos-avengers
+  RedirectMatch 301 ^/bebes-fisher-price\.html$        /catalogo.html?cat=bebes-fisher-price
+  RedirectMatch 301 ^/legos\.html$                     /catalogo.html?cat=legos
+  RedirectMatch 301 ^/joyas-plata\.html$               /catalogo.html?cat=joyas-plata
+  RedirectMatch 301 ^/joyas-lannel\.html$              /catalogo.html?cat=joyas-lannel
+  RedirectMatch 301 ^/victoria-secret\.html$           /catalogo.html?cat=victoria-secret
+  RedirectMatch 301 ^/autos-motos\.html$               /catalogo.html?cat=autos-motos
+  RedirectMatch 301 ^/perfumes-mujer\.html$            /catalogo.html?cat=perfumes-mujer
+  RedirectMatch 301 ^/perfumes-boss-bottled\.html$     /catalogo.html?cat=perfumes-boss-bottled
+  RedirectMatch 301 ^/implementos-deportivos\.html$    /catalogo.html?cat=implementos-deportivos
+  RedirectMatch 301 ^/americanino\.html$               /catalogo.html?cat=americanino
+  RedirectMatch 301 ^/americanino-mujer\.html$         /catalogo.html?cat=americanino-mujer
+  RedirectMatch 301 ^/chevignon-hombres\.html$         /catalogo.html?marca=Chevignon
+  RedirectMatch 301 ^/chevignon-mujer\.html$           /catalogo.html?marca=Chevignon
+  RedirectMatch 301 ^/offcorss\.html$                  /catalogo.html?cat=offcorss
+  RedirectMatch 301 ^/offcorss-nenas\.html$            /catalogo.html?cat=offcorss-nenas
+  RedirectMatch 301 ^/camisas-camisetas-polo\.html$    /catalogo.html?cat=camisas-camisetas-polo
+  RedirectMatch 301 ^/jeans-men\.html$                 /catalogo.html?cat=jeans-men
+  RedirectMatch 301 ^/ocasiones-especiales\.html$      /catalogo.html?cat=ocasiones-especiales
+  RedirectMatch 301 ^/detalles\.html$                  /catalogo.html?cat=detalles
+  RedirectMatch 301 ^/empresa\.html$                   /nosotros.html
+  RedirectMatch 301 ^/contactos\.html$                 /contacto.html
+  RedirectMatch 301 ^/metodos-pagos\.html$             /pagos.html
+  RedirectMatch 301 ^/pedido\.html$                    /pagos.html
+  RedirectMatch 301 ^/error-404\.html$                 /404.html
+  RedirectMatch 301 ^/cambio-revoluciones\.html$       /pagos.html
+  RedirectMatch 301 ^/promociones-black-friday\.html$  /catalogo.html
 </IfModule>
 
-# --- Caché de estáticos ---------------------------------------------------
+# --- Compresión --------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# --- Caché del navegador -----------------------------------------------------
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/svg+xml "access plus 1 year"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/html                 "access plus 1 hour"
+  ExpiresByType text/css                  "access plus 1 month"
+  ExpiresByType application/javascript    "access plus 1 month"
+  ExpiresByType image/jpeg                "access plus 6 months"
+  ExpiresByType image/png                 "access plus 6 months"
+  ExpiresByType image/webp                "access plus 6 months"
+  ExpiresByType image/svg+xml             "access plus 6 months"
+  ExpiresByType font/woff2                "access plus 1 year"
 </IfModule>
 
-# --- Redirecciones del sitio anterior -------------------------------------
-# Cada URL que se compartió en Facebook o WhatsApp durante años sigue
-# funcionando y traspasa su posicionamiento a la página nueva.
-Redirect 301 /empresa.html https://www.creatividad-laser.com/nosotros.html
-Redirect 301 /contactos.html https://www.creatividad-laser.com/contacto.html
-Redirect 301 /pedidos.html https://www.creatividad-laser.com/contacto.html
-Redirect 301 /error.html https://www.creatividad-laser.com/404.html
-Redirect 301 /productos.html https://www.creatividad-laser.com/catalogo.html
-Redirect 301 /productos100.html https://www.creatividad-laser.com/catalogo.html
-Redirect 301 /personalizados.html https://www.creatividad-laser.com/catalogo.html
-Redirect 301 /recuerdos-personalizados.html https://www.creatividad-laser.com/recuerdos-eventos.html
-Redirect 301 /eventos-especiales.html https://www.creatividad-laser.com/recuerdos-eventos.html
-Redirect 301 /eventos-actual.html https://www.creatividad-laser.com/recuerdos-eventos.html
-Redirect 301 /led-base-madera.html https://www.creatividad-laser.com/producto/lampara-led-base-madera.html
-Redirect 301 /led-base-grietas.html https://www.creatividad-laser.com/producto/lampara-led-grietas.html
-Redirect 301 /led-base-negra.html https://www.creatividad-laser.com/producto/lampara-led-base-negra.html
-Redirect 301 /led-cuadros.html https://www.creatividad-laser.com/producto/cuadro-led-pared.html
-Redirect 301 /lampara-led-base-madera-con-parlante.html https://www.creatividad-laser.com/producto/lampara-led-parlante.html
-Redirect 301 /lampara-led-base-madera-con-bateria.html https://www.creatividad-laser.com/producto/lampara-led-bateria.html
-Redirect 301 /lampara-led-base-parlante-giratoria.html https://www.creatividad-laser.com/producto/lampara-led-giratoria.html
-Redirect 301 /lampara-luna.html https://www.creatividad-laser.com/producto/lampara-luna.html
-Redirect 301 /reloj-cubo-luz-led.html https://www.creatividad-laser.com/producto/lamparas-coleccion.html
-Redirect 301 /detalles-led.html https://www.creatividad-laser.com/producto/cuadros-led-evento.html
-Redirect 301 /cupula-con-flor-de-gypsophila-rosa-girasol.html https://www.creatividad-laser.com/producto/cupula-girasol.html
-Redirect 301 /llaveros-personalizados.html https://www.creatividad-laser.com/producto/llaveros-personalizados.html
-Redirect 301 /agendas-personalizadas.html https://www.creatividad-laser.com/producto/agenda-personalizada.html
-Redirect 301 /portaretratos-doble-impresion.html https://www.creatividad-laser.com/producto/portarretrato-doble.html
-Redirect 301 /placas-reconocimientos-agradecimientos.html https://www.creatividad-laser.com/producto/placa-reconocimiento.html
-Redirect 301 /plascas-medallas-personalizadas.html https://www.creatividad-laser.com/placas-reconocimientos.html
-Redirect 301 /acrilico-laser.html https://www.creatividad-laser.com/producto/corte-acrilico.html
-Redirect 301 /madera-mdf.html https://www.creatividad-laser.com/producto/corte-madera-mdf.html
-Redirect 301 /cuero-laser.html https://www.creatividad-laser.com/producto/corte-cuero.html
-Redirect 301 /papel-cartulina.html https://www.creatividad-laser.com/producto/tarjetas-invitacion.html
-Redirect 301 /graduados.html https://www.creatividad-laser.com/ocasiones/grados.html
-Redirect 301 /matrimonios.html https://www.creatividad-laser.com/ocasiones/matrimonios.html
-Redirect 301 /bautizos.html https://www.creatividad-laser.com/ocasiones/bautizos.html
-Redirect 301 /babyshower.html https://www.creatividad-laser.com/ocasiones/babyshower.html
-Redirect 301 /cumpleanos.html https://www.creatividad-laser.com/ocasiones/cumpleanos.html
-Redirect 301 /dia-de-la-madre.html https://www.creatividad-laser.com/ocasiones/madre.html
-Redirect 301 /dia-del-padre.html https://www.creatividad-laser.com/ocasiones/padre.html
-Redirect 301 /dia-del-maestro.html https://www.creatividad-laser.com/ocasiones/maestro.html
-Redirect 301 /dia-del-ninio.html https://www.creatividad-laser.com/ocasiones/nino.html
-Redirect 301 /dia-de-la-mujer.html https://www.creatividad-laser.com/ocasiones/mujer.html
-Redirect 301 /enamorados.html https://www.creatividad-laser.com/ocasiones/enamorados.html
-Redirect 301 /san-valentin-matrimonios.html https://www.creatividad-laser.com/ocasiones/enamorados.html
-Redirect 301 /navidad.html https://www.creatividad-laser.com/ocasiones/navidad.html
-Redirect 301 /sacramentos.html https://www.creatividad-laser.com/producto/recuerdos-sacramentos.html
-Redirect 301 /lampara-submenu.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu2.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu3.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu4.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu5.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-6.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-7.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-8.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-9.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-10.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-11.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-12.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-13.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-14.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-15.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /lampara-submenu-16.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /base-madera-submenu.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /base-madera-submenu-1.html https://www.creatividad-laser.com/lamparas-led.html
-Redirect 301 /base-madera-submenu-2.html https://www.creatividad-laser.com/lamparas-led.html
+# --- Seguridad básica --------------------------------------------------------
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+Options -Indexes

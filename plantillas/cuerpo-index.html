@@ -1,0 +1,303 @@
+    <main id="contenido">
+
+      <!-- Slider de portada ------------------------------------------------ -->
+      <section class="hs" data-slider aria-roledescription="carrusel" aria-label="Novedades y campañas" tabindex="-1"></section>
+
+      <!-- Franja de promociones -------------------------------------------- -->
+      <div class="franja-promos">
+        <div class="franja-promos__fila" data-promos></div>
+      </div>
+
+      <!-- Beneficios ------------------------------------------------------- -->
+      <section class="seccion--blanco" aria-label="Por qué comprar en Mawëwë">
+        <div class="contenedor">
+          <div class="beneficios">
+            <div class="beneficios__item">
+              <div class="beneficios__texto">
+                <h3>Compra segura</h3>
+                <p>Producto original, con factura y garantía escrita.</p>
+              </div>
+              <span class="beneficios__icono">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5 40 11v11c0 9.5-6.6 17.4-16 20-9.4-2.6-16-10.5-16-20V11z"></path><path d="m17 24 5 5 10-10"></path></svg>
+              </span>
+            </div>
+            <div class="beneficios__item">
+              <div class="beneficios__texto">
+                <h3>Medios de pago</h3>
+                <p>Efectivo, transferencia y tarjeta corriente o diferida.</p>
+              </div>
+              <span class="beneficios__icono">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="38" height="26" rx="3"></rect><path d="M5 20h38"></path><path d="M12 29h8"></path></svg>
+              </span>
+            </div>
+            <div class="beneficios__item">
+              <div class="beneficios__texto">
+                <h3>Cambio fácil</h3>
+                <p>Ocho días para cambiar talla o color con tu factura.</p>
+              </div>
+              <span class="beneficios__icono">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18a15 15 0 0 1 25-6l5 5"></path><path d="M39 9v8h-8"></path><path d="M39 30a15 15 0 0 1-25 6l-5-5"></path><path d="M9 39v-8h8"></path></svg>
+              </span>
+            </div>
+            <div class="beneficios__item">
+              <div class="beneficios__texto">
+                <h3>Envío a todo el país</h3>
+                <p>Servientrega y Laar. Gratis en Lago Agrio desde $60.</p>
+              </div>
+              <span class="beneficios__icono">
+                <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h24v20H4z"></path><path d="M28 20h7l6 6v7h-13z"></path><circle cx="13" cy="37" r="4"></circle><circle cx="34" cy="37" r="4"></circle></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categorías ------------------------------------------------------- -->
+      <section class="seccion seccion--crema" id="categorias">
+        <div class="contenedor">
+          <div class="encabezado encabezado--fila">
+            <div class="encabezado__texto">
+              <span class="antetitulo">Comprá por categoría</span>
+              <h2>Todo lo que buscás, ordenado por ocasión</h2>
+              <p class="bajada">Nuestras líneas más pedidas. Cada tarjeta abre el catálogo con filtros por marca y por departamento.</p>
+            </div>
+            <a class="enlace-flecha" href="catalogo.html">Ver las 22 categorías
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+          <div class="rejilla-categorias" data-categorias="perfumes-mujer,peluches,jeans-men,juguetes-ninos-avengers,joyas-plata,offcorss-nenas,relojes,detalles"></div>
+        </div>
+      </section>
+
+      <!-- Vitrina con pestañas --------------------------------------------- -->
+      <section class="seccion seccion--blanco">
+        <div class="contenedor">
+          <div class="encabezado encabezado--fila">
+            <div class="encabezado__texto">
+              <span class="antetitulo">Selección de temporada</span>
+              <h2>Lo más buscado en el local</h2>
+            </div>
+            <div class="carrusel-controles" data-carrusel-controles="rail-vitrina">
+              <button class="carrusel-boton" type="button" data-dir="prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg></button>
+              <button class="carrusel-boton" type="button" data-dir="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            </div>
+          </div>
+
+          <div class="pestanas" role="tablist" data-pestanas="rail-vitrina" aria-label="Filtrar la selección">
+            <button class="pestana" type="button" role="tab" aria-selected="true" data-cats="perfumes-mujer,relojes,joyas-lannel,camisas-camisetas-polo,peluches,legos,victoria-secret,implementos-deportivos" data-limite="14">Destacados</button>
+            <button class="pestana" type="button" role="tab" aria-selected="false" data-cats="perfumes-mujer,victoria-secret,joyas-lannel,americanino-mujer,ocasiones-especiales" data-limite="14">Para ella</button>
+            <button class="pestana" type="button" role="tab" aria-selected="false" data-cats="perfumes-boss-bottled,jeans-men,camisas-camisetas-polo,relojes,accesorios" data-limite="14">Para él</button>
+            <button class="pestana" type="button" role="tab" aria-selected="false" data-cats="offcorss,offcorss-nenas,juguetes-ninas,juguetes-ninos-avengers,legos,bebes-fisher-price" data-limite="14">Peques</button>
+            <button class="pestana" type="button" role="tab" aria-selected="false" data-cats="detalles,peluches,ocasiones-especiales,joyas-plata" data-limite="14">Regalos</button>
+          </div>
+
+          <div class="carrusel" id="rail-vitrina"></div>
+        </div>
+      </section>
+
+      <!-- Dúo editorial ----------------------------------------------------- -->
+      <section class="seccion seccion--crema" style="padding-top:0">
+        <div class="contenedor">
+          <div class="duo">
+            <article class="duo__pieza">
+              <img src="assets/img/productos/offcorss/nenas/1.jpg" alt="Colección Offcorss para niñas" loading="lazy" decoding="async">
+              <div class="duo__cuerpo">
+                <span class="pastilla pastilla--clara">Nueva colección</span>
+                <h3 style="margin-top:12px">Offcorss para los peques</h3>
+                <p>Ropa cómoda y divertida, de la talla 3/6 meses a la 16. Niñas y niños.</p>
+                <a class="boton boton--claro" href="catalogo.html?dep=ninos">Ver la colección</a>
+              </div>
+            </article>
+            <article class="duo__pieza">
+              <img src="assets/img/productos/americanino/i1.jpg" alt="Denim Americanino y Chevignon" loading="lazy" decoding="async">
+              <div class="duo__cuerpo">
+                <span class="pastilla pastilla--clara">Tallas 28 a 40</span>
+                <h3 style="margin-top:12px">Denim que aguanta</h3>
+                <p>Americanino y Chevignon en cortes slim y classic fit, para él y para ella.</p>
+                <a class="boton boton--claro" href="catalogo.html?cat=jeans-men">Ver denim</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Asistente Wë ------------------------------------------------------ -->
+      <section class="seccion seccion--vino">
+        <div class="contenedor">
+          <div class="editorial">
+            <div>
+              <span class="antetitulo">Asistente Wë</span>
+              <h2>¿No sabés qué regalar? Te ayudamos en tres preguntas.</h2>
+              <p class="bajada">
+                Contanos para quién es y cuál es la ocasión: el asistente propone ideas concretas
+                del catálogo y, si preferís, te pasa directo con una asesora por WhatsApp.
+              </p>
+              <ul class="lista-marcas">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Para ella, para él, para los peques.</strong> Recomendaciones distintas según a quién le regalás.</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Cumpleaños, aniversario, grado o porque sí.</strong> Cada ocasión tiene su combinación.</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Lo armamos y lo enviamos.</strong> Envolvemos para regalo y despachamos a todo el Ecuador.</span></li>
+              </ul>
+              <div class="heroe__acciones" style="margin-bottom:0">
+                <button class="boton boton--claro" type="button" data-abrir-chat>Abrir el asistente</button>
+                <a class="boton boton--contorno-claro" href="catalogo.html?dep=regalos">Ver la sección Regalos</a>
+              </div>
+            </div>
+            <div class="editorial__figura">
+              <img src="assets/img/detalles/m8.jpg" alt="Detalles y arreglos artesanales de Mawëwë" loading="lazy">
+              <div class="editorial__dato">
+                <strong>24 h</strong>
+                <span>Armado y entrega</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Juguetería -------------------------------------------------------- -->
+      <section class="seccion seccion--arena">
+        <div class="contenedor">
+          <div class="encabezado encabezado--fila">
+            <div class="encabezado__texto">
+              <span class="antetitulo">Juguetería original</span>
+              <h2>LEGO, Marvel, Fisher-Price y colección</h2>
+              <p class="bajada">Juguetes con licencia oficial para cada edad, más réplicas a escala para coleccionistas.</p>
+            </div>
+            <div class="carrusel-controles" data-carrusel-controles="rail-juguetes">
+              <button class="carrusel-boton" type="button" data-dir="prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg></button>
+              <button class="carrusel-boton" type="button" data-dir="next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            </div>
+          </div>
+          <div class="carrusel" id="rail-juguetes" data-vitrina="legos,juguetes-ninos-avengers,autos-motos,bebes-fisher-price,juguetes-ninas,peluches" data-limite="14" data-mezclar></div>
+        </div>
+      </section>
+
+      <!-- Marcas ------------------------------------------------------------ -->
+      <section class="seccion seccion--blanco">
+        <div class="contenedor">
+          <div class="encabezado encabezado--centro">
+            <span class="antetitulo" style="justify-content:center">Distribuidor autorizado</span>
+            <h2>Las marcas que trabajamos</h2>
+            <p class="bajada">Todo lo que vendemos entra por canal oficial. Si no es original, no entra al local.</p>
+          </div>
+          <div class="marcas-grid" data-marcas-grid="12"></div>
+        </div>
+      </section>
+
+      <!-- Nosotros ---------------------------------------------------------- -->
+      <section class="seccion seccion--crema">
+        <div class="contenedor">
+          <div class="editorial">
+            <div class="editorial__figura">
+              <img src="assets/img/empresa/lago-agrio.jpg" alt="Fachada del almacén Mawëwë en Lago Agrio" loading="lazy">
+              <div class="editorial__dato">
+                <strong>+20</strong>
+                <span>Años en Lago Agrio</span>
+              </div>
+            </div>
+            <div>
+              <span class="antetitulo">Quiénes somos</span>
+              <h2>Un almacén de barrio con estándar de marca</h2>
+              <p class="bajada">
+                Mawëwë nació en Lago Agrio como un almacén de detalles y hoy es distribuidor autorizado de
+                algunas de las marcas más reconocidas de Colombia y Ecuador. Seguimos atendiendo igual:
+                de frente, sin letra chica y con la puerta abierta.
+              </p>
+              <ul class="lista-marcas">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Vestuario:</strong> Chevignon, Americanino y Offcorss.</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Perfumería:</strong> Jean Paul Gaultier, Hugo Boss, Carolina Herrera y Paco Rabanne.</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Juguetería:</strong> LEGO, Marvel, Fisher-Price y colección Maisto.</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg><span><strong>Joyería:</strong> plata 925 certificada y línea Lannel.</span></li>
+              </ul>
+              <a class="boton boton--contorno" href="nosotros.html">Conocé la empresa</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cómo comprar ------------------------------------------------------ -->
+      <section class="seccion seccion--blanco">
+        <div class="contenedor">
+          <div class="encabezado encabezado--centro">
+            <span class="antetitulo" style="justify-content:center">Cómo comprar</span>
+            <h2>Tres pasos y listo</h2>
+            <p class="bajada">No necesitás crear cuenta ni completar formularios largos.</p>
+          </div>
+          <div class="confianza">
+            <div class="confianza__item">
+              <span class="confianza__icono">1</span>
+              <div>
+                <h3>Elegí en el catálogo</h3>
+                <p>Filtrá por categoría o marca y guardá el enlace del producto que te gustó.</p>
+              </div>
+            </div>
+            <div class="confianza__item">
+              <span class="confianza__icono">2</span>
+              <div>
+                <h3>Escribinos por WhatsApp</h3>
+                <p>Te confirmamos precio del día, tallas, colores y el costo del envío a tu ciudad.</p>
+              </div>
+            </div>
+            <div class="confianza__item">
+              <span class="confianza__icono">3</span>
+              <div>
+                <h3>Pagá y recibí</h3>
+                <p>Transferencia, tarjeta o efectivo en el local. Despachamos apenas confirmás.</p>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:32px">
+            <a class="boton boton--wsp" data-wsp="Hola Mawëwë, quiero hacer un pedido desde la web.">Hacer un pedido por WhatsApp</a>
+            <a class="boton boton--contorno" href="pagos.html">Ver formas de pago y envíos</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Redes -------------------------------------------------------------- -->
+      <section class="seccion seccion--crema seccion--compacta">
+        <div class="contenedor">
+          <div class="encabezado encabezado--fila">
+            <div class="encabezado__texto">
+              <span class="antetitulo">Seguinos</span>
+              <h2>@mawewe_ec</h2>
+            </div>
+            <a class="enlace-flecha" href="https://www.instagram.com/mawewe_ec" target="_blank" rel="noopener">Ver el perfil
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </a>
+          </div>
+          <div class="social-tira" data-social="peluches-1,perfumes-mujer-1,relojes-1,legos-1,joyas-lannel-1,detalles-1"></div>
+        </div>
+      </section>
+
+      <!-- Boletín ------------------------------------------------------------ -->
+      <section class="seccion seccion--vino seccion--compacta">
+        <div class="contenedor">
+          <div class="boletin">
+            <div>
+              <span class="antetitulo">Ofertas antes que nadie</span>
+              <h2 style="margin-bottom:10px">Enterate de las promos por WhatsApp</h2>
+              <p class="bajada">Dejanos tu número y te avisamos cuando llega colección nueva o arranca una promoción. Sin spam: un mensaje cada tanto.</p>
+            </div>
+            <form class="boletin__form" data-form-boletin>
+              <label class="solo-lectores" for="b-tel">Tu número de WhatsApp</label>
+              <input id="b-tel" name="tel" type="tel" inputmode="tel" placeholder="Tu número de WhatsApp" required>
+              <button class="boton boton--claro" type="submit">Quiero enterarme</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <script>
+        /* El boletín no guarda datos: abre WhatsApp con el mensaje de alta. */
+        document.addEventListener('mawewe:listo', function () {
+          var f = document.querySelector('[data-form-boletin]');
+          if (!f) return;
+          f.addEventListener('submit', function (ev) {
+            ev.preventDefault();
+            var tel = (new FormData(f)).get('tel') || '';
+            window.open(window.MAWEWE.urlWhatsapp(
+              'Hola Mawëwë, quiero recibir las promociones. Mi número es ' + tel + '.'
+            ), '_blank', 'noopener');
+          });
+        });
+      </script>
+    </main>

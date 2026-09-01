@@ -1,149 +1,225 @@
-# Creatividad Láser — sitio web
+# Mawëwë — sitio web
 
-Sitio del taller de corte y grabado láser de Nueva Loja (Lago Agrio), Ecuador.
-Es un sitio **estático**: se genera con Node y el resultado se sube por FTP a
-cualquier hosting. No necesita base de datos, PHP ni servidor especial.
+Rediseño del sitio de **Mawëwë** (Lago Agrio, Ecuador). Sitio estático: HTML, CSS y
+JavaScript sin dependencias ni proceso de compilación. Se sube por FTP tal cual está
+la carpeta y funciona.
 
----
-
-## Cómo trabajar con el sitio
-
-```bash
-npm run build     # regenera todo el HTML
-npm run dev       # regenera y levanta http://localhost:4321 para revisar
-npm run imagenes  # optimiza las fotos (sólo al agregar fotos nuevas)
-```
-
-No hay dependencias que instalar. Sólo hace falta Node 18 o superior.
-
-**Sobre las imágenes.** Muchas fotos del archivo estaban guardadas como PNG y
-pesaban hasta 400 KB cada una; la portada llegaba a 2,6 MB. `npm run imagenes`
-genera copias en JPEG dentro de `assets/img/` y el sitio las usa
-automáticamente: la portada bajó a 1,3 MB. Corré ese comando sólo cuando sumes
-o cambies fotos; el resto del tiempo alcanza con `npm run build`.
-
-> **Importante:** los archivos `.html` de la raíz, de `producto/` y de
-> `ocasiones/` **se generan automáticamente**. Si los editás a mano, el próximo
-> `npm run build` pisa los cambios. Editá `data/` y `templates/`.
-
----
-
-## Dónde se cambia cada cosa
-
-| Quiero cambiar…                                   | Archivo                       |
-| ------------------------------------------------- | ----------------------------- |
-| Teléfono, dirección, horario, redes sociales      | `data/site.js`                |
-| Preguntas frecuentes                              | `data/site.js` → `faq`        |
-| Los 4 pasos del proceso                           | `data/site.js` → `proceso`    |
-| Materiales y espesores                            | `data/site.js` → `materiales` |
-| Opiniones de clientes                             | `data/site.js` → `testimonios`|
-| Productos (nombre, fotos, descripción, precio…)   | `data/productos.js`           |
-| Categorías, subcategorías y ocasiones             | `data/taxonomia.js`           |
-| Redirecciones del sitio viejo                     | `data/redirecciones.js`       |
-| Colores, tipografías, espaciados                  | `styles/01-base.css`          |
-| Textos de la portada                              | `templates/home.js`           |
-| Respuestas del asistente                          | `assets/js/bot.js`            |
-
-Después de cualquier cambio: `npm run build`.
-
----
-
-## Añadir un producto
-
-1. Abrí `data/productos.js`.
-2. Copiá un bloque completo de producto (desde `{` hasta `},`).
-3. Cambiá el `id` — tiene que ser único, sin espacios ni tildes. Ese `id` es la
-   URL: `producto/<id>.html`.
-4. Apuntá `galeria` a fotos que existan dentro de
-   `pagina-antigua/assets/images/`. El atajo `g('carpeta', 'jpg', [1,2,3])` arma
-   la lista sola.
-5. Ejecutá `npm run build`. La ficha, el menú, el buscador, el sitemap y los
-   filtros se actualizan solos.
-
-El `build` avisa si un producto apunta a una subcategoría o una ocasión que no
-existe.
-
----
-
-## ⚠️ Revisar antes de publicar
-
-Del sitio anterior se pudo confirmar la dirección, los teléfonos, el correo, el
-horario, los bancos, el Facebook y las fotos de los productos. **Todo lo demás
-son textos comerciales que hay que verificar**, porque son compromisos con el
-cliente. Repasá esta lista:
-
-1. **Plazos de producción.** Cada ficha dice «3 a 5 días hábiles» (o 1 a 2, o 5
-   a 7). Están en `data/productos.js`, campo `tiempo`. Ajustalos a lo que
-   realmente tardás.
-
-2. **Pedidos mínimos.** Algunas fichas piden «desde 20 piezas». Campo `minimo`.
-
-3. **Medidas.** Las medidas de cada producto (`medidas`) son estimadas a partir
-   de las fotos. Corregí las que no coincidan.
-
-4. **Las 4 promesas de la franja principal.** `data/site.js` → `garantias`:
-   boceto previo, plazo, envíos y garantía de rehacer piezas falladas. Aparecen
-   en todas las páginas.
-
-5. **Preguntas frecuentes.** `data/site.js` → `faq`. En especial el 50% de
-   anticipo y la respuesta sobre envíos.
-
-6. **Los 4 pasos del proceso.** `data/site.js` → `proceso`.
-
-7. **Año de apertura.** `data/site.js` → `fundacion` está en `null`, así que el
-   sitio no dice ninguna fecha ni cuenta años de trayectoria. Poné el año real y
-   las frases aparecen solas.
-
-8. **Opiniones de clientes.** `data/site.js` → `testimonios` está vacío y la
-   sección no se muestra. No pusimos reseñas de relleno: inventarlas engaña al
-   comprador. Pegá ahí comentarios reales y la sección se activa sola.
-
-9. **Redes sociales.** Sólo Facebook y WhatsApp están puestos, porque son los
-   únicos confirmados. Instagram y TikTok quedaron comentados en `redes`;
-   descomentalos con el usuario real si existen.
-
-10. **Fotos en mejor resolución.** El archivo actual llega a 450 px de ancho. El
-    sitio está armado para que se vean nítidas a ese tamaño (ninguna se estira),
-    pero si algún día se vuelven a fotografiar las piezas a 1600 px, el sitio
-    gana mucho. Varias fotos traen una marca «1/9» de catálogo en la esquina;
-    conviene reemplazarlas.
-
----
-
-## Publicar
-
-Subí al hosting **todo el contenido de la carpeta**, incluyendo:
-
-- los `.html` de la raíz, `producto/` y `ocasiones/`
-- `assets/` completo (ahí están el CSS, el JS y las fotos optimizadas)
-- `pagina-antigua/assets/images/logo.png`, el favicon y los logos de bancos
-- `.htaccess`, `sitemap.xml`, `robots.txt`
-
-Si ya corriste `npm run imagenes`, el sitio sirve las fotos desde
-`assets/img/` y no necesita el resto de `pagina-antigua/` para funcionar.
-Conviene subirlo igual la primera vez, por si alguna referencia quedó apuntando
-al original.
-
-`.htaccess` fuerza HTTPS y redirige las 63 URLs del sitio anterior a su página
-nueva, para no perder el posicionamiento en Google ni romper los enlaces
-compartidos en Facebook y WhatsApp. Si el hosting usa Nginx en vez de Apache,
-pasale a soporte la lista de `data/redirecciones.js`.
-
-No hace falta subir `data/`, `templates/`, `styles/`, `build.js` ni
-`servidor.js`: son las fuentes, no el sitio. Tampoco molestan si van.
+El sitio anterior queda intacto en [`pagina-antigua/`](pagina-antigua/) como referencia.
 
 ---
 
 ## Estructura
 
 ```
-data/            contenido editable (productos, taxonomía, datos del taller)
-templates/       plantillas que arman el HTML
-styles/          hojas de estilo fuente (se concatenan en assets/css/site.css)
-assets/          CSS y JS finales que usa el navegador
-producto/        fichas generadas, una por producto
-ocasiones/       páginas generadas, una por ocasión
-pagina-antigua/  sitio anterior — se conserva por su archivo de fotos
-build.js         el generador
-servidor.js      servidor local para ver el sitio antes de subirlo
+index.html          Portada
+catalogo.html       Catálogo (una sola ruta para las 22 categorías)
+producto.html       Ficha de producto
+nosotros.html       La empresa
+contacto.html       Contacto, horarios y mapa
+pagos.html          Cómo comprar, formas de pago, envíos y garantía
+404.html            Página de error
+
+assets/
+  css/mawewe.css    Sistema de diseño completo (tokens, componentes, responsive)
+  js/sitio.js       Cabecera, mega menú, buscador, cajón móvil, pie
+  js/portada.js     Slider, franja de promos, pestañas, marcas y tira social
+  js/catalogo.js    Catálogo, filtros, ficha de producto, vitrinas
+  js/chatbot.js     Asistente "Wë"
+  data/catalogo.js  ← LOS DATOS. Slider, productos, categorías, departamentos y contacto
+  img/              Fotos de producto y de marca
+
+plantillas/         Piezas para regenerar los HTML (ver más abajo)
+pagina-antigua/     Sitio anterior, sin tocar
 ```
+
+---
+
+## Cómo funcionan las rutas
+
+En lugar de mantener 22 archivos HTML casi idénticos (como hacía el sitio anterior),
+**una sola página sirve todo el catálogo** mediante parámetros en la URL:
+
+| URL | Qué muestra |
+|---|---|
+| `catalogo.html` | Los 414 productos, con todos los filtros |
+| `catalogo.html?dep=mujer` | Un departamento del menú superior |
+| `catalogo.html?cat=peluches` | Una categoría |
+| `catalogo.html?marca=Chevignon` | Una marca |
+| `catalogo.html?q=perfume` | Una búsqueda |
+| `producto.html?id=peluches-19` | Una ficha de producto |
+
+Los filtros que el visitante toca se reflejan en la URL, así que **cualquier vista se
+puede copiar y compartir por WhatsApp** y abre exactamente igual del otro lado.
+
+Las URLs viejas (`peluches.html`, `relojes.html`, `empresa.html`…) redirigen con 301 a
+su equivalente nuevo desde el [`.htaccess`](.htaccess), para no perder posicionamiento.
+
+---
+
+## Editar el contenido
+
+### Añadir o cambiar un producto
+
+Todo vive en **`assets/data/catalogo.js`**. Copiá una línea y cambiá los valores:
+
+```js
+{"id":"relojes-16","cat":"relojes","nombre":"Reloj Q&Q dorado",
+ "marca":"Q&Q","detalle":"Línea Reloj Damas",
+ "img":"assets/img/categorias/relojes/16.jpg",
+ "tienda":"https://tienda.mawewe.com.ec/?product=123"}
+```
+
+- `id` — único, sin espacios. Es lo que aparece en la URL de la ficha.
+- `cat` — tiene que existir en `MAWEWE_CATEGORIAS` (más abajo en el mismo archivo).
+- `detalle` — texto corto: tallas, línea, presentación. Puede ir vacío.
+- `tienda` — enlace de compra directa. Si va vacío, el botón lleva a la tienda general.
+
+La foto va en `assets/img/`. No hace falta tocar ningún HTML: el menú, el pie, los
+contadores por categoría, el buscador y el chatbot se actualizan solos.
+
+### Cambiar el slider de la portada
+
+En `MAWEWE_SLIDER`, arriba de `assets/data/catalogo.js`. Hay dos tipos de diapositiva:
+
+**`modo: 'editorial'`** — el fondo lo dibuja el CSS con la paleta de la marca y el texto
+lo pone la web. La foto del producto se recorta sola (el `mix-blend-mode: multiply`
+hace desaparecer el fondo blanco), así que **funciona con cualquier foto de catálogo
+que esté sobre fondo blanco**. El campo `fondo` acepta:
+
+| `fondo` | Cómo se ve |
+|---|---|
+| `vino` | Fondo vino oscuro, texto claro, la foto va sobre una tarjeta crema |
+| `arena` | Fondo arena claro, texto vino, la foto se funde con el fondo |
+| `oro` | Igual que arena pero en tono dorado |
+
+**`modo: 'banner'`** — la imagen ocupa todo y ya trae su propio arte y texto. Es el
+formato de los banners que venían del sitio anterior (`assets/img/hero/1_1.png`,
+`1_2.png`, `1_3.png`). Sólo se le superpone el botón, abajo a la izquierda.
+
+Reordená, borrá o agregá objetos y el slider se rearma solo: los puntos, las flechas,
+el autoplay y la barra de progreso salen de la cantidad de diapositivas.
+
+La franja negra de debajo del slider sale de `MAWEWE_PROMOS`, en el mismo archivo.
+
+### Cambiar teléfonos, horarios o dirección
+
+Arriba del todo de `assets/data/catalogo.js`, en `MAWEWE_NEGOCIO`. Se usa en la
+cabecera, el pie, la página de contacto y el chatbot a la vez.
+
+### Reorganizar el menú superior
+
+En `MAWEWE_DEPARTAMENTOS` (mismo archivo). Cada departamento es un ítem del menú,
+con sus columnas (`grupos`) y su tarjeta destacada con foto.
+
+> Si agregás o quitás un departamento, acordate de reflejarlo también en la lista
+> `<ul class="nav__lista">` de `plantillas/parte-cabecera.html` y regenerar (ver abajo).
+
+---
+
+## Colores y tipografía
+
+Todo el sistema visual sale de las variables al inicio de `assets/css/mawewe.css`:
+
+```css
+--vino: #741d2a;    /* color principal */
+--oro:  #b4823a;    /* acento */
+--crema:#faf6f0;    /* fondo */
+```
+
+Cambiando esas tres líneas cambia el sitio entero.
+
+Las tipografías son **Fraunces** (títulos, desde Google Fonts) y **Arial** (todo lo
+demás: menú, botones, pastillas, fichas y textos corridos). Arial es fuente de sistema:
+no se descarga nada, no depende de la conexión y no distorsiona los textos chicos en
+mayúsculas.
+
+### El logo
+
+Es **el logo de siempre**, recoloreado a la paleta nueva y guardado como archivos
+propios en `assets/img/marca/`:
+
+| Archivo | Dónde se usa |
+|---|---|
+| `logo-vino.png` | Cabecera y menú móvil (fondo claro) |
+| `sello-crema.png` | Pie de página, con el delfín (fondo oscuro) |
+| `logo-crema.png` · `sello-vino.png` | Variantes de repuesto |
+
+Se generaron recoloreando píxel a píxel el PNG original y conservando el canal alfa, así
+que el trazo y el antialias son idénticos: sólo cambió el color. En el HTML son un
+`<img class="marca">` común, y el CSS sólo les fija la **altura** (el ancho sale de la
+proporción):
+
+```css
+.marca { height: 44px; width: auto; }
+.marca--sello { height: 80px; }
+```
+
+> Antes esto se resolvía con una máscara CSS sobre el PNG original. Se cambió porque la
+> máscara depende del soporte de `mask` y de cómo resuelva el navegador la ruta relativa
+> del CSS, y en algunos casos el logo simplemente no aparecía. Con un `<img>` se ve
+> siempre. La contra: si cambia el color de la marca hay que regenerar esos PNG.
+
+---
+
+## Regenerar los HTML
+
+Las siete páginas comparten cabecera y pie. Para no editarlos siete veces, están
+separados en `plantillas/`:
+
+```
+plantillas/parte-cabecera.html   Barra de anuncios, cabecera, menú, buscador, cajón móvil
+plantillas/parte-pie.html        Pie, botón de WhatsApp y los <script>
+plantillas/cuerpo-*.html         El contenido propio de cada página
+plantillas/armar.sh              Junta todo y escribe los .html de la raíz
+```
+
+Con Git Bash (o cualquier shell) desde la raíz del proyecto:
+
+```sh
+bash plantillas/armar.sh
+```
+
+> **Ojo:** el script sobrescribe los `.html` de la raíz. Si preferís editar los HTML
+> a mano, hacelo y no vuelvas a ejecutar `armar.sh`. Si vas a seguir usando las
+> plantillas, editá siempre en `plantillas/`.
+
+---
+
+## Publicar
+
+Subir por FTP a la raíz del hosting:
+
+- `index.html`, `catalogo.html`, `producto.html`, `nosotros.html`, `contacto.html`,
+  `pagos.html`, `404.html`
+- `assets/`
+- `.htaccess`, `robots.txt`, `sitemap.xml`
+
+`plantillas/` y `pagina-antigua/` no hacen falta en el servidor (y quedan excluidas
+de los buscadores en `robots.txt`).
+
+---
+
+## Pendientes conocidos
+
+- **Precios.** El sitio anterior no publicaba ninguno, así que la ficha dice
+  "Precio a consultar" y empuja a WhatsApp. Si en algún momento se cargan precios,
+  agregar un campo `precio` a cada producto y mostrarlo en `catalogo.js`.
+- **Nombres repetidos.** Varios productos comparten nombre porque así estaban en el
+  sitio viejo (por ejemplo tres "Panda Gigante 140cm" con fotos distintas). Se
+  arreglan editando `nombre` en `assets/data/catalogo.js`.
+- **Los banners del slider desentonan.** `1_1.png`, `1_2.png` y `1_3.png` vienen del
+  sitio anterior con fondo azul y violeta y texto rosa quemado en la imagen, así que
+  cortan con la paleta vino. Se dejaron porque son material que ya existía, pero lo
+  ideal es rehacerlos en vino/oro, o directamente borrarlos de `MAWEWE_SLIDER` y dejar
+  sólo las diapositivas editoriales (que se arman con cualquier foto de catálogo).
+- **Pesan mucho.** Cada uno de esos tres PNG ocupa más de 1 MB. Pasarlos a JPG o WebP
+  de ancho 1920 los dejaría por debajo de 200 KB cada uno.
+- **Fotos.** Son las del sitio anterior, en JPG sin optimizar (~51 MB en total).
+  Convertirlas a WebP reduciría bastante el peso de las páginas.
+- **Relojes aparece en Mujer y en Hombre.** La categoría `relojes` mezcla líneas de
+  dama y de caballero, así que en el departamento Mujer se cuelan relojes de hombre.
+  Se arregla partiéndola en dos categorías (`relojes-damas` / `relojes-hombres`) en
+  `MAWEWE_CATEGORIAS` y cambiando el `cat` de cada producto: el campo `detalle` ya
+  dice cuál es cuál.
+- **Redes sociales.** Los enlaces de Instagram y TikTok del pie están armados con el
+  usuario `mawewe_ec`; conviene verificarlos antes de publicar.

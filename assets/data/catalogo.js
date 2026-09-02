@@ -35,14 +35,19 @@ window.MAWEWE_NEGOCIO = {
 
 /* ---------------------------------------------------------------------------
    SLIDER DE PORTADA
-   Cada objeto es una diapositiva. Hay dos modos:
+   Cada objeto es una diapositiva de modo 'editorial': la foto es un PNG con
+   transparencia real (sin fondo) y va directo sobre un degradado azul/rosado
+   que dibuja el CSS (ver ".hs__slide[data-fondo=...]" en mawewe.css) — no
+   hace falta que la foto tenga fondo blanco ni recortarla con mezcla.
 
-   modo: 'editorial'  → el fondo lo dibuja el CSS con la paleta de la marca y
-                        la foto del producto se recorta sola (fondo blanco).
-                        Se usa cuando el texto lo pone la web.
-   modo: 'banner'     → la imagen ocupa todo y ya trae su propio arte y texto
-                        (son los banners que ya venían del sitio anterior).
-                        Sólo se le superpone el botón.
+     fondo   → nombre del degradado (medianoche / zafiro / algodon /
+               electrico / pastel). Cada uno combina marino + azul + rosa.
+     tono    → 'claro' si el fondo es oscuro (texto blanco/rosado) o
+               'oscuro' si el fondo es claro (texto marino/gris).
+
+   También existe modo: 'banner' para una imagen a sangre completa con su
+   propio arte y texto (ya no se usa por ahora, pero el slider lo sigue
+   soportando si hace falta más adelante).
 
    Para cambiar la campaña: reordená, borrá o agregá objetos acá. No hay que
    tocar el HTML.
@@ -50,54 +55,63 @@ window.MAWEWE_NEGOCIO = {
 window.MAWEWE_SLIDER = [
   {
     modo: 'editorial',
-    fondo: 'vino',
-    img: 'assets/img/categorias/perfumes-damas/1.jpg',
+    fondo: 'medianoche',
+    tono: 'claro',
+    img: 'assets/img/hero/slide-jeans.png',
+    antetitulo: 'Denim Chevignon y Americanino',
+    titulo: 'El jean que<br><em>te define</em>',
+    bajada: 'Cortes slim y classic fit, en mezclilla clara y oscura. Tallas de la 28 a la 40, con cambio garantizado.',
+    cta: { texto: 'Ver denim', href: 'catalogo.html?cat=jeans-men' },
+    cta2: { texto: 'Ver toda la sección Hombre', href: 'catalogo.html?dep=hombre' },
+    pastillas: ['Tallas 28 a 40', 'Corte slim y classic', 'Marca original']
+  },
+  {
+    modo: 'editorial',
+    fondo: 'zafiro',
+    tono: 'claro',
+    img: 'assets/img/hero/slide-perfumes.png',
     antetitulo: 'Perfumería original',
-    titulo: 'Fragancias que<br><em>se recuerdan</em>',
-    bajada: 'Jean Paul Gaultier, Carolina Herrera, Hugo Boss y Paco Rabanne. Originales, con factura y garantía.',
+    titulo: 'Una fragancia<br><em>que te precede</em>',
+    bajada: 'Carolina Herrera CH y Hugo Boss Bottled, 100 % originales. Para regalar o para vos.',
     cta: { texto: 'Ver perfumería', href: 'catalogo.html?dep=belleza' },
-    cta2: { texto: 'Consultar precio', wsp: 'Hola Mawëwë, quisiera precios de la línea de perfumería.' },
+    cta2: { texto: 'Consultar precio', wsp: 'Hola Mawëwë, quisiera precios de perfumería CH y Hugo Boss.' },
     pastillas: ['100 % originales', 'Damas y caballeros', 'Envío a todo el país']
   },
   {
-    modo: 'banner',
-    img: 'assets/img/hero/1_2.png',
-    alt: 'Línea de fragancias originales Victoria’s Secret y Hugo Boss',
-    cta: { texto: 'Ver fragancias', href: 'catalogo.html?dep=belleza' }
+    modo: 'editorial',
+    fondo: 'algodon',
+    tono: 'oscuro',
+    img: 'assets/img/hero/slide-peluches.png',
+    antetitulo: 'Peluches con licencia',
+    titulo: 'El abrazo que<br><em>nunca falla</em>',
+    bajada: 'Personajes de tus películas favoritas, con la calidad que se siente al primer abrazo.',
+    cta: { texto: 'Ver peluches', href: 'catalogo.html?cat=peluches' },
+    cta2: { texto: 'Ayudame a elegir un regalo', chat: true },
+    pastillas: ['Licencia oficial', 'Ideal para regalar', 'Todas las edades']
   },
   {
     modo: 'editorial',
-    fondo: 'arena',
-    img: 'assets/img/productos/americanino/i1.jpg',
-    antetitulo: 'Denim Americanino y Chevignon',
-    titulo: 'El jean que<br><em>te queda</em>',
-    bajada: 'Cortes slim y classic fit, de la talla 28 a la 40. Probátelo en la matriz o pedilo por WhatsApp con cambio garantizado.',
-    cta: { texto: 'Ver denim', href: 'catalogo.html?cat=jeans-men' },
-    cta2: { texto: 'Ver toda la sección Hombre', href: 'catalogo.html?dep=hombre' },
-    pastillas: ['Tallas 28 a 40', 'Cambios en 8 días', 'Marca original']
-  },
-  {
-    modo: 'banner',
-    img: 'assets/img/hero/1_1.png',
-    alt: 'Relojes Fossil originales',
-    cta: { texto: 'Ver relojería', href: 'catalogo.html?cat=relojes' }
+    fondo: 'electrico',
+    tono: 'claro',
+    img: 'assets/img/hero/slide-deportes.png',
+    antetitulo: 'Implementos deportivos',
+    titulo: 'Directo a<br><em>la cancha</em>',
+    bajada: 'Balones de fútbol y básquet homologados, para entrenar o para coleccionar.',
+    cta: { texto: 'Ver implementos', href: 'catalogo.html?cat=implementos-deportivos' },
+    cta2: { texto: 'Consultar disponibilidad', wsp: 'Hola Mawëwë, quisiera consultar balones deportivos.' },
+    pastillas: ['Uso profesional', 'Fútbol y básquet', 'Envío a todo el país']
   },
   {
     modo: 'editorial',
-    fondo: 'oro',
-    img: 'assets/img/detalles/m8.jpg',
-    antetitulo: 'Detalles hechos a mano',
-    titulo: 'Armamos el<br><em>regalo por vos</em>',
-    bajada: 'Flores eternas, cajas sorpresa y arreglos personalizados. Lo preparamos el mismo día y lo enviamos a todo el Ecuador.',
-    cta: { texto: 'Ver la sección Regalos', href: 'catalogo.html?dep=regalos' },
-    cta2: { texto: 'Que me ayuden a elegir', chat: true },
-    pastillas: ['Listo en 24 h', 'Envolvemos sin costo', 'Tarjeta dedicatoria']
-  },
-  {
-    modo: 'banner',
-    img: 'assets/img/hero/1_3.png',
-    alt: 'Balones de fútbol originales Trionda y Mikasa',
-    cta: { texto: 'Ver implementos deportivos', href: 'catalogo.html?cat=implementos-deportivos' }
+    fondo: 'pastel',
+    tono: 'oscuro',
+    img: 'assets/img/hero/slide-ninos.png',
+    antetitulo: 'Colección niños',
+    titulo: 'Ropa lista para<br><em>cualquier travesura</em>',
+    bajada: 'Camisetas, jeans y calzado cómodo para niñas y niños, de la talla 3/6 meses a la 16.',
+    cta: { texto: 'Ver colección niños', href: 'catalogo.html?dep=ninos' },
+    cta2: { texto: 'Ver Offcorss niñas', href: 'catalogo.html?cat=offcorss-nenas' },
+    pastillas: ['Tallas 3/6 M a 16', 'Niñas y niños', 'Cómoda y resistente']
   }
 ];
 

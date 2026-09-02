@@ -79,22 +79,50 @@ contadores por categoría, el buscador y el chatbot se actualizan solos.
 
 ### Cambiar el slider de la portada
 
-En `MAWEWE_SLIDER`, arriba de `assets/data/catalogo.js`. Hay dos tipos de diapositiva:
+En `MAWEWE_SLIDER`, arriba de `assets/data/catalogo.js`. Cada diapositiva es
+`modo: 'editorial'`: una foto **sin fondo** (PNG con transparencia real, no una foto
+recortada sobre blanco) que va directo sobre un degradado azul/rosado que dibuja el
+CSS — no hace falta tarjeta ni mezcla de capas.
 
-**`modo: 'editorial'`** — el fondo lo dibuja el CSS con la paleta de la marca y el texto
-lo pone la web. La foto del producto se recorta sola (el `mix-blend-mode: multiply`
-hace desaparecer el fondo blanco), así que **funciona con cualquier foto de catálogo
-que esté sobre fondo blanco**. El campo `fondo` acepta:
+```js
+{
+  modo: 'editorial',
+  fondo: 'medianoche',   // el degradado — ver tabla abajo
+  tono: 'claro',         // 'claro' = texto blanco/rosado, 'oscuro' = texto marino/gris
+  img: 'assets/img/hero/slide-jeans.png',
+  antetitulo: 'Denim Chevignon y Americanino',
+  titulo: 'El jean que<br><em>te define</em>',
+  bajada: '…',
+  cta:  { texto: 'Ver denim', href: 'catalogo.html?cat=jeans-men' },
+  cta2: { texto: 'Ver toda la sección Hombre', href: 'catalogo.html?dep=hombre' },
+  pastillas: ['Tallas 28 a 40', 'Corte slim y classic', 'Marca original']
+}
+```
 
-| `fondo` | Cómo se ve |
-|---|---|
-| `vino` | Fondo vino oscuro, texto claro, la foto va sobre una tarjeta crema |
-| `arena` | Fondo arena claro, texto vino, la foto se funde con el fondo |
-| `oro` | Igual que arena pero en tono dorado |
+`fondo` acepta cinco degradados, todos en la misma familia (marino + azul + rosa),
+definidos en `assets/css/mawewe.css` bajo `.hs__slide[data-fondo='…']`:
 
-**`modo: 'banner'`** — la imagen ocupa todo y ya trae su propio arte y texto. Es el
-formato de los banners que venían del sitio anterior (`assets/img/hero/1_1.png`,
-`1_2.png`, `1_3.png`). Sólo se le superpone el botón, abajo a la izquierda.
+| `fondo` | Cómo se ve | `tono` recomendado |
+|---|---|---|
+| `medianoche` | Marino oscuro liso | `claro` |
+| `zafiro` | Marino a azul, con un halo rosado | `claro` |
+| `electrico` | Marino a azul vivo, con un halo rosado | `claro` |
+| `algodon` | Rosa a lavanda-azul, claro | `oscuro` |
+| `pastel` | Celeste a rosa pastel, muy claro | `oscuro` |
+
+`cta2` admite `href` (enlace normal), `wsp` (abre WhatsApp con ese mensaje) o
+`chat: true` (abre el asistente Wë).
+
+Existe también `modo: 'banner'` (una imagen a sangre completa con su propio arte y
+texto, sin franja ni tarjeta) por si algún día hace falta una campaña así — el slider
+lo sigue soportando aunque ninguna diapositiva actual lo usa.
+
+**Las fotos de producto tienen que estar recortadas y con proporción parecida entre
+sí** (más o menos 1.4:1 a 1.8:1, horizontal) — si una queda mucho más vertical que las
+demás (como pasó con la foto de niños, que era un retrato de cuerpo entero), el
+`object-fit: contain` la muestra desproporcionadamente más grande que al resto. La
+forma de corregirlo sin recortar el contenido es ensanchar el lienzo con relleno
+transparente a los costados hasta emparejar la proporción; no hay que tocar el CSS.
 
 Reordená, borrá o agregá objetos y el slider se rearma solo: los puntos, las flechas,
 el autoplay y la barra de progreso salen de la cantidad de diapositivas.
@@ -121,12 +149,17 @@ con sus columnas (`grupos`) y su tarjeta destacada con foto.
 Todo el sistema visual sale de las variables al inicio de `assets/css/mawewe.css`:
 
 ```css
---vino: #741d2a;    /* color principal */
---oro:  #b4823a;    /* acento */
---crema:#faf6f0;    /* fondo */
+--marino-800: #252b34;  /* color principal (pedido tal cual) */
+--marino:     #35507a;  /* acento — links, botones, iconos */
+--rosa-500:   #d1477e;  /* "Ofertas", urgencias */
+--rosa:       #c25b8f;  /* acento secundario */
+--crema:      #f6f7f9;  /* fondo */
 ```
 
-Cambiando esas tres líneas cambia el sitio entero.
+El resto de tonos (`--marino-900`, `--marino-600`, `--rosa-900`, `--rosa-400`,
+`--rosa-100`, y los neutros `--carbon`/`--grafito`/`--gris`/`--linea`/`--arena`) son
+derivados de esos mismos tres colores — cambiando las variables de arriba, todo el
+sitio se reacomoda solo.
 
 Las tipografías son **Fraunces** (títulos, desde Google Fonts) y **Arial** (todo lo
 demás: menú, botones, pastillas, fichas y textos corridos). Arial es fuente de sistema:
@@ -135,14 +168,14 @@ mayúsculas.
 
 ### El logo
 
-Es **el logo de siempre**, recoloreado a la paleta nueva y guardado como archivos
-propios en `assets/img/marca/`:
+Es **el logo de siempre**, recoloreado y guardado como archivos propios en
+`assets/img/marca/`:
 
 | Archivo | Dónde se usa |
 |---|---|
-| `logo-vino.png` | Cabecera y menú móvil (fondo claro) |
-| `sello-crema.png` | Pie de página, con el delfín (fondo oscuro) |
-| `logo-crema.png` · `sello-vino.png` | Variantes de repuesto |
+| `logo-rosa.png` | Cabecera y menú móvil (fondo claro) |
+| `sello-rosa.png` | Pie de página, con el delfín (fondo oscuro) |
+| `logo-marino.png` · `logo-crema.png` · `sello-crema.png` · `sello-marino.png` | Variantes de repuesto, por si algún día conviene otro contraste |
 
 Se generaron recoloreando píxel a píxel el PNG original y conservando el canal alfa, así
 que el trazo y el antialias son idénticos: sólo cambió el color. En el HTML son un
@@ -153,6 +186,12 @@ proporción):
 .marca { height: 44px; width: auto; }
 .marca--sello { height: 80px; }
 ```
+
+Para regenerar cualquier variante: cargar `logo.png` (o `logo-footer.png` para la
+versión con delfín) en un `<canvas>`, recorrer `getImageData` y, para cada píxel con
+`alfa > 0`, reemplazar sus canales R/G/B por el color deseado dejando el alfa intacto;
+exportar con `canvas.toDataURL('image/png')`. No hay que repetir esto a mano: cualquier
+color nuevo sale con ese mismo procedimiento.
 
 > Antes esto se resolvía con una máscara CSS sobre el PNG original. Se cambió porque la
 > máscara depende del soporte de `mask` y de cómo resuelva el navegador la ruta relativa
@@ -207,15 +246,13 @@ de los buscadores en `robots.txt`).
 - **Nombres repetidos.** Varios productos comparten nombre porque así estaban en el
   sitio viejo (por ejemplo tres "Panda Gigante 140cm" con fotos distintas). Se
   arreglan editando `nombre` en `assets/data/catalogo.js`.
-- **Los banners del slider desentonan.** `1_1.png`, `1_2.png` y `1_3.png` vienen del
-  sitio anterior con fondo azul y violeta y texto rosa quemado en la imagen, así que
-  cortan con la paleta vino. Se dejaron porque son material que ya existía, pero lo
-  ideal es rehacerlos en vino/oro, o directamente borrarlos de `MAWEWE_SLIDER` y dejar
-  sólo las diapositivas editoriales (que se arman con cualquier foto de catálogo).
-- **Pesan mucho.** Cada uno de esos tres PNG ocupa más de 1 MB. Pasarlos a JPG o WebP
-  de ancho 1920 los dejaría por debajo de 200 KB cada uno.
-- **Fotos.** Son las del sitio anterior, en JPG sin optimizar (~51 MB en total).
-  Convertirlas a WebP reduciría bastante el peso de las páginas.
+- **Las fotos del slider pesan mucho.** Las cinco (`assets/img/hero/slide-*.png`) están
+  entre 500 KB y 1.5 MB porque salieron de un recorte por canvas sin optimizador de PNG
+  (esta máquina no tenía `pngquant`/`cwebp`/ImageMagick a mano). Pasarlas por un
+  optimizador de PNG, o a WebP con transparencia, las bajaría bastante sin perder
+  calidad visible.
+- **Fotos del catálogo.** Son las del sitio anterior, en JPG sin optimizar (~51 MB en
+  total). Convertirlas a WebP reduciría bastante el peso de las páginas.
 - **Relojes aparece en Mujer y en Hombre.** La categoría `relojes` mezcla líneas de
   dama y de caballero, así que en el departamento Mujer se cuelan relojes de hombre.
   Se arregla partiéndola en dos categorías (`relojes-damas` / `relojes-hombres`) en

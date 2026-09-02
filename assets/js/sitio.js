@@ -201,7 +201,7 @@
           '<div class="mega__pie">' +
             '<a class="enlace-flecha" href="' + urlDepartamento(dep.slug) + '">Ver todo ' + escapar(dep.nombre) + ' ' + icono('flecha') + '</a>' +
             '<span class="pastilla">' + total + ' productos publicados</span>' +
-            '<span class="pastilla pastilla--oro">Envíos a todo el Ecuador</span>' +
+            '<span class="pastilla pastilla--rosa">Envíos a todo el Ecuador</span>' +
           '</div>' +
         '</div>' +
         destacado +

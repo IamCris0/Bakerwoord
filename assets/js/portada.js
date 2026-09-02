@@ -37,7 +37,7 @@
     pista.className = 'hs__pista';
 
     pista.innerHTML = slides.map(function (s, i) {
-      var tono = s.modo === 'editorial' && (s.fondo === 'arena' || s.fondo === 'oro') ? 'oscuro' : 'claro';
+      var tono = s.tono || 'claro';
       var attrs = ' data-tono="' + tono + '"' + (s.fondo ? ' data-fondo="' + s.fondo + '"' : '') +
         (i === 0 ? ' data-activo' : '') + ' aria-hidden="' + (i === 0 ? 'false' : 'true') + '"';
 

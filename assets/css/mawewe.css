@@ -1363,6 +1363,108 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .info-lista svg { width: 18px; height: 18px; flex: none; color: var(--marino); margin-top: 3px; }
 .info-lista strong { display: block; color: var(--carbon); font-weight: 600; }
 
+/* --- tarjeta "Abierto ahora" (contacto.html) --------------------------- */
+/* Es un <details> nativo: el navegador da el abrir/cerrar gratis y con
+   [open] alcanza para animar la flechita, sin JS aparte para eso. El JS
+   sólo calcula el estado (abierto / cierra pronto / cerrado) y arma la
+   lista de la semana a partir de MAWEWE_NEGOCIO.horarioSemana. */
+.estado-tienda {
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--blanco);
+  overflow: hidden;
+}
+.estado-tienda__resumen {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--t-sm);
+  color: var(--grafito);
+}
+.estado-tienda__resumen::-webkit-details-marker { display: none; }
+.estado-tienda__resumen:focus-visible { outline-offset: -2px; }
+.estado-tienda__punto {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--gris-claro);
+}
+.estado-tienda[data-estado='abierto'] .estado-tienda__punto { background: var(--exito); box-shadow: 0 0 0 3px rgba(47, 107, 79, 0.16); }
+.estado-tienda[data-estado='cierra-pronto'] .estado-tienda__punto { background: var(--alerta); box-shadow: 0 0 0 3px rgba(180, 130, 58, 0.18); }
+.estado-tienda[data-estado='cerrado'] .estado-tienda__punto { background: var(--gris-claro); }
+.estado-tienda__texto { font-weight: 600; color: var(--carbon); }
+.estado-tienda[data-estado='abierto'] .estado-tienda__texto { color: var(--exito); }
+.estado-tienda[data-estado='cierra-pronto'] .estado-tienda__texto { color: var(--alerta); }
+.estado-tienda__resto { color: var(--gris); }
+.estado-tienda__flecha {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: var(--gris-claro);
+  transition: transform var(--transicion);
+}
+.estado-tienda[open] .estado-tienda__flecha { transform: rotate(180deg); }
+
+.horario-semana {
+  display: grid;
+  gap: 1px;
+  margin: 0 16px 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--linea);
+}
+.horario-semana__fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 5px 0;
+  font-size: var(--t-sm);
+  color: var(--gris);
+}
+.horario-semana__fila--hoy { color: var(--carbon); font-weight: 600; }
+.horario-semana__dia { display: flex; align-items: center; gap: 8px; }
+.horario-semana__hoy-marca {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--marino);
+  background: var(--arena);
+  border-radius: var(--radio-full);
+  padding: 1px 7px;
+}
+.horario-semana__horas { text-align: right; }
+
+.acciones-ubicacion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.acciones-ubicacion a,
+.acciones-ubicacion button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 15px;
+  border-radius: var(--radio-full);
+  border: 1px solid var(--linea-fuerte);
+  background: var(--blanco);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--grafito);
+  transition: all var(--transicion);
+}
+.acciones-ubicacion a:hover,
+.acciones-ubicacion button:hover { border-color: var(--marino); color: var(--marino); }
+.acciones-ubicacion svg { width: 15px; height: 15px; flex: none; }
+.acciones-ubicacion [data-copiado='true'] { border-color: var(--exito); color: var(--exito); }
+
 /* 10. PIE, CHATBOT Y RESPONSIVE ========================================= */
 .pie {
   background: var(--carbon);

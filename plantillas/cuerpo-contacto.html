@@ -112,12 +112,41 @@
             <span class="antetitulo">Cómo llegar</span>
             <h2>Estamos en pleno centro de Nueva Loja</h2>
           </div>
-          <div style="border-radius:var(--radio-lg);overflow:hidden;border:1px solid var(--linea)">
-            <iframe
-              title="Mapa de la matriz Mawëwë en Lago Agrio"
-              src="https://www.google.com/maps?q=Jorge%20A%C3%B1azco%20y%2012%20de%20Febrero%2C%20Nueva%20Loja%2C%20Sucumb%C3%ADos%2C%20Ecuador&output=embed"
-              width="100%" height="420" style="border:0;display:block" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <div class="editorial" style="align-items:start">
+            <div>
+              <details class="estado-tienda" data-estado-tienda>
+                <summary class="estado-tienda__resumen">
+                  <span class="estado-tienda__punto" aria-hidden="true"></span>
+                  <span><span class="estado-tienda__texto" data-estado-texto>Consultando el horario…</span>
+                  <span class="estado-tienda__resto" data-estado-resto></span></span>
+                  <svg class="estado-tienda__flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
+                </summary>
+                <ul class="horario-semana" data-horario-semana></ul>
+              </details>
+
+              <div class="acciones-ubicacion">
+                <a data-accion-llegar target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m15 9-2 6-6 2 2-6 6-2Z"></path></svg>
+                  Cómo llegar
+                </a>
+                <a data-wsp="Hola Mawëwë, quisiera saber cómo llegar a la matriz de Lago Agrio.">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Z"></path></svg>
+                  WhatsApp
+                </a>
+                <button type="button" data-accion-compartir>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"></circle><circle cx="6" cy="12" r="2.6"></circle><circle cx="18" cy="19" r="2.6"></circle><path d="M8.3 13.4 15.7 17.4M15.7 6.6 8.3 10.6"></path></svg>
+                  <span>Compartir</span>
+                </button>
+              </div>
+            </div>
+
+            <div style="border-radius:var(--radio-lg);overflow:hidden;border:1px solid var(--linea)">
+              <iframe
+                title="Mapa de la matriz Mawëwë en Lago Agrio"
+                src="https://www.google.com/maps?q=Jorge%20A%C3%B1azco%20y%2012%20de%20Febrero%2C%20Nueva%20Loja%2C%20Sucumb%C3%ADos%2C%20Ecuador&output=embed"
+                width="100%" height="380" style="border:0;display:block" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
         </div>
       </section>
@@ -135,6 +164,122 @@
               'Motivo: ' + d.get('tema') + '\n' + d.get('mensaje');
             window.open(window.MAWEWE.urlWhatsapp(texto), '_blank', 'noopener');
           });
+        });
+
+        /* Tarjeta "Abierto ahora": calcula el estado en vivo (según la hora
+           de Ecuador, sin importar en qué huso esté quien visita la página)
+           y arma la lista de la semana a partir de MAWEWE_NEGOCIO.horarioSemana. */
+        document.addEventListener('mawewe:listo', function () {
+          var N = window.MAWEWE.negocio;
+          var raiz = document.querySelector('[data-estado-tienda]');
+          var semana = N.horarioSemana || [];
+
+          function minutos(hhmm) {
+            var p = hhmm.split(':');
+            return parseInt(p[0], 10) * 60 + parseInt(p[1], 10);
+          }
+          function horaLegible(mins) {
+            var h = Math.floor(mins / 60), m = mins % 60;
+            var h12 = h % 12 === 0 ? 12 : h % 12;
+            return h12 + (m ? ':' + (m < 10 ? '0' : '') + m : '') + (h < 12 ? ' a.m.' : ' p.m.');
+          }
+          function ahoraEcuador() {
+            var partes = new Intl.DateTimeFormat('en-US', {
+              timeZone: 'America/Guayaquil', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+            }).formatToParts(new Date());
+            var m = {};
+            partes.forEach(function (p) { m[p.type] = p.value; });
+            var dias = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+            var hora = m.hour === '24' ? 0 : parseInt(m.hour, 10);
+            return { dia: dias[m.weekday], minutos: hora * 60 + parseInt(m.minute, 10) };
+          }
+          function rangosDelDia(d) {
+            if (!d || !d.abre) return [];
+            var abre = minutos(d.abre), cierra = minutos(d.cierra);
+            return d.pausa ? [[abre, minutos(d.pausa[0])], [minutos(d.pausa[1]), cierra]] : [[abre, cierra]];
+          }
+          function horasDelDia(d) {
+            if (!d.abre) return d.nota || 'Cerrado';
+            if (d.pausa) {
+              return horaLegible(minutos(d.abre)) + ' – ' + horaLegible(minutos(d.pausa[0])) +
+                ' y ' + horaLegible(minutos(d.pausa[1])) + ' – ' + horaLegible(minutos(d.cierra));
+            }
+            return horaLegible(minutos(d.abre)) + ' – ' + horaLegible(minutos(d.cierra));
+          }
+
+          if (raiz && semana.length === 7) {
+            var ahora = ahoraEcuador();
+            var rangos = rangosDelDia(semana[ahora.dia]);
+            var estado = 'cerrado', resto = '', activo = null;
+
+            for (var i = 0; i < rangos.length; i++) {
+              if (ahora.minutos >= rangos[i][0] && ahora.minutos < rangos[i][1]) { activo = rangos[i]; break; }
+            }
+
+            if (activo) {
+              estado = (activo[1] - ahora.minutos) <= 45 ? 'cierra-pronto' : 'abierto';
+              resto = '· Cierra a las ' + horaLegible(activo[1]);
+            } else {
+              var proximaHoy = null;
+              for (var j = 0; j < rangos.length; j++) {
+                if (ahora.minutos < rangos[j][0]) { proximaHoy = rangos[j][0]; break; }
+              }
+              if (proximaHoy !== null) {
+                resto = '· Abre a las ' + horaLegible(proximaHoy);
+              } else {
+                for (var k = 1; k <= 7; k++) {
+                  var d2 = semana[(ahora.dia + k) % 7];
+                  var r2 = rangosDelDia(d2);
+                  if (r2.length) {
+                    resto = '· Abre ' + (k === 1 ? 'mañana' : 'el ' + d2.dia.toLowerCase()) + ' a las ' + horaLegible(r2[0][0]);
+                    break;
+                  }
+                }
+              }
+            }
+
+            raiz.setAttribute('data-estado', estado);
+            raiz.querySelector('[data-estado-texto]').textContent =
+              estado === 'abierto' ? 'Abierto ahora' : estado === 'cierra-pronto' ? 'Cierra pronto' : 'Cerrado ahora';
+            raiz.querySelector('[data-estado-resto]').textContent = resto;
+
+            var orden = [1, 2, 3, 4, 5, 6, 0]; /* lunes a domingo */
+            raiz.querySelector('[data-horario-semana]').innerHTML = orden.map(function (idx) {
+              var d = semana[idx];
+              var esHoy = idx === ahora.dia;
+              return '<li class="horario-semana__fila' + (esHoy ? ' horario-semana__fila--hoy' : '') + '">' +
+                '<span class="horario-semana__dia">' + d.dia + (esHoy ? '<span class="horario-semana__hoy-marca">Hoy</span>' : '') + '</span>' +
+                '<span class="horario-semana__horas">' + horasDelDia(d) + '</span></li>';
+            }).join('');
+          }
+
+          /* Botones: Cómo llegar (Maps con indicaciones) y Compartir */
+          var urlLlegar = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(N.mapsQuery || N.direccion);
+          var linkLlegar = document.querySelector('[data-accion-llegar]');
+          if (linkLlegar) linkLlegar.href = urlLlegar;
+
+          var btnCompartir = document.querySelector('[data-accion-compartir]');
+          if (btnCompartir) {
+            btnCompartir.addEventListener('click', function () {
+              var datos = { title: 'Mawëwë', text: 'Ubicación de Mawëwë en Lago Agrio', url: urlLlegar };
+              if (navigator.share) {
+                navigator.share(datos).catch(function () {});
+                return;
+              }
+              if (navigator.clipboard) {
+                navigator.clipboard.writeText(urlLlegar).then(function () {
+                  var etiqueta = btnCompartir.querySelector('span');
+                  var original = etiqueta.textContent;
+                  btnCompartir.setAttribute('data-copiado', 'true');
+                  etiqueta.textContent = '¡Enlace copiado!';
+                  setTimeout(function () {
+                    btnCompartir.removeAttribute('data-copiado');
+                    etiqueta.textContent = original;
+                  }, 2200);
+                });
+              }
+            });
+          }
         });
       </script>
     </main>

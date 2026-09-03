@@ -124,7 +124,7 @@ window.MAWEWE_SLIDER = [
     antetitulo: 'Colección Offcorss',
     titulo: 'Ropa lista para<br><em>cualquier travesura</em>',
     bajada: 'Camisetas y jeans cómodos para niñas y niños, de la talla 3/6 meses a la 16.',
-    cta: { texto: 'Ver colección niños', href: 'catalogo.html?dep=ninos' },
+    cta: { texto: 'Ver Offcorss niños', href: 'catalogo.html?cat=offcorss' },
     cta2: { texto: 'Ver Offcorss niñas', href: 'catalogo.html?cat=offcorss-nenas' },
     pastillas: ['Offcorss', 'Tallas 3/6 M a 16', 'Cómoda y resistente']
   }

@@ -236,11 +236,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 
 .barra-anuncios__item {
+  /* Nada de display:flex acá: text-overflow:ellipsis no tiene efecto dentro de
+     un contenedor flex (la especificación sólo lo aplica a cajas de bloque/
+     inline-block), así que el texto largo se cortaba a media palabra y sin
+     puntos suspensivos en pantallas angostas. Centrado vertical por
+     line-height, ya que el contenido es un renglón de texto simple. */
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  line-height: 18px; /* = altura de .barra-anuncios__rotador */
   opacity: 0;
   transform: translateY(100%);
   transition: opacity 400ms ease, transform 400ms ease;
@@ -592,7 +595,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   flex: none;
 }
 
-.cajon__cuerpo { overflow-y: auto; flex: 1; padding: 8px 0 24px; }
+.cajon__cuerpo { overflow-y: auto; flex: 1; padding: 8px 0 24px; -webkit-overflow-scrolling: touch; }
 
 .acordeon__disparador {
   width: 100%;
@@ -600,7 +603,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 15px 20px;
+  padding: 13px 20px;
   font-size: var(--t-md);
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -637,11 +640,17 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 .cajon__pie {
   flex: none;
-  padding: 18px 20px;
+  padding: 16px 20px;
   border-top: 1px solid var(--linea);
   display: grid;
   gap: 10px;
   background: var(--crema);
+  /* En pantallas bajas el cuerpo del menú no entra completo y hay que
+     scrollear; esta sombra hace ver que el pie queda flotando ENCIMA de esa
+     lista (no que la tapa por error) — el mismo recurso que una barra de
+     acciones fija sobre un listado largo. */
+  position: relative;
+  box-shadow: 0 -6px 14px -6px rgba(20, 23, 29, 0.22);
 }
 
 /* 7. COMPONENTES ======================================================== */
@@ -1725,6 +1734,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .campo--doble { grid-template-columns: 1fr; }
   .encabezado--fila { align-items: flex-start; }
   .chat { right: 0; bottom: 0; width: 100vw; height: 100dvh; border-radius: 0; border: 0; }
+  /* En el panel de pantalla completa sobra alto: las opciones (hasta 7 en el
+     menú principal) pueden estirarse más antes de necesitar scroll propio. */
+  .chat__opciones { max-height: 40vh; }
   .flotante-wsp { bottom: 84px; right: 16px; }
   .chat-lanzador { right: 16px; bottom: 16px; padding: 12px; }
   .chat-lanzador span:not(.chat-lanzador__punto) { display: none; }

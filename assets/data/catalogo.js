@@ -21,10 +21,25 @@ window.MAWEWE_NEGOCIO = {
   email: 'info@mawewe.com.ec',
   direccion: 'Jorge Añazco y 12 de Febrero',
   ciudad: 'Lago Agrio (Nueva Loja), Sucumbíos — Ecuador',
+  mapsQuery: 'Jorge Añazco y 12 de Febrero, Nueva Loja, Sucumbíos, Ecuador',
   horario: [
     { dias: 'Lunes a viernes', horas: '08h30 – 13h00 · 14h30 – 19h00' },
     { dias: 'Sábados', horas: '09h00 – 18h00' },
     { dias: 'Domingos y feriados', horas: 'Atención por WhatsApp' }
+  ],
+  /* Igual que arriba pero un renglón por día (índice 0 = domingo, como
+     Date.getDay()) — es lo que usa la tarjeta "Abierto ahora" de la página
+     de Contacto para calcular el estado en vivo y pintar la semana completa.
+     "pausa" es el cierre de mediodía; un día sin "abre" se toma por cerrado
+     y "nota" es lo que se muestra en su lugar. */
+  horarioSemana: [
+    { dia: 'Domingo', nota: 'Atención por WhatsApp' },
+    { dia: 'Lunes', abre: '08:30', cierra: '19:00', pausa: ['13:00', '14:30'] },
+    { dia: 'Martes', abre: '08:30', cierra: '19:00', pausa: ['13:00', '14:30'] },
+    { dia: 'Miércoles', abre: '08:30', cierra: '19:00', pausa: ['13:00', '14:30'] },
+    { dia: 'Jueves', abre: '08:30', cierra: '19:00', pausa: ['13:00', '14:30'] },
+    { dia: 'Viernes', abre: '08:30', cierra: '19:00', pausa: ['13:00', '14:30'] },
+    { dia: 'Sábado', abre: '09:00', cierra: '18:00' }
   ],
   redes: {
     facebook: 'https://www.facebook.com/MaweweDespiertaTuImaginacion',

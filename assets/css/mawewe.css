@@ -1947,8 +1947,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .hs__figura {
   position: relative;
   height: 100%;
-  display: grid;
-  place-items: center;
+  /* flex, no grid: con display:grid + place-items:center el porcentaje de
+     max-height de la imagen no tiene una pista de tamaño definido contra la
+     cual resolverse (queda como "none"), así que el navegador termina
+     dibujando la imagen a su tamaño natural en vez de encogerla — en mobile
+     eso hacía que la foto se saliera de su caja y tapara el texto de abajo. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-block: clamp(20px, 3vw, 44px);
 }
 .hs__figura img {
@@ -2336,17 +2342,56 @@ a.franja-promos__item:hover { background: rgba(250, 246, 240, 0.06); color: #fff
 }
 
 @media (max-width: 980px) {
-  .hs__editorial { grid-template-columns: 1fr; align-content: center; }
-  .hs__figura { display: none; }
-  .hs__pista { height: clamp(400px, 68vw, 520px); }
+  /* La foto de producto NO se oculta en mobile: se apila arriba del texto
+     (antes desaparecía por completo con display:none, que es el bug que
+     reportó el cliente — el fondo se veía pero el producto no). Todo el
+     bloque se compacta bastante más que en escritorio: la idea es un
+     rectángulo horizontal cortito, no una tarjeta apilada que empuja el
+     resto de la portada hacia abajo — el título usa la misma escala clamp()
+     que en escritorio si no se recorta acá, y a este ancho eso solo daba
+     letras enormes que obligaban a un slide altísimo. */
+  .hs__editorial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(6px, 1.6vw, 12px);
+    /* deja libres los puntos del carrusel, que flotan pegados al piso de
+       .hs y si no se reserva este margen las pastillas les quedan debajo */
+    padding-bottom: 30px;
+  }
+  .hs__figura {
+    order: -1;
+    flex: none;
+    height: clamp(100px, 22vw, 150px);
+    padding-block: 6px;
+  }
+  .hs__pista { height: clamp(420px, 58vw, 500px); }
   .hs__slide--editorial .hs__cuerpo { padding-block: 0; }
+  .hs__titulo { font-size: clamp(1.8rem, 4.6vw, 2.6rem); line-height: 1.05; margin-bottom: 10px; }
+  .hs__bajada { font-size: 0.85rem; line-height: 1.4; margin-bottom: 14px; }
+  .hs__acciones { gap: 8px; margin-bottom: 12px; }
+  .hs__pastillas { display: none; }
   .beneficios__item { border-left: 0; border-top: 1px solid var(--linea); }
   .beneficios__item:first-child { border-top: 0; }
 }
 
 @media (max-width: 720px) {
   .barra-util { display: none; }
-  .hs__pista { height: clamp(380px, 92vw, 470px); }
+  .hs__pista { height: clamp(340px, 92vw, 440px); }
+  .hs__figura { height: clamp(80px, 24vw, 120px); padding-block: 4px; }
+  .hs__editorial { gap: 6px; padding-bottom: 26px; }
+  .hs__antetitulo { font-size: 0.625rem; margin-bottom: 6px; }
+  .hs__titulo { font-size: clamp(1.35rem, 7vw, 1.7rem); margin-bottom: 8px; }
+  .hs__bajada {
+    font-size: 0.78rem;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .hs__acciones { gap: 6px; margin-bottom: 0; }
+  .hs__acciones .boton { padding: 9px 16px; font-size: 0.6875rem; }
   .hs__flecha { display: none; }
   .hs__slide--banner img { object-position: 62% center; }
   .franja-promos__item { border-left: 0; border-top: 1px solid rgba(250, 246, 240, 0.14); }

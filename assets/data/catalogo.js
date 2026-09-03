@@ -121,12 +121,12 @@ window.MAWEWE_SLIDER = [
     fondo: 'pastel',
     tono: 'oscuro',
     img: 'assets/img/hero/slide-ninos.png',
-    antetitulo: 'Colección niños',
+    antetitulo: 'Colección Offcorss',
     titulo: 'Ropa lista para<br><em>cualquier travesura</em>',
-    bajada: 'Camisetas, jeans y calzado cómodo para niñas y niños, de la talla 3/6 meses a la 16.',
+    bajada: 'Camisetas y jeans cómodos para niñas y niños, de la talla 3/6 meses a la 16.',
     cta: { texto: 'Ver colección niños', href: 'catalogo.html?dep=ninos' },
     cta2: { texto: 'Ver Offcorss niñas', href: 'catalogo.html?cat=offcorss-nenas' },
-    pastillas: ['Tallas 3/6 M a 16', 'Niñas y niños', 'Cómoda y resistente']
+    pastillas: ['Offcorss', 'Tallas 3/6 M a 16', 'Cómoda y resistente']
   }
 ];
 
